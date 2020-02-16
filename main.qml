@@ -21,10 +21,12 @@ Window {
 
     }
 
-//    StackView {
-//        id: stack
-//        anchors.fill: parent
-//        initialItem: mainView
-//    }
+    StackView {
+        id: stack
+        anchors.fill: parent
+        initialItem: mainView
+    }
 
 }
+
+
