@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <GmAbstrBitBoard.h>
 
 int main(int argc, char *argv[])
 {   
@@ -15,6 +16,11 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+    Gm::GmAbstrBitBoard obj(8, 8, 1);
+    obj.DIAG_showBoard();
+
+
 
     return app.exec();
 }
