@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    Gm::GmAbstrBitBoard obj(8, 8, 1);
+    Gm::GmAbstrBitBoard obj(8, 8, 5);
     obj.DIAG_showBoard();
 
 

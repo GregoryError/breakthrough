@@ -18,6 +18,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <initializer_list>
 
 namespace Gm {
 
@@ -25,18 +26,19 @@ class GmAbstrBitBoard
 {
 private:
     std::size_t WIDTH, HEIGHT;
-    size_t TYPES;
-    std::size_t board_space = 0;    
+    std::size_t TYPES;
+    std::size_t board_space;
     std::unique_ptr<std::int8_t[]> p_cells;
     std::unique_ptr<std::int8_t[]> p_side;
     std::unique_ptr<std::int8_t[]> p_types;
 
-    void setCell(const std::size_t& pos);
-    void setSide(const std::size_t& pos);
-    void setType(const std::size_t& pos, const int& n_type);
-    bool getCell(const std::size_t& pos) const;
-    bool getSide(const std::size_t& pos) const;
-    int getType(const std::size_t& pos) const;
+    void setCell(const std::size_t& pos);                 // 1 - filled, 0 - empty
+    void setSide(const std::size_t& pos);                 // 1 - one player, 0 - another
+    void setType(const std::size_t& pos,                  // (position on brd, type of figure)
+                 const std::size_t& n_type);
+    bool getCell(const std::size_t& pos) const;           // empty or filled
+    bool getSide(const std::size_t& pos) const;           // whose figure
+    std::size_t getType(const std::size_t& pos) const;
 
 public:
     GmAbstrBitBoard() = delete;
@@ -44,7 +46,7 @@ public:
                     const std::size_t& width,
                     const std::size_t& tps);
 
-    void initBoard();
+    void arrange(const std::initializer_list<std::size_t>& lst);
 
     void DIAG_showBoard();
 };
