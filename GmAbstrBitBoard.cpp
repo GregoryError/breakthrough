@@ -3,34 +3,41 @@
 using namespace Gm;
 
 GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
-                const std::size_t& width,
-                const std::size_t& tps)
+                                 const std::size_t& width,
+                                 const std::size_t& tps)
 {
     WIDTH = width;
     HEIGHT = height;
-
+    TYPES = tps;
     board_space = (height * width) / 8 + 1;
     p_cells = std::make_unique<std::int8_t[]>(board_space);
     p_side = std::make_unique<std::int8_t[]>(board_space);
     p_types = std::make_unique<std::int8_t[]>(tps / 8 + 1);
-
-   // p_cells = std::unique_ptr<std::int8_t[]>(new std::int8_t[board_space]);
-   // p_side = std::unique_ptr<std::int8_t[]>(new std::int8_t[board_space]);
-   // p_types = std::unique_ptr<std::int8_t[]>(new std::int8_t[tps / 8 + 1]);
-
-
 }
 
-bool GmAbstrBitBoard::getCell(const std::size_t &pos)
+bool GmAbstrBitBoard::getCell(const std::size_t &pos) const
 {
-    return p_cells[pos / 8] & (1 << (pos % 8));
+    if (pos > board_space)
+        return p_cells[pos / 8] & (1 << (pos % 8));
+    else
+        return false;
 }
 
-bool GmAbstrBitBoard::getSide(const std::size_t &pos)
+bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
 {
-    return p_side[pos / 8] & (1 << (pos % 8));
+    if (pos > board_space)
+        return p_side[pos / 8] & (1 << (pos % 8));
+    else
+        return false;
 }
 
+int GmAbstrBitBoard::getType(const std::size_t &pos) const
+{
+    if (pos > (TYPES / 8 + 1))
+        return p_types[pos / 8] & (1 << (pos % 8));
+    else
+        return false;
+}
 
 void GmAbstrBitBoard::DIAG_showBoard()
 {

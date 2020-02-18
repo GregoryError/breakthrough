@@ -30,11 +30,9 @@ private:
     std::unique_ptr<std::int8_t[]> p_side;
     std::unique_ptr<std::int8_t[]> p_types;
 
-
     void setCell(const std::size_t& pos);
     void setSide(const std::size_t& pos);
     void setType(const std::size_t& pos);
-
     bool getCell(const std::size_t& pos) const;
     bool getSide(const std::size_t& pos) const;
     int getType(const std::size_t& pos) const;
