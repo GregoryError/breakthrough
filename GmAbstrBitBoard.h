@@ -24,17 +24,16 @@ namespace Gm {
 class GmAbstrBitBoard
 {
 private:
-    std::size_t WIDTH, HEIGHT, TYPES;
+    std::size_t WIDTH, HEIGHT;
+    size_t TYPES;
     std::size_t board_space = 0;    
     std::unique_ptr<std::int8_t[]> p_cells;
     std::unique_ptr<std::int8_t[]> p_side;
     std::unique_ptr<std::int8_t[]> p_types;
 
-
     void setCell(const std::size_t& pos);
     void setSide(const std::size_t& pos);
-    void setType(const std::size_t& pos);
-
+    void setType(const std::size_t& pos, const int& n_type);
     bool getCell(const std::size_t& pos) const;
     bool getSide(const std::size_t& pos) const;
     int getType(const std::size_t& pos) const;

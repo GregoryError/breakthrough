@@ -12,12 +12,27 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
     board_space = (height * width) / 8 + 1;
     p_cells = std::make_unique<std::int8_t[]>(board_space);
     p_side = std::make_unique<std::int8_t[]>(board_space);
-    p_types = std::make_unique<std::int8_t[]>(tps / 8 + 1);
+    p_types = std::make_unique<std::int8_t[]>(TYPES * board_space);
+}
+
+void GmAbstrBitBoard::setCell(const std::size_t &pos)
+{
+    p_cells[pos / 8] |= (1 << (pos % 8));
+}
+
+void GmAbstrBitBoard::setSide(const std::size_t &pos)
+{
+    p_side[pos / 8] |= (1 << (pos % 8));
+}
+
+void GmAbstrBitBoard::setType(const std::size_t &pos, const int &n_type)
+{
+
 }
 
 bool GmAbstrBitBoard::getCell(const std::size_t &pos) const
 {
-    if (pos > board_space)
+    if (pos < WIDTH * HEIGHT)
         return p_cells[pos / 8] & (1 << (pos % 8));
     else
         return false;
@@ -25,7 +40,7 @@ bool GmAbstrBitBoard::getCell(const std::size_t &pos) const
 
 bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
 {
-    if (pos > board_space)
+    if (pos < WIDTH * HEIGHT)
         return p_side[pos / 8] & (1 << (pos % 8));
     else
         return false;
@@ -33,11 +48,10 @@ bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
 
 int GmAbstrBitBoard::getType(const std::size_t &pos) const
 {
-    if (pos > (TYPES / 8 + 1))
-        return p_types[pos / 8] & (1 << (pos % 8));
-    else
-        return false;
+    if (pos < TYPES)
 }
+
+/////// DIAGNOSTIC
 
 void GmAbstrBitBoard::DIAG_showBoard()
 {
