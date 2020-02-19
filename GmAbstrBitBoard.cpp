@@ -16,7 +16,9 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
 
 
     arrange({1, 1, 1, 1, 1, 1, 1, 1,
-             0, 0, 1, 1, 1, 1, 0, 0});
+             0, 0, 1, 1, 1, 1, 0, 0}, Gm::right);
+
+
 
    // std::cout << "4: " << getType(4) << " " << " 11: " << getType(11) << '\n';
 
@@ -77,8 +79,9 @@ std::size_t GmAbstrBitBoard::getType(const std::size_t &pos) const
 /// but for both sides. Mirror-like way.                                   ///
 //////////////////////////////////////////////////////////////////////////////
 
-void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst)
+void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, const BEG& beg)
 {
+    std::cout << "ENUM: " << beg << '\n';
     std::size_t i = 0;
     for (auto l_beg = lst.begin(); l_beg != lst.end(); ++l_beg)
     {

@@ -22,6 +22,8 @@
 
 namespace Gm {
 
+enum BEG{left, right};
+
 class GmAbstrBitBoard
 {
 private:
@@ -46,7 +48,7 @@ public:
                     const std::size_t& width,
                     const std::size_t& tps);
 
-    void arrange(const std::initializer_list<std::size_t>& lst);
+    void arrange(const std::initializer_list<std::size_t>& lst, const BEG& beg = left);
 
     void DIAG_showBoard();
 };
