@@ -13,15 +13,17 @@
 #ifndef GMABSTRFIGURE_H
 #define GMABSTRFIGURE_H
 
+#include <initializer_list>
+#include <cstdint>
+
 namespace Gm {
 
-class GmAbstrFigure
+struct GmAbstrFigure
 {
-public:
-    GmAbstrFigure();
+    int8_t skills[4];
+    GmAbstrFigure() = delete;
+    GmAbstrFigure(const std::initializer_list<int8_t>& lst);
 };
-
-
 
 }
 

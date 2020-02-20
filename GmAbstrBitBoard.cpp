@@ -70,7 +70,7 @@ std::size_t GmAbstrBitBoard::getType(const std::size_t &pos) const
 //////////////////////////////////////////////////////////////////////////////
 ///    2, 3, 4, 5, 5, 4, 6, 2,                                             ///
 ///    1, 1, 1, 1, 1, 1, 1, 1,                                             ///
-///    0, 0, 0, 0, 0, 0, ...      - Typical example of chess forces arrangement
+///    0, 0, 0, 0, 0, 0, ... - Typical example of chess forces arrangement ///
 //////////////////////////////////////////////////////////////////////////////
 /// \brief GmAbstrBitBoard::arrange                                        ///
 /// \param lst {2, 3, 4, 5, 5, 4, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1}            ///

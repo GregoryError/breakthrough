@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+
 #include <GmAbstrBitBoard.h>
+#include <GmAbstrFigure.h>
 
 int main(int argc, char *argv[])
 {   
@@ -20,6 +22,11 @@ int main(int argc, char *argv[])
     Gm::GmAbstrBitBoard obj(8, 8, 5);
     obj.DIAG_showBoard();
 
+    Gm::GmAbstrFigure some{0, 0, 0, 0, 0,
+                           0, 1, 1, 1, 0,
+                           0, 1, 1, 1, 0,
+                           0, 1, 1, 1, 0,
+                           0, 0, 0, 0, 0, 0};
 
 
     return app.exec();
