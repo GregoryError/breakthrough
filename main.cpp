@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     Gm::GmAbstrBitBoard obj(8, 8, 7);
              //  0  1  2  3  4  5  6  7
     obj.arrange({2, 3, 4, 5, 6, 4, 3, 2,                                             ///
-                 1, 1, 1, 1, 1, 1, 1, 1}, Gm::direct);
+                 1, 1, 1, 1, 1, 1, 1, 1}, Gm::cross);
 
     obj.DIAG_showBoard();
 

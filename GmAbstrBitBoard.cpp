@@ -22,7 +22,8 @@ void GmAbstrBitBoard::setSide(const std::size_t &pos)
 
 void GmAbstrBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
 {
-    p_forces[(pos / 8) + (8 * n_type)] ^= (1 << (pos % 8));
+    if (pos < WIDTH * HEIGHT)
+        p_forces[(pos / 8) + (8 * n_type)] ^= (1 << (pos % 8));
 }
 
 bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
@@ -76,8 +77,8 @@ void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, con
 
     if (beg == direct)
     {
-        for (i = lst.size(); i > 0; --i)
-            setCell(WIDTH * HEIGHT - 1 - i, getCell(i));
+        for (i = 0; i < lst.size(); ++i)
+            setCell(WIDTH * HEIGHT - lst.size() + i, getCell(i));
 
     }
 }
