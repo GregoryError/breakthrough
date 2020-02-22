@@ -78,10 +78,32 @@ void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, con
     if (beg == direct)
     {
         for (i = 0; i < lst.size(); ++i)
+        {
             setCell(WIDTH * HEIGHT - lst.size() + i, getCell(i));
+            setSide(WIDTH * HEIGHT - lst.size() + i);
+        }
 
     }
 }
+
+void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
+{
+    setCell(pos_to, getCell(pos_from));
+    setCell(pos_from, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////// DIAGNOSTIC
 

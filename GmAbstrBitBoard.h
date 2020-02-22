@@ -47,6 +47,8 @@ public:
 
     void arrange(const std::initializer_list<std::size_t>& lst,
                  const BEG& beg = direct);
+    void move(const std::size_t& pos_from,
+              const std::size_t& pos_to);
 
     void DIAG_showBoard();
 };

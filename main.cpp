@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
     obj.arrange({2, 3, 4, 5, 6, 4, 3, 2,                                             ///
                  1, 1, 1, 1, 1, 1, 1, 1}, Gm::cross);
 
+    obj.move(4, 20);
+
     obj.DIAG_showBoard();
 
 
