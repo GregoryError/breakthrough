@@ -10,25 +10,8 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
     HEIGHT = height;
     TYPES = tps;
     board_space = (height * width) / 8 + 1;
-    p_cells = std::make_unique<std::int8_t[]>(board_space);
     p_side = std::make_unique<std::int8_t[]>(board_space);
-    p_types = std::make_unique<std::int8_t[]>(TYPES * board_space);
-
-
-    arrange({1, 1, 1, 1, 1, 1, 1, 1,
-             0, 0, 1, 1, 1, 1, 0, 0}, Gm::right);
-
-
-
-   // std::cout << "4: " << getType(4) << " " << " 11: " << getType(11) << '\n';
-
-
-}
-
-void GmAbstrBitBoard::setCell(const std::size_t &pos)
-{
-    if (pos < WIDTH * HEIGHT)
-        p_cells[pos / 8] ^= (1 << (pos % 8));
+    p_forces = std::make_unique<std::int8_t[]>(TYPES * board_space);
 }
 
 void GmAbstrBitBoard::setSide(const std::size_t &pos)
@@ -37,17 +20,9 @@ void GmAbstrBitBoard::setSide(const std::size_t &pos)
         p_side[pos / 8] ^= (1 << (pos % 8));
 }
 
-void GmAbstrBitBoard::setType(const std::size_t &pos, const std::size_t& n_type)
+void GmAbstrBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
 {
-    p_types[(pos / 8) + (8 * n_type)] ^= (1 << (pos % 8));
-}
-
-bool GmAbstrBitBoard::getCell(const std::size_t &pos) const
-{
-    if (pos < WIDTH * HEIGHT)
-        return p_cells[pos / 8] & (1 << (pos % 8));
-    else
-        return false;
+    p_forces[(pos / 8) + (8 * n_type)] ^= (1 << (pos % 8));
 }
 
 bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
@@ -58,17 +33,17 @@ bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
         return false;
 }
 
-std::size_t GmAbstrBitBoard::getType(const std::size_t &pos) const
+std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
 {
     std::size_t i;
     for (i = 0; i < TYPES; ++i)
-        if (p_types[(pos / 8) + (8 * i)] & (1 << pos % 8))
+        if (p_forces[(pos / 8) + (8 * i)] & (1 << pos % 8))
             return i;
     return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////
-///    2, 3, 4, 5, 5, 4, 6, 2,                                             ///
+///    2, 3, 4, 5, 6, 4, 3, 2,                                             ///
 ///    1, 1, 1, 1, 1, 1, 1, 1,                                             ///
 ///    0, 0, 0, 0, 0, 0, ... - Typical example of chess forces arrangement ///
 //////////////////////////////////////////////////////////////////////////////
@@ -83,21 +58,29 @@ void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, con
 {
     std::cout << "ENUM: " << beg << '\n';
     std::size_t i = 0;
-    for (auto l_beg = lst.begin(); l_beg != lst.end(); ++l_beg)
-    {
-        if (*l_beg != 0)
-        {
-            setCell(i);                             //player 0
-            setType(i, *l_beg);
 
-            setCell(WIDTH * HEIGHT - 1 - i);       // Player 1
-            setType(WIDTH * HEIGHT - 1 - i, *l_beg);
-            setSide(WIDTH * HEIGHT - 1 - i);
+    for (const auto& v : lst)
+    {
+        if (v != 0)
+        {                                                        //player 0
+            setCell(i, v);
+            if (beg == cross)
+            {                                                    // player 1
+                setCell(WIDTH * HEIGHT - 1 - i, v);
+                setSide(WIDTH * HEIGHT - 1 - i);
+            }
+
         }
         ++i;
     }
-}
 
+    if (beg == direct)
+    {
+        for (i = lst.size(); i > 0; --i)
+            setCell(WIDTH * HEIGHT - 1 - i, getCell(i));
+
+    }
+}
 
 /////// DIAGNOSTIC
 
@@ -110,7 +93,8 @@ void GmAbstrBitBoard::DIAG_showBoard()
         if ((i + 1) % WIDTH == 0)
             std::cout << '\n';
     }
-    std::cout << std::endl;
+    // std::cout << std::endl << std::cout;
+
 }
 
 

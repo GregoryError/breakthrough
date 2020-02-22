@@ -22,7 +22,7 @@
 
 namespace Gm {
 
-enum BEG{left, right};
+enum BEG{direct, cross};
 
 class GmAbstrBitBoard
 {
@@ -30,17 +30,14 @@ private:
     std::size_t WIDTH, HEIGHT;
     std::size_t TYPES;
     std::size_t board_space;
-    std::unique_ptr<std::int8_t[]> p_cells;
     std::unique_ptr<std::int8_t[]> p_side;
-    std::unique_ptr<std::int8_t[]> p_types;
+    std::unique_ptr<std::int8_t[]> p_forces;
 
-    void setCell(const std::size_t& pos);                 // 1 - filled, 0 - empty
-    void setSide(const std::size_t& pos);                 // 1 - one player, 0 - another
-    void setType(const std::size_t& pos,                  // (position on brd, type of figure)
+    void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
+    void setCell(const std::size_t& pos,           // (position on brd, type of figure)
                  const std::size_t& n_type);
-    bool getCell(const std::size_t& pos) const;           // empty or filled
-    bool getSide(const std::size_t& pos) const;           // whose figure
-    std::size_t getType(const std::size_t& pos) const;
+    bool getSide(const std::size_t& pos) const;          // whose figure
+    std::size_t getCell(const std::size_t& pos) const;
 
 public:
     GmAbstrBitBoard() = delete;
@@ -48,12 +45,11 @@ public:
                     const std::size_t& width,
                     const std::size_t& tps);
 
-    void arrange(const std::initializer_list<std::size_t>& lst, const BEG& beg = left);
+    void arrange(const std::initializer_list<std::size_t>& lst,
+                 const BEG& beg = direct);
 
     void DIAG_showBoard();
 };
-
-
 
 }
 

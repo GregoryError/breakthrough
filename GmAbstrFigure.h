@@ -1,5 +1,5 @@
 // Gregory Kolesnikoff 2020
-//
+
 // This abstract class represents a figure.
 // The class keeps following information:
 // - the 'name' of figure - just a numder.
@@ -20,9 +20,14 @@ namespace Gm {
 
 struct GmAbstrFigure
 {
-    int8_t skills[4];
+    std::int8_t n_name;
+    std::int8_t skills[4];
     GmAbstrFigure() = delete;
-    GmAbstrFigure(const std::initializer_list<int8_t>& lst);
+    GmAbstrFigure(const std::initializer_list<int8_t>& lst,
+                  const std::int8_t& name = 0);
+    void setBit(const std::size_t& pos);
+    bool getBit(const std::size_t& pos);
+    bool operator[](const std::size_t& pos);
 };
 
 }
