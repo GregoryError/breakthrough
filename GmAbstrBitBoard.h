@@ -30,8 +30,8 @@ private:
     std::size_t WIDTH, HEIGHT;
     std::size_t TYPES;
     std::size_t board_space;
-    std::unique_ptr<std::int8_t[]> p_side;
-    std::unique_ptr<std::int8_t[]> p_forces;
+    std::unique_ptr<std::uint8_t[]> p_side;
+    std::unique_ptr<std::uint8_t[]> p_forces;
 
     void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
     void setCell(const std::size_t& pos,           // (position on brd, type of figure)

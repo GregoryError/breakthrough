@@ -10,8 +10,8 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
     HEIGHT = height;
     TYPES = tps;
     board_space = (height * width) / 8 + 1;
-    p_side = std::make_unique<std::int8_t[]>(board_space);
-    p_forces = std::make_unique<std::int8_t[]>(TYPES * board_space);
+    p_side = std::make_unique<std::uint8_t[]>(board_space);
+    p_forces = std::make_unique<std::uint8_t[]>(TYPES * board_space);
 }
 
 void GmAbstrBitBoard::setSide(const std::size_t &pos)
