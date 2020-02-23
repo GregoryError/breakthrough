@@ -96,15 +96,6 @@ void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_t
 
 
 
-
-
-
-
-
-
-
-
-
 /////// DIAGNOSTIC
 
 void GmAbstrBitBoard::DIAG_showBoard()

@@ -32,11 +32,11 @@ private:
     std::size_t board_space;
     std::unique_ptr<std::uint8_t[]> p_side;
     std::unique_ptr<std::uint8_t[]> p_forces;
-
+public:
+    bool getSide(const std::size_t& pos) const;    // whose figure
     void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
     void setCell(const std::size_t& pos,           // (position on brd, type of figure)
                  const std::size_t& n_type);
-    bool getSide(const std::size_t& pos) const;          // whose figure
     std::size_t getCell(const std::size_t& pos) const;
 
 public:
@@ -49,6 +49,7 @@ public:
                  const BEG& beg = direct);
     void move(const std::size_t& pos_from,
               const std::size_t& pos_to);
+
 
     void DIAG_showBoard();
 };

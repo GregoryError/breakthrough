@@ -11,11 +11,13 @@
 
 namespace Gm {
 
+
 template <class GameStrategy>
 class GmBoardGame : public GameStrategy
 {
 public:
-    GmBoardGame();
+    GmBoardGame() = default;
+
 };
 
 }

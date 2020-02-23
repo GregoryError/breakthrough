@@ -3,6 +3,8 @@
 
 #include <GmAbstrBitBoard.h>
 #include <GmAbstrFigure.h>
+#include <GmBoardGame.h>
+#include <GmBreakthroughStrategy.h>
 
 int main(int argc, char *argv[])
 {   
@@ -21,27 +23,32 @@ int main(int argc, char *argv[])
 
     Gm::GmAbstrBitBoard obj(8, 8, 7);
     //  0  1  2  3  4  5  6  7
-    obj.arrange({2, 3, 4, 5, 6, 4, 3, 2,                                             ///
+    obj.arrange({2, 3, 4, 5, 6, 4, 3, 2,
                  1, 1, 1, 1, 1, 1, 1, 1}, Gm::cross);
 
     obj.move(4, 20);
 
     obj.DIAG_showBoard();
 
+    Gm::GmBoardGame<Gm::GmBreakthroughStrategy> Game;
 
-    //    Gm::GmAbstrFigure some({0, 0, 0, 0, 0,
-    //                            0, 1, 1, 1, 0,
-    //                            0, 1, 1, 1, 0,
-    //                            0, 1, 1, 1, 0,
-    //                            0, 0, 0, 0, 0, 1}, 1);
 
-    //    std::cout << "\n\nFIGURE:\n";
-    //    for(std::size_t i = 0; i < 26; ++i)
-    //    {
-    //        std::cout << some[i] << ' ';
-    //        if ((i + 1) % 5 == 0)
-    //            std::cout << '\n';
-    //    }
+
+
+//    Gm::GmAbstrFigure some({0, 0, 0, 0, 0,
+//                            0, 1, 1, 1, 0,
+//                            0, 1, 1, 1, 0,
+//                            0, 1, 1, 1, 0,
+//                            0, 0, 0, 0, 0, 1}, 0);
+
+//    std::cout << "\n\nFIGURE:\n";
+//    for(std::size_t i = 0; i < 26; ++i)
+//    {
+//        if (i == 0) std::cout << "->";
+//        std::cout << some[i] << ' ';
+//        if ((i + 1) % 5 == 0)
+//            std::cout << '\n';
+//    }
 
     return 0;
 
