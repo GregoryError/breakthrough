@@ -9,7 +9,6 @@
 // the figure can move. Bit #25 - sets whether
 // figure can move unlimited(queen) or not.
 
-
 #ifndef GMABSTRFIGURE_H
 #define GMABSTRFIGURE_H
 
@@ -22,7 +21,11 @@ struct GmAbstrFigure
 {
     std::int8_t n_name = 0;
     std::int8_t skills[4] = {};
-    GmAbstrFigure();
+    // these guys show how many cells available in this direction
+    std::int8_t c_RIGHT, c_LEFT, c_UP, c_DOWN,
+    c_LEFTUP, c_RIGHTUP, c_RIGHTDOWN, c_LEFTDOWN;
+
+    GmAbstrFigure() = delete;
     GmAbstrFigure(const std::initializer_list<int8_t>& lst,
                   const std::int8_t& name = 0);
     void setBit(const std::size_t& pos);

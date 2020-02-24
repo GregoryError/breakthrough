@@ -9,8 +9,9 @@
 #ifndef GMBOARDGAME_H
 #define GMBOARDGAME_H
 
-namespace Gm {
+#include <cstdint>
 
+namespace Gm {
 
 template <class GameStrategy>
 class GmBoardGame : public GameStrategy

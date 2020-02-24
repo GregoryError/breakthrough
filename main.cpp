@@ -21,34 +21,28 @@ int main(int argc, char *argv[])
     //    }, Qt::QueuedConnection);
     //    engine.load(url);
 
-    Gm::GmAbstrBitBoard obj(8, 8, 7);
+    Gm::GmAbstrBitBoard obj(8, 8, 2);
     //  0  1  2  3  4  5  6  7
-    obj.arrange({2, 3, 4, 5, 6, 4, 3, 2,
-                 1, 1, 1, 1, 1, 1, 1, 1}, Gm::cross);
-
-    obj.move(4, 20);
-
-    obj.DIAG_showBoard();
+    obj.arrange({1, 1, 1, 1, 1, 1, 1, 1,
+                 0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
 
     Gm::GmBoardGame<Gm::GmBreakthroughStrategy> Game;
+    Game.addBoard(&obj);
+    Game.addFigure({0, 0, 0, 0, 0,
+                    0, 1, 1, 1, 0,
+                    0, 1, 1, 1, 0,
+                    0, 1, 1, 1, 0,
+                    0, 0, 0, 0, 0}, 0);
+
+    if (!Game.move(0, 10, 18)) std::cout << "\nWRONG: Can`t move there!\n";
+
+    obj.DIAG_showBoard();
+    std::cout << "\n\n";
+    std::cout << "obj.getCellsLEFT(40) = " << obj.getCellsRIGHTDOWN(18) << '\n';
 
 
 
 
-//    Gm::GmAbstrFigure some({0, 0, 0, 0, 0,
-//                            0, 1, 1, 1, 0,
-//                            0, 1, 1, 1, 0,
-//                            0, 1, 1, 1, 0,
-//                            0, 0, 0, 0, 0, 1}, 0);
-
-//    std::cout << "\n\nFIGURE:\n";
-//    for(std::size_t i = 0; i < 26; ++i)
-//    {
-//        if (i == 0) std::cout << "->";
-//        std::cout << some[i] << ' ';
-//        if ((i + 1) % 5 == 0)
-//            std::cout << '\n';
-//    }
 
     return 0;
 

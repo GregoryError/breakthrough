@@ -11,6 +11,7 @@
 #include <GmAbstrBitBoard.h>
 #include <GmAbstrFigure.h>
 #include <memory>
+#include <initializer_list>
 
 namespace Gm {
 
@@ -19,16 +20,21 @@ class GmBreakthroughStrategy
 private:
     GmAbstrBitBoard* p_board;
     std::unique_ptr<GmAbstrFigure> figure;
+
 public:
     GmBreakthroughStrategy();
-    void addBoard(GmAbstrBitBoard* b)
-    {
-        p_board = b;
-    }
+    void addBoard(GmAbstrBitBoard* b);
+    void addFigure(const std::initializer_list<std::int8_t>& lst,
+                          const int8_t& n_name);
 
-    bool make_Move(const std::uint8_t& side,
+    bool move(const std::uint8_t& side,
                    const std::uint8_t& pos_from,
                    const std::uint8_t& pos_to);
+
+    bool checkSkill(const std::uint8_t& from,
+                    const std::uint8_t& to);
+
+
 
 };
 

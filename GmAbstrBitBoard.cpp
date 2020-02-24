@@ -92,6 +92,55 @@ void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_t
     setCell(pos_from, 0);
 }
 
+std::size_t GmAbstrBitBoard::getCellsRIGHT(const std::size_t &pos)
+{
+    std::size_t i = 0;
+    for (; i * WIDTH <= pos; ++i) ;
+    return (i * WIDTH - pos) - 1;
+
+}
+
+std::size_t GmAbstrBitBoard::getCellsLEFT(const std::size_t &pos)
+{
+    std::size_t i = 0;
+    for (; i * WIDTH <= pos; ++i) ;
+    return pos - (i * WIDTH - WIDTH);
+}
+
+std::size_t GmAbstrBitBoard::getCellsUP(const std::size_t &pos)
+{
+    std::size_t i = 0;
+    for (; i * WIDTH < pos; ++i) ;
+    return (i == 0) ? i : (i - 1);
+}
+
+std::size_t GmAbstrBitBoard::getCellsDOWN(const std::size_t &pos)
+{
+    std::size_t i = 0;
+    for (; i * WIDTH < pos; ++i) ;
+    return HEIGHT - i;
+}
+
+std::size_t GmAbstrBitBoard::getCellsLEFTUP(const std::size_t &pos)
+{
+    return getCellsLEFT(pos) <= getCellsUP(pos) ? getCellsLEFT(pos) : getCellsUP(pos);
+}
+
+std::size_t GmAbstrBitBoard::getCellsRIGHTUP(const std::size_t &pos)
+{
+    return getCellsRIGHT(pos) <= getCellsUP(pos) ? getCellsRIGHT(pos) : getCellsUP(pos);
+}
+
+std::size_t GmAbstrBitBoard::getCellsRIGHTDOWN(const std::size_t &pos)
+{
+    return getCellsRIGHT(pos) <= getCellsDOWN(pos) ? getCellsRIGHT(pos) : getCellsDOWN(pos);
+}
+
+std::size_t GmAbstrBitBoard::getCellsLEFTDOWN(const std::size_t &pos)
+{
+    return getCellsLEFT(pos) <= getCellsDOWN(pos) ? getCellsLEFT(pos) : getCellsDOWN(pos);
+}
+
 
 
 

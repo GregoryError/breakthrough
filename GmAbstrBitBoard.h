@@ -46,9 +46,20 @@ public:
                     const std::size_t& tps);
 
     void arrange(const std::initializer_list<std::size_t>& lst,
-                 const BEG& beg = direct);
+                 const BEG& beg = cross);
     void move(const std::size_t& pos_from,
               const std::size_t& pos_to);
+
+
+    // these guys show how many cells available in this direction
+    std::size_t getCellsRIGHT(const std::size_t& pos);
+    std::size_t getCellsLEFT(const std::size_t& pos);
+    std::size_t getCellsUP(const std::size_t& pos);
+    std::size_t getCellsDOWN(const std::size_t& pos);
+    std::size_t getCellsLEFTUP(const std::size_t& pos);
+    std::size_t getCellsRIGHTUP(const std::size_t& pos);
+    std::size_t getCellsRIGHTDOWN(const std::size_t& pos);
+    std::size_t getCellsLEFTDOWN(const std::size_t& pos);
 
 
     void DIAG_showBoard();
