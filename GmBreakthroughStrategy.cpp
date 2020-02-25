@@ -18,9 +18,9 @@ void GmBreakthroughStrategy::addFigure(const std::initializer_list<std::int8_t>&
     figure = std::make_unique<GmAbstrFigure>(lst, n_name);
 }
 
-bool GmBreakthroughStrategy::move(const std::uint8_t& side,
-                                  const std::uint8_t& pos_from,
-                                  const std::uint8_t& pos_to)
+bool GmBreakthroughStrategy::move(const std::size_t &side,
+                                  const std::size_t& pos_from,
+                                  const std::size_t& pos_to)
 {
     if (p_board->getCell(pos_from) != 0 && (pos_to != pos_from))   // - If on 'pos_from' is not empty cell AND
         if ((!p_board->getSide(pos_from) && side == 0) ||          // - If the figure on pos 'pos_from' yours, AND
@@ -43,8 +43,25 @@ bool GmBreakthroughStrategy::move(const std::uint8_t& side,
     return false;
 }
 
-bool GmBreakthroughStrategy::checkSkill(const uint8_t &from, const std::uint8_t& to)         // move allowed according to figures skills
+bool GmBreakthroughStrategy::checkSkill(const std::size_t& from, const std::size_t& to)         // move allowed according to figures skills
 {
-
+    return true;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

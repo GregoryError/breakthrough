@@ -22,7 +22,9 @@
 
 namespace Gm {
 
-enum BEG{direct, cross};
+enum BEG {direct, cross};
+enum DIRECTION {right, left, up, down, leftUp,
+                rightUp, rightDown, leftDown, undefined};
 
 class GmAbstrBitBoard
 {
@@ -52,15 +54,17 @@ public:
 
 
     // these guys show how many cells available in this direction
-    std::size_t getCellsRIGHT(const std::size_t& pos);
-    std::size_t getCellsLEFT(const std::size_t& pos);
-    std::size_t getCellsUP(const std::size_t& pos);
-    std::size_t getCellsDOWN(const std::size_t& pos);
-    std::size_t getCellsLEFTUP(const std::size_t& pos);
-    std::size_t getCellsRIGHTUP(const std::size_t& pos);
-    std::size_t getCellsRIGHTDOWN(const std::size_t& pos);
-    std::size_t getCellsLEFTDOWN(const std::size_t& pos);
+    std::size_t getCellsRIGHT(const std::size_t& pos) const;
+    std::size_t getCellsLEFT(const std::size_t& pos) const;
+    std::size_t getCellsUP(const std::size_t& pos) const;
+    std::size_t getCellsDOWN(const std::size_t& pos) const;
+    std::size_t getCellsLEFTUP(const std::size_t& pos) const;
+    std::size_t getCellsRIGHTUP(const std::size_t& pos) const;
+    std::size_t getCellsRIGHTDOWN(const std::size_t& pos) const;
+    std::size_t getCellsLEFTDOWN(const std::size_t& pos) const;
 
+    // this shows direction by positions
+    DIRECTION getDirection(const std::size_t& pos_from, const std::size_t& pos_to) const;
 
     void DIAG_showBoard();
 };

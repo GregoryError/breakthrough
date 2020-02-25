@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     //  0  1  2  3  4  5  6  7
     obj.arrange({1, 1, 1, 1, 1, 1, 1, 1,
                  0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
+    std::cout << "Direction: " << obj.getDirection(35, 28) << '\n';
 
     Gm::GmBoardGame<Gm::GmBreakthroughStrategy> Game;
     Game.addBoard(&obj);

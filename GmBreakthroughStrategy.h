@@ -27,12 +27,12 @@ public:
     void addFigure(const std::initializer_list<std::int8_t>& lst,
                           const int8_t& n_name);
 
-    bool move(const std::uint8_t& side,
-                   const std::uint8_t& pos_from,
-                   const std::uint8_t& pos_to);
+    bool move(const std::size_t& side,
+                   const std::size_t& pos_from,
+                   const std::size_t& pos_to);
 
-    bool checkSkill(const std::uint8_t& from,
-                    const std::uint8_t& to);
+    bool checkSkill(const std::size_t& from,
+                    const std::size_t& to);
 
 
 
