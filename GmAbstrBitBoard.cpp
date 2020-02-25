@@ -138,57 +138,47 @@ std::size_t GmAbstrBitBoard::getCellsLEFTDOWN(const std::size_t &pos) const
     return getCellsLEFT(pos) <= getCellsDOWN(pos) ? getCellsLEFT(pos) : getCellsDOWN(pos);
 }
 
-DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::size_t &pos_to) const
+DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::size_t &pos_to) const  // TODO: Check here not shure this works properly
 {
-    if (pos_to > pos_from)
+    if (pos_to < pos_from)                            // -left, -leftUp, -up, -rightUp
+    {
+        if (pos_from - pos_to < WIDTH &&
+                getCellsLEFT(pos_from) < WIDTH)
+            return left;
+
+        if ((pos_from - pos_to) % WIDTH == 0)
+            return up;
+
+        auto rows = (pos_from - pos_to) / WIDTH;
+        auto endPos = (rows * WIDTH) + rows;
+        if (pos_to == pos_from - endPos)
+            return leftUp;
+
+        rows = ((pos_from - pos_to) / WIDTH) + 1;
+        endPos = pos_from - (rows * WIDTH) + rows;
+        if (pos_to == endPos)
+            return rightUp;
+    }
+
+    if (pos_to > pos_from)                            // leftDown, -down, rightDown, -right
     {
         if (pos_to - pos_from < WIDTH &&
                 getCellsRIGHT(pos_from) < WIDTH)
             return right;
 
-    }
-    if (pos_to < pos_from)
-    {
-        if (pos_from - pos_to < WIDTH &&
-                getCellsLEFT(pos_from) < WIDTH)
-            return left;
-    }
-    if (pos_to < pos_from)
-    {
-        if ((pos_from - pos_to) % WIDTH == 0)
-            return up;
-    }
-    if (pos_to > pos_from)
-    {
         if ((pos_to - pos_from) % WIDTH == 0)
             return down;
-    }
-    if (pos_to < pos_from)
-    {
-        auto rows = (pos_from - pos_to) / WIDTH;
+
+        auto rows = (pos_to - pos_from) / WIDTH;
         auto endPos = (rows * WIDTH) + rows;
+        if (pos_to == pos_from + endPos)
+            return rightDown;
 
-        if (pos_to == pos_from - endPos)
-            return leftUp;
+        rows = ((pos_to - pos_from) / WIDTH) + 1;
+        endPos = pos_from + (rows * WIDTH) - rows;
+        if (pos_to == endPos)
+            return leftDown;
     }
-
-    if (pos_to < pos_from)
-    {
-        auto rows = (pos_from - pos_to) / WIDTH;
-        auto endPos = (rows * WIDTH) + rows;
-        std::cout << "ROWS: " << rows << '\n';
-        if (pos_to == pos_from - endPos)
-            return rightUp;
-    }
-
-
-
-
-
-
-
-
-
 
     return undefined;
 }
