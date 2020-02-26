@@ -22,7 +22,7 @@ struct GmAbstrFigure
     std::int8_t n_name = 0;
     std::int8_t skills[4] = {};
     // these guys show how many cells available in this direction
-    std::int8_t c_RIGHT, c_LEFT, c_UP, c_DOWN,
+    std::size_t c_RIGHT, c_LEFT, c_UP, c_DOWN,
     c_LEFTUP, c_RIGHTUP, c_RIGHTDOWN, c_LEFTDOWN;
 
     GmAbstrFigure() = delete;

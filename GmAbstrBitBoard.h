@@ -65,6 +65,7 @@ public:
 
     // this shows direction by positions
     DIRECTION getDirection(const std::size_t& pos_from, const std::size_t& pos_to) const;
+    std::size_t getDistance(const std::size_t& pos_from, const std::size_t& pos_to) const;
 
     void DIAG_showBoard();
 };

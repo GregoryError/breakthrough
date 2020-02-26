@@ -29,34 +29,30 @@ bool GmBreakthroughStrategy::move(const std::size_t &side,
                     (p_board->getSide(pos_to) && side == 0) ||     // you are allowed to make a move.
                     (!p_board->getSide(pos_to) && side == 1))
             {
-
-
-
-
-                if (checkSkill(pos_from, pos_to))
+               if (checkSkill(pos_from, pos_to))
                 {
                     p_board->move(pos_from, pos_to);
                     return true;
                 }
-
             }
     return false;
 }
 
 bool GmBreakthroughStrategy::checkSkill(const std::size_t& from, const std::size_t& to)         // move allowed according to figures skills
 {
-    return true;
+    switch (p_board->getDirection(from, to))
+    {
+    case right: if (figure->c_RIGHT >= (to - from)) return true;
+    case left: if (figure->c_LEFT >= (from - to)) return true;
+    case up: if (figure->c_UP >= (from - to)) return true;
+    case down: if (figure->c_DOWN >= (to - from)) return true;
+    case leftUp: if (figure->c_LEFTUP >= (to - from)) return true;
+    case rightUp:
+    case rightDown:
+    case leftDown:
+    case undefined: return false;
+    }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

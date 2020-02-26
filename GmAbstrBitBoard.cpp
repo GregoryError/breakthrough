@@ -93,7 +93,6 @@ std::size_t GmAbstrBitBoard::getCellsRIGHT(const std::size_t &pos) const
     std::size_t i = 0;
     for (; i * WIDTH <= pos; ++i) ;
     return (i * WIDTH - pos) - 1;
-
 }
 
 std::size_t GmAbstrBitBoard::getCellsLEFT(const std::size_t &pos) const
@@ -148,8 +147,7 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
 
 
 
-        if (pos_from - pos_to < WIDTH &&
-                getCellsLEFT(pos_from) < WIDTH)
+        if (pos_from - pos_to <= getCellsLEFT(pos_from))
             return left;
 
         if ((pos_from - pos_to) % WIDTH == 0)
@@ -158,20 +156,17 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
         rows = ((pos_from - pos_to) / WIDTH) + 1;
         endPos = pos_from - (rows * WIDTH) + rows;
         if (pos_to == endPos)
-            return rightUp; //
+            return rightUp;
     }
 
     if (pos_to > pos_from)                            // leftDown, -down, rightDown, -right
-    {  
+    {
         auto rows = (pos_to - pos_from) / WIDTH;
         auto endPos = (rows * WIDTH) + rows;
         if (pos_to == pos_from + endPos)
             return rightDown;
 
-
-
-        if (pos_to - pos_from < WIDTH &&
-                getCellsRIGHT(pos_from) < WIDTH)
+        if (pos_to - pos_from <= getCellsRIGHT(pos_from))
             return right;
 
         if ((pos_to - pos_from) % WIDTH == 0)
@@ -180,16 +175,26 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
         rows = ((pos_to - pos_from) / WIDTH) + 1;
         endPos = pos_from + (rows * WIDTH) - rows;
         if (pos_to == endPos)
-            return leftDown;  //
-
-
+            return leftDown;
     }
 
     return undefined;
 }
 
+std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std::size_t &pos_to) const
+{
+    std::size_t diff = 0;
+    if (pos_from > pos_to)
+        diff = pos_from - pos_to;
+    if (pos_to > pos_from)
+        diff = pos_to - pos_from;
 
 
+
+    if (diff == 1 || diff == 7 || diff == 8 || diff == 9) return 1;
+    else
+        return 0;
+}
 
 
 /////// DIAGNOSTIC
