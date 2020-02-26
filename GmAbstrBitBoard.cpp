@@ -57,7 +57,6 @@ std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
 
 void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, const BEG& beg)
 {
-    std::cout << "ENUM: " << beg << '\n';
     std::size_t i = 0;
     for (const auto& v : lst)
     {
@@ -142,6 +141,13 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
 {
     if (pos_to < pos_from)                            // -left, -leftUp, -up, -rightUp
     {
+        auto rows = (pos_from - pos_to) / WIDTH;
+        auto endPos = (rows * WIDTH) + rows;
+        if (pos_to == pos_from - endPos)
+            return leftUp;
+
+
+
         if (pos_from - pos_to < WIDTH &&
                 getCellsLEFT(pos_from) < WIDTH)
             return left;
@@ -149,19 +155,21 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
         if ((pos_from - pos_to) % WIDTH == 0)
             return up;
 
-        auto rows = (pos_from - pos_to) / WIDTH;
-        auto endPos = (rows * WIDTH) + rows;
-        if (pos_to == pos_from - endPos)
-            return leftUp;
-
         rows = ((pos_from - pos_to) / WIDTH) + 1;
         endPos = pos_from - (rows * WIDTH) + rows;
         if (pos_to == endPos)
-            return rightUp;
+            return rightUp; //
     }
 
     if (pos_to > pos_from)                            // leftDown, -down, rightDown, -right
-    {
+    {  
+        auto rows = (pos_to - pos_from) / WIDTH;
+        auto endPos = (rows * WIDTH) + rows;
+        if (pos_to == pos_from + endPos)
+            return rightDown;
+
+
+
         if (pos_to - pos_from < WIDTH &&
                 getCellsRIGHT(pos_from) < WIDTH)
             return right;
@@ -169,15 +177,12 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
         if ((pos_to - pos_from) % WIDTH == 0)
             return down;
 
-        auto rows = (pos_to - pos_from) / WIDTH;
-        auto endPos = (rows * WIDTH) + rows;
-        if (pos_to == pos_from + endPos)
-            return rightDown;
-
         rows = ((pos_to - pos_from) / WIDTH) + 1;
         endPos = pos_from + (rows * WIDTH) - rows;
         if (pos_to == endPos)
-            return leftDown;
+            return leftDown;  //
+
+
     }
 
     return undefined;
