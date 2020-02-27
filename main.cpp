@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 
                     0, 1, 1, 1, 0,
                     0, 0, 0, 0, 0}, 0);
-    std::cout << "Distance: " << obj.getDistance(43, 34) << '\n';
+    std::cout << "Distance: " << obj.getDistance(0, 56) << '\n';
     //std::cout << "Define direction: " << obj.getDirection(0, 17) << '\n';
 
 

@@ -183,17 +183,30 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
 
 std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std::size_t &pos_to) const
 {
+    std::size_t row_first = 0;
+    std::size_t row_second = 0;
     std::size_t diff = 0;
     if (pos_from > pos_to)
+    {
         diff = pos_from - pos_to;
+        for (row_first = pos_to; row_first % WIDTH != 0; --row_first) ;
+        for (row_second = pos_from; row_second % WIDTH != 0; ++row_second) ;
+
+    }
     if (pos_to > pos_from)
+    {
         diff = pos_to - pos_from;
+        for (row_first = pos_from; row_first % WIDTH != 0; --row_first) ;
+        for (row_second = pos_to; row_second % WIDTH != 0; ++row_second) ;
 
+    }
 
+    if (pos_from < row_first && pos_to < row_second)
+        if (diff == 1 || diff == 7 || diff == 8 || diff == 9) return diff;
 
-    if (diff == 1 || diff == 7 || diff == 8 || diff == 9) return 1;
-    else
-        return 0;
+    for (std::size_t i = 1; i < WIDTH; ++i)
+        if (diff == 1 * i || diff == 7 * i || diff == 8 * i || diff == 9 * i) return i;
+    return 0;
 }
 
 
