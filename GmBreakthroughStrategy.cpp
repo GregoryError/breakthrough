@@ -42,16 +42,17 @@ bool GmBreakthroughStrategy::checkSkill(const std::size_t& from, const std::size
 {
     switch (p_board->getDirection(from, to))
     {
-    case right: if (figure->c_RIGHT >= (to - from)) return true;
-    case left: if (figure->c_LEFT >= (from - to)) return true;
-    case up: if (figure->c_UP >= (from - to)) return true;
-    case down: if (figure->c_DOWN >= (to - from)) return true;
-    case leftUp: if (figure->c_LEFTUP >= (to - from)) return true;
-    case rightUp:
-    case rightDown:
-    case leftDown:
+    case right: if (figure->c_RIGHT >= (p_board->getDistance(from, to))) return true; break;
+    case left: if (figure->c_LEFT >= (p_board->getDistance(from, to))) return true; break;
+    case up: if (figure->c_UP >= (p_board->getDistance(from, to))) return true; break;
+    case down: if (figure->c_DOWN >= (p_board->getDistance(from, to))) return true; break;
+    case leftUp: if (figure->c_LEFTUP >= (p_board->getDistance(from, to))) return true; break;
+    case rightUp: if (figure->c_RIGHTUP >= (p_board->getDistance(from, to))) return true; break;
+    case rightDown: if (figure->c_RIGHTDOWN >= (p_board->getDistance(from, to))) return true; break;
+    case leftDown: if (figure->c_LEFTDOWN >= (p_board->getDistance(from, to))) return true; break;
     case undefined: return false;
     }
+    return false;
 }
 
 

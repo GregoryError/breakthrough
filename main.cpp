@@ -52,14 +52,13 @@ int main(int argc, char *argv[])
     Game.addFigure({0, 0, 0, 0, 0,
                     0, 1, 1, 1, 0,
                     0, 1, 1, 1, 0,
-
                     0, 1, 1, 1, 0,
                     0, 0, 0, 0, 0}, 0);
     std::cout << "Distance: " << obj.getDistance(0, 56) << '\n';
-    //std::cout << "Define direction: " << obj.getDirection(0, 17) << '\n';
+    Game.move(0, 7, 23);
 
 
-   // obj.DIAG_showBoard();
+    obj.DIAG_showBoard();
 
 
 //    // tests:
