@@ -86,6 +86,9 @@ GmAbstrFigure::GmAbstrFigure(const std::initializer_list<int8_t>& lst,
 
 
     }
+
+  //  DIAG_showFigure();
+
 }
 
 void GmAbstrFigure::setBit(const size_t &pos)
@@ -100,6 +103,10 @@ bool GmAbstrFigure::getBit(const size_t &pos)
 
 void GmAbstrFigure::DIAG_showFigure()
 {
+    std::cout << "c_RIGHT: " << c_RIGHT << " c_LEFT: " << c_LEFT << " c_UP: " << c_UP << " c_DOWN: " << c_DOWN
+              << "\nc_DOWN: " << c_DOWN << " c_LEFTUP: " << c_LEFTUP << " c_RIGHTUP: " << c_RIGHTUP
+              << " c_LEFTDOWN: " << c_LEFTDOWN << '\n';
+
     std::cout << "\n\nFIGURE:\n";
     for(std::size_t i = 0; i < 26; ++i)
     {
