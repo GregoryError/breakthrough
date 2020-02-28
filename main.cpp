@@ -60,6 +60,12 @@ int main(int argc, char *argv[])
 
     obj.DIAG_showBoard();
 
+    std::size_t f, t;
+    while (std::cin >> f >> t)
+    {
+        std::cout << "Distance: " << obj.getDistance(f, t) << '\n';
+    }
+
 
 //    // tests:
 //    // rightUp

@@ -201,7 +201,7 @@ std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std:
 
     }
 
-    if (pos_from < row_first && pos_to < row_second)
+    if (pos_from <= row_first && pos_to < row_second)
         if (diff == 1 || diff == 7 || diff == 8 || diff == 9) return diff;
 
     for (std::size_t i = 1; i < WIDTH; ++i)
