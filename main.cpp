@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
                     0, 0, 0, 0, 0}, 0);
     obj.DIAG_showBoard();
 
-//    std::cout << "Distance: " << obj.getDistance(48, 41) << '\n';
+ //   std::cout << "Distance: " << obj.getDistance(8, 17) << '\n';
 //    std::cout << "Direction: " << obj.getDirection(48, 41) << '\n';
 
     std::size_t f, t, side = 0;

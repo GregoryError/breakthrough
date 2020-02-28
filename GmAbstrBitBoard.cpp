@@ -209,7 +209,7 @@ std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std:
 
     }
 
-    if (pos_from <= row_first && pos_to < row_second)
+    if (pos_from < row_first && pos_to < row_second)
         if (diff == 1 || diff == 7 || diff == 8 || diff == 9) return diff;
 
     for (std::size_t i = 1; i < WIDTH; ++i)
@@ -222,13 +222,13 @@ std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std:
 
 void GmAbstrBitBoard::DIAG_showBoard()
 {
-    std::cout << "DIAG_showBoard()::Sides\n";
-    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-    {
-        std::cout << getSide(i) << " ";
-        if ((i + 1) % WIDTH == 0)
-            std::cout << '\n';
-    }
+//    std::cout << "DIAG_showBoard()::Sides\n";
+//    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+//    {
+//        std::cout << getSide(i) << " ";
+//        if ((i + 1) % WIDTH == 0)
+//            std::cout << '\n';
+//    }
 
 
     std::cout << "DIAG_showBoard()::Cells\n";
