@@ -40,6 +40,7 @@ public:
     void setCell(const std::size_t& pos,           // (position on brd, type of figure)
                  const std::size_t& n_type);
     std::size_t getCell(const std::size_t& pos) const;
+   // void clearCell(const std::size_t& pos);
 
 public:
     GmAbstrBitBoard() = delete;
@@ -68,6 +69,10 @@ public:
     std::size_t getDistance(const std::size_t& pos_from, const std::size_t& pos_to) const;
 
     void DIAG_showBoard();
+
+    const std::size_t& getWidth() const { return WIDTH; }
+    const std::size_t& getHeight() const { return HEIGHT; }
+    bool empty();
 };
 
 }

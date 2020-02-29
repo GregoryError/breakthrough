@@ -55,6 +55,25 @@ bool GmBreakthroughStrategy::checkSkill(const std::size_t& from, const std::size
     return false;
 }
 
+int GmBreakthroughStrategy::win()
+{
+    int result = 3;   // 3 - neams the game is continue
+    if (p_board->empty())    // absolute empty board, return 2 - means nobody win (tied)
+        return 2;
+
+    for (std::size_t i = 0; i <= p_board->getWidth(); ++i)     // is player 1 wins?
+        if (p_board->getSide(i))
+            result = 1;
+    for (std::size_t i = (p_board->getWidth() * p_board->getHeight() - 1);          // is player 0 win?
+         i >= (p_board->getWidth() * p_board->getHeight() - p_board->getWidth()); --i)
+    {
+        if (p_board->getSide(i) == 0 && p_board->getCell(i) == 1)
+            result = result == 1 ? 2 : 0;                                  // or both?
+    }
+
+    return result;
+}
+
 
 
 

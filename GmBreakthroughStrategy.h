@@ -33,8 +33,7 @@ public:
 
     bool checkSkill(const std::size_t& from,
                     const std::size_t& to);
-
-
+    int win();
 
 };
 

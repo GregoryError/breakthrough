@@ -48,15 +48,13 @@ std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
 void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
 {
     setCell(pos_to, getCell(pos_from));
-
+    setCell(pos_from, getCell(pos_to));
 
     if (getSide(pos_from))
     {
         setSide(pos_to);
         setSide(pos_from);
     }
-    else
-         setCell(pos_from, getCell(pos_to));
 }
 
 

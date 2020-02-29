@@ -12,17 +12,19 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
+//    QQmlApplicationEngine engine;
+//    const QUrl url(QStringLiteral("qrc:/main.qml"));
+//    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+//                     &app, [url](QObject *obj, const QUrl &objUrl) {
+//        if (!obj && url == objUrl)
+//            QCoreApplication::exit(-1);
+//    }, Qt::QueuedConnection);
+//    engine.load(url);
 
-    Gm::GmAbstrBitBoard obj(8, 8, 2);
+    Gm::GmAbstrBitBoard obj(6, 8, 2);
     //  0  1  2  3  4  5  6  7
+
+
     obj.arrange({1, 1, 1, 1, 1, 1, 1, 1,
                  0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
 
@@ -50,6 +52,13 @@ int main(int argc, char *argv[])
             side = 1;
         else
             side = 0;
+        switch (Game.win())
+        {
+        case 0: std::cout << "Player 0 wins!\n"; break;
+        case 1: std::cout << "Player 1 wins!\n"; break;
+        case 2: std::cout << "NOBODY WIN!\n"; break;
+        case 3: break;
+        }
         std::cout << side << " move: ";
     }
 
