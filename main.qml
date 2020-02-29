@@ -24,7 +24,7 @@ Window {
     StackView {
         id: stack
         anchors.fill: parent
-        initialItem: mainView
+       // initialItem: mainView
     }
 
 }
