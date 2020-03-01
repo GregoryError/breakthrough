@@ -6,57 +6,17 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
                                  const std::size_t& width,
                                  const std::size_t& tps)
 {
-    WIDTH = width;
-    HEIGHT = height;
+    if (HEIGHT >= 6)
+         HEIGHT = height;
+    if (width > 8)
+        WIDTH = width;
+
     TYPES = tps;
-    board_space = (height * width) / 8 + 1;
+    board_space = (HEIGHT * WIDTH) / 8 + 1;
     p_side = std::make_unique<std::uint8_t[]>(board_space);
     p_forces = std::make_unique<std::uint8_t[]>(TYPES * board_space);
-}
-
-void GmAbstrBitBoard::setSide(const std::size_t &pos)
-{
-    if (pos < WIDTH * HEIGHT)
-        p_side[pos / 8] ^= (1 << (pos % 8));
-}
-
-void GmAbstrBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
-{
-    if (pos < WIDTH * HEIGHT)
-    {
-        p_forces[(pos / 8) + (8 * n_type)] ^= (1 << (pos % 8));
-    }
-}
-
-bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
-{
-    if (pos < WIDTH * HEIGHT)
-        return p_side[pos / 8] & (1 << (pos % 8));
-    else
-        return false;
-}
-
-std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
-{
-    std::size_t i;
-    for (i = 0; i < TYPES; ++i)
-        if (p_forces[(pos / 8) + (8 * i)] & (1 << pos % 8))
-            return i;
-    return 0;
-}
-
-void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
-{
-    setCell(pos_to, getCell(pos_from));
-
-
-    if (getSide(pos_from))
-    {
-        setSide(pos_to);
-        setSide(pos_from);
-    }
-    else
-         setCell(pos_from, getCell(pos_to));
+    for (std::size_t i = 0 ; i < board_space; ++i) p_side[i] = 0;
+    for (std::size_t i = 0 ; i < (TYPES * board_space); ++i) p_forces[i] = 0;
 }
 
 
@@ -69,7 +29,7 @@ void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_t
 /// \param lst {2, 3, 4, 5, 5, 4, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1}            ///
 //////////////////////////////////////////////////////////////////////////////
 /// Arranges forces on board according how it was made for one side,       ///
-/// but for both sides. Mirror-like way.                                   ///
+/// but for both sides. Mirror-like way or directly.                       ///
 //////////////////////////////////////////////////////////////////////////////
 
 void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, const BEG& beg)
@@ -97,6 +57,61 @@ void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, con
             setSide(WIDTH * HEIGHT - lst.size() + i);
         }
     }
+}
+
+void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
+{
+    setCell(pos_to, getCell(pos_from));
+   // setCell(pos_from, getCell(pos_to));
+    clearCell(pos_from);
+
+    if (getSide(pos_to))
+        setSide(pos_to);
+
+    if (getSide(pos_from))
+    {
+        setSide(pos_to);
+        setSide(pos_from);
+    }
+}
+
+bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
+{
+    if (pos < WIDTH * HEIGHT)
+        return p_side[pos / 8] & (1 << (pos % 8));
+    else
+        return false;
+}
+
+void GmAbstrBitBoard::setSide(const std::size_t &pos)
+{
+    if (pos < WIDTH * HEIGHT)
+        p_side[pos / 8] ^= (1 << (pos % 8));
+}
+
+void GmAbstrBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
+{
+    if (pos < WIDTH * HEIGHT)
+    {
+        p_forces[(pos / 8) + (8 * n_type)] ^= (1 << (pos % 8));
+    }
+}
+
+std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
+{
+    std::size_t i;
+    for (i = 0; i < TYPES; ++i)
+        if (p_forces[(pos / 8) + (8 * i)] & (1 << pos % 8))
+            return i;
+    return 0;
+}
+
+void GmAbstrBitBoard::clearCell(const std::size_t &pos)
+{
+    std::size_t i;
+    for (i = 0; i < TYPES; ++i)
+        if (p_forces[(pos / 8) + (8 * i)] & (1 << pos % 8))
+            setCell(pos, i);
 }
 
 std::size_t GmAbstrBitBoard::getCellsRIGHT(const std::size_t &pos) const
@@ -220,18 +235,26 @@ std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std:
     return 0;
 }
 
+bool GmAbstrBitBoard::empty()
+{
+    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+        if (getCell(i))
+            return false;
+    return true;
+}
 
-/////// DIAGNOSTIC
+
+/////// DIAGNOSTIC // delete leter
 
 void GmAbstrBitBoard::DIAG_showBoard()
 {
-//        std::cout << "DIAG_showBoard()::Sides\n";
-//        for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-//        {
-//            std::cout << getSide(i) << " ";
-//            if ((i + 1) % WIDTH == 0)
-//                std::cout << '\n';
-//        }
+    //        std::cout << "DIAG_showBoard()::Sides\n";
+    //        for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+    //        {
+    //            std::cout << getSide(i) << " ";
+    //            if ((i + 1) % WIDTH == 0)
+    //                std::cout << '\n';
+    //        }
 
 
     std::cout << "DIAG_showBoard()::Cells\n";
@@ -241,16 +264,7 @@ void GmAbstrBitBoard::DIAG_showBoard()
         if ((i + 1) % WIDTH == 0)
             std::cout << '\n';
     }
-    // std::cout << std::endl << std::cout;
 
-}
-
-bool GmAbstrBitBoard::empty()
-{
-    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-        if (getCell(i))
-            return false;
-    return true;
 }
 
 

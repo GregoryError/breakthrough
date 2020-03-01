@@ -29,32 +29,34 @@ enum DIRECTION {right, left, up, down, leftUp,
 class GmAbstrBitBoard
 {
 private:
-    std::size_t WIDTH, HEIGHT;
+    std::size_t WIDTH = 8, HEIGHT = 8;
     std::size_t TYPES;
     std::size_t board_space;
     std::unique_ptr<std::uint8_t[]> p_side;
     std::unique_ptr<std::uint8_t[]> p_forces;
-public:
-    bool getSide(const std::size_t& pos) const;    // whose figure
-    void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
-    void setCell(const std::size_t& pos,           // (position on brd, type of figure)
-                 const std::size_t& n_type);
-    std::size_t getCell(const std::size_t& pos) const;
-   // void clearCell(const std::size_t& pos);
-
 public:
     GmAbstrBitBoard() = delete;
     GmAbstrBitBoard(const std::size_t& height,
                     const std::size_t& width,
                     const std::size_t& tps);
 
+    // TODO: Make some methods protected or private leter
+
     void arrange(const std::initializer_list<std::size_t>& lst,
                  const BEG& beg = cross);
+
     void move(const std::size_t& pos_from,
               const std::size_t& pos_to);
 
+    bool getSide(const std::size_t& pos) const;    // whose figure
+    void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
+    void setCell(const std::size_t& pos,           // (position on brd, type of figure)
+                 const std::size_t& n_type);
+    std::size_t getCell(const std::size_t& pos) const;  // returns KIND of figure on 'pos'
+    void clearCell(const std::size_t& pos);
 
-    // these guys show how many cells available in this direction
+
+    // these guys show how many cells available in this direction starting from 'pos'
     std::size_t getCellsRIGHT(const std::size_t& pos) const;
     std::size_t getCellsLEFT(const std::size_t& pos) const;
     std::size_t getCellsUP(const std::size_t& pos) const;
@@ -66,13 +68,16 @@ public:
 
     // this shows direction by positions
     DIRECTION getDirection(const std::size_t& pos_from, const std::size_t& pos_to) const;
+    // this shows distance in cells between positions
     std::size_t getDistance(const std::size_t& pos_from, const std::size_t& pos_to) const;
 
-    void DIAG_showBoard();
 
     const std::size_t& getWidth() const { return WIDTH; }
     const std::size_t& getHeight() const { return HEIGHT; }
-    bool empty();
+    bool empty(); // if every cell is set to zero
+
+    // TODO: delete leter
+    void DIAG_showBoard();
 };
 
 }
