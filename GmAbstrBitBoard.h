@@ -77,7 +77,8 @@ public:
     bool empty(); // if every cell is set to zero
 
     // TODO: delete leter
-    void DIAG_showBoard();
+//    void DIAG_showBoard();
+//    void DIAG_showMask();
 };
 
 }

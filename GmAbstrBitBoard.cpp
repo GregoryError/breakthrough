@@ -7,7 +7,7 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
                                  const std::size_t& tps)
 {
     if (HEIGHT >= 6)
-         HEIGHT = height;
+        HEIGHT = height;
     if (width > 8)
         WIDTH = width;
 
@@ -62,7 +62,7 @@ void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, con
 void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
 {
     setCell(pos_to, getCell(pos_from));
-   // setCell(pos_from, getCell(pos_to));
+    // setCell(pos_from, getCell(pos_to));
     clearCell(pos_from);
 
     if (getSide(pos_to))
@@ -246,26 +246,39 @@ bool GmAbstrBitBoard::empty()
 
 /////// DIAGNOSTIC // delete leter
 
-void GmAbstrBitBoard::DIAG_showBoard()
-{
-    //        std::cout << "DIAG_showBoard()::Sides\n";
-    //        for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-    //        {
-    //            std::cout << getSide(i) << " ";
-    //            if ((i + 1) % WIDTH == 0)
-    //                std::cout << '\n';
-    //        }
+//void GmAbstrBitBoard::DIAG_showBoard()
+//{
+//    //        std::cout << "DIAG_showBoard()::Sides\n";
+//    //        for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+//    //        {
+//    //            std::cout << getSide(i) << " ";
+//    //            if ((i + 1) % WIDTH == 0)
+//    //                std::cout << '\n';
+//    //        }
 
 
-    std::cout << "DIAG_showBoard()::Cells\n";
-    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-    {
-        std::cout << getCell(i) << " ";
-        if ((i + 1) % WIDTH == 0)
-            std::cout << '\n';
-    }
+//    std::cout << "DIAG_showBoard()::Cells\n";
+//    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+//    {
+//        std::cout << getCell(i) << " ";
+//        if ((i + 1) % WIDTH == 0)
+//            std::cout << '\n';
+//    }
+//     std::cout << std::endl;
 
-}
+//}
+
+//void GmAbstrBitBoard::DIAG_showMask()
+//{
+//    for (int i = 0; i < WIDTH * HEIGHT; ++i)
+//    {
+//        std::cout << i << ' ';
+//        if ((i + 1) % WIDTH == 0)
+//            std::cout << '\n';
+//    }
+//     std::cout << std::endl;
+
+//}
 
 
 

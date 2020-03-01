@@ -32,7 +32,7 @@ struct GmAbstrFigure
     bool getBit(const std::size_t& pos);
 //    bool operator[](const std::size_t& pos);
 
-    void DIAG_showFigure();
+//    void DIAG_showFigure();
 };
 
 }
