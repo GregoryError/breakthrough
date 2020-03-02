@@ -1,6 +1,6 @@
-import QtQuick 2.0
-import QtQuick.Window 2.0
-import QtQuick.Controls 2.0
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 
 Window {
     id: mainWindow
@@ -8,10 +8,10 @@ Window {
     width: 540
     height: 960
 
-    maximumHeight: height   // delete leter
-    maximumWidth: width
-    minimumHeight: height
-    minimumWidth: width
+//    maximumHeight: height   // delete leter
+//    maximumWidth: width
+//    minimumHeight: height
+//    minimumWidth: width
 
 
     Item {
@@ -78,12 +78,6 @@ Window {
             onStopped: {
                 toolButtoncolorRect.width = 0
                 toolButtoncolorRect.height = 0
-
-//                if (stackView.depth > 1) {
-//                    stackView.pop()
-//                } else {
-//                    drawer.open()
-//                }
             }
         }
 

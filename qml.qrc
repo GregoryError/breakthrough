@@ -4,5 +4,8 @@
         <file>mainView.qml</file>
         <file>visualsources/toolPic.png</file>
         <file>visualsources/shareBtn.png</file>
+        <file>visualsources/blueFigure.png</file>
+        <file>visualsources/redFigure.png</file>
+        <file>visualsources/lightCell.png</file>
     </qresource>
 </RCC>
