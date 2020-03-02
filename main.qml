@@ -1,6 +1,6 @@
-import QtQuick 2.13
-import QtQuick.Window 2.13
-import QtQuick.Controls 2.12
+import QtQuick 2.0
+import QtQuick.Window 2.0
+import QtQuick.Controls 2.0
 
 Window {
     id: mainWindow
@@ -21,14 +21,14 @@ Window {
         y: 0
         width: mainWindow.width
         height: mainWindow.height / 24
-        clip: true
+        // clip: true
         Rectangle{
             id: toolRect
             anchors.verticalCenter: bar.verticalCenter
             color: "transparent"
             radius: 25
-            clip: true
-            height: bar.height * 0.8
+            // clip: true
+            height: bar.height
             width: height
             x: 20
 
@@ -65,18 +65,25 @@ Window {
             target: toolButtoncolorRect
             properties: "width,height,radius"
             from: 0
-            to: toolRect.width
+            to: toolRect.width * 2
             duration: 400
-
-            onStopped: {
-                toolButtoncolorRect.width = 0
-                toolButtoncolorRect.height = 0
-
+            onRunningChanged: {
                 if (stackView.depth > 1) {
                     stackView.pop()
                 } else {
                     drawer.open()
                 }
+            }
+
+            onStopped: {
+                toolButtoncolorRect.width = 0
+                toolButtoncolorRect.height = 0
+
+//                if (stackView.depth > 1) {
+//                    stackView.pop()
+//                } else {
+//                    drawer.open()
+//                }
             }
         }
 
@@ -86,8 +93,7 @@ Window {
             properties: "opacity"
             from: 1
             to: 0
-            duration: 400
-
+            duration: 700
         }
 
         Rectangle{
@@ -95,7 +101,7 @@ Window {
             anchors.verticalCenter: bar.verticalCenter
             color: "transparent"
             radius: 25
-            clip: true
+            // clip: true
             height: bar.height
             width: height
 
@@ -125,7 +131,6 @@ Window {
                 onPressed: {
                     shareButtoncircleAnimation.start()
                     shareButtonOpacityAnimation.start()
-
                 }
             }
         }
@@ -135,7 +140,7 @@ Window {
             target: shareButtoncolorRect
             properties: "width,height,radius"
             from: 0
-            to: shareRect.width
+            to: shareRect.width * 2
             duration: 400
 
             onStopped: {
@@ -150,7 +155,7 @@ Window {
             properties: "opacity"
             from: 1
             to: 0
-            duration: 400
+            duration: 700
         }
     }
 
@@ -170,11 +175,25 @@ Window {
                 dragMargin: 25
                 clip: true
                 interactive: true
+
+                onAboutToShow: {
+                    drawerAnimOpacity.start()
+                }
+
                 Rectangle{
                     id: drawBack
                     anchors.fill: parent
                     color: "#1d242b"
                 }
+            }
+            PropertyAnimation {
+                id: drawerAnimOpacity
+                target: drawer
+                easing.type: Easing.InCubic
+                properties: "opacity"
+                from: 0
+                to: 1
+                duration: 350
             }
         }
     }
