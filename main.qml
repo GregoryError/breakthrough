@@ -1,12 +1,12 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
+import QtQuick 2.2
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.2
 
 Window {
     id: mainWindow
     visible: true
-    width: 540
-    height: 960
+    width: 540 * 0.7
+    height: 960 * 0.7
 
 //    maximumHeight: height   // delete leter
 //    maximumWidth: width
