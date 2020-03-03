@@ -84,14 +84,14 @@ Item {
                     id: dndModel
                 }
 
-                Grid {
+                GridView {
                     id: dndGrid
-                   // interactive: false
+                    interactive: false
                     anchors.fill: parent
-                  //  cellWidth: gameItem.width / 8
-                  //  cellHeight: gameItem.height / 8
-                  //  model: dndModel
-                  //  delegate: dndDelegate
+                    cellWidth: gameItem.width / 8
+                    cellHeight: gameItem.height / 8
+                    model: dndModel
+                    delegate: dndDelegate
                     property int draggedItemIndex: -1
 
                     Item {
