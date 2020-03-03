@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+
 Item {
     id: mainItem
     anchors.fill: parent
@@ -32,62 +33,107 @@ Item {
             anchors.bottom: mainRect.bottom
             color: "#000106"
 
-            Grid {
-                id: gameGrid
+            Item {
+                id: gameItem
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                rows: 8
-                columns: 8
-                width: parent.width * 0.9
+                width: parent.width - 40
                 height: width
 
-                Repeater {
-                    id: rptr
-                    model: 64
 
-                    Loader {
-                        id: cellLoader
+                Component {
+                    id: dndDelegate
+
+
+                    Item {
+                        id: wrapper
+                        width: dndGrid.cellWidth
+                        height: dndGrid.cellHeight
+                        Rectangle {
+                            id: imageBorder
+                            anchors.fill: parent
+                            radius: 2
+                            color: "transparent"
+                            border.color: "#ffffff"
+                            border.width: 1
+                            opacity: 0
+                        }
+                        states: [
+                            State {
+                                name: "inDrag"
+                                when: index == dndGrid.draggedItemIndex
+                                PropertyChanges { target: imageBorder; opacity: 1 }
+
+                                PropertyChanges { target: itemImage; scale: 0.9 }
+                                PropertyChanges { target: itemImage; anchors.centerIn: parent }
+
+                            }
+                        ]
+
+                        Image {
+                            id: itemImage
+                            source: imagePath
+                             anchors.fill: parent
+                            width: dndGrid.cellWidth - 5
+                            height: width
+                            smooth: true
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                }
+
+                ListModel {
+                    id: dndModel
+                }
+
+                GridView {
+                    id: dndGrid
+                    interactive: false
+                    anchors.fill: parent
+                    //                    anchors.margins: 10
+                    cellWidth: gameItem.width / 8
+                    cellHeight: gameItem.height / 8
+                    model: dndModel
+                    delegate: dndDelegate
+                    property int draggedItemIndex: -1
+                    Item {
+                        id: dndContainer
                         anchors.fill: parent
                     }
-                    Rectangle {
-                        width: gameGrid.width / 8
-                        height: width
-                        color: "transparent"
 
-                        Text {
-                            id: txr
-                            anchors.centerIn: parent.Center
-                            text: index
-                            color: "white"
+                    MouseArea {
+                        id: coords
+                        anchors.fill: parent
+                        onReleased: {
+                            if (dndGrid.draggedItemIndex != -1) {
+                                var draggedIndex = dndGrid.draggedItemIndex
+                                dndGrid.draggedItemIndex = -1
+                                dndModel.move(draggedIndex,dndGrid.indexAt(mouseX, mouseY), 1)
+                            }
+                        }
+//                        onPressed: {
+//                            dndGrid.draggedItemIndex = dndGrid.indexAt(mouseX, mouseY)
+//                        }
+
+                        onClicked: {
+                            dndGrid.draggedItemIndex = dndGrid.indexAt(mouseX, mouseY)
                         }
 
-                        MouseArea {
-                            id: mouseCellArea
-                            anchors.fill: parent
-                        }
+
                     }
 
                     Component.onCompleted: {
-
-                        var lineCount = 0;
-                        for (var i = 0; i < 64; ++i) {                   // "#2C3846" : "#020911"
-                            if (i % 8 == 0)
-                                ++lineCount;
-                            if (lineCount % 2 != 0) {
-                                if (i % 2 == 0)
-                                    rptr.itemAt(i, lineCount).color = "#2C3846"
-                                else
-                                    rptr.itemAt(i, lineCount).color = "#020911"
+                        for (var i = 0; i < 64; ++i) {
+                            if (i < 16) {
+                                dndModel.append({"imagePath": "qrc:/visualsources/blueFigure.png"})
+                                continue
                             }
-                            else {
-                                if (i % 2 == 0)
-                                    rptr.itemAt(i, lineCount).color = "#020911"
-                                else
-                                    rptr.itemAt(i, lineCount).color = "#2C3846"
+                            if (i >= 48 && i < 64) {
+                                dndModel.append({"imagePath": "qrc:/visualsources/redFigure.png"})
+                                continue
                             }
+                            dndModel.append({"imagePath": "qrc:/visualsources/lightCell.png"})
                         }
-                        addFigure(3, 3, 0);
-                        addFigure(5, 5, 1);
                     }
                 }
             }
