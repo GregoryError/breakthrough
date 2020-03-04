@@ -4,25 +4,15 @@ import QtQuick.Controls 2.2
 Item {
     id: mainItem
     anchors.fill: parent
-
-    ParallelAnimation {
-        id: imgAnim
-        running: false
-        NumberAnimation { target: cellImg; property: "x"; to: mouseX; duration: 500 }
-        NumberAnimation { target: cellImg; property: "y"; to: mouseY; duration: 500 }
-    }
-
     property int from: -1
 
     function item_clicked(index) {
         if (from == -1) {
+
             from = index
         } else {
-            imgAnim.start()
-
             my_model.replace(from, index)
             from = -1
-            //cellImg.state = "returnParent"
 
         }
     }
@@ -63,8 +53,51 @@ Item {
                 height: width
 
 
+
+                ListModel {
+                    id: backModel
+                    Component.onCompleted: {
+                        var line_count = 1;
+                        for (var i = 0; i < 64; ++i) {
+                            if (i % 8 === 0)
+                                ++line_count;
+                            if (line_count % 2 !== 0)
+                                if (i % 2 === 0)
+                                    append({"backColor": "black"})
+                                else
+                                    append({"backColor": "#2C3846"})
+                            else
+                                if (i % 2 === 0)
+                                    append({"backColor": "#2C3846"})
+                                else
+                                    append({"backColor": "black"})
+
+                        }
+                    }
+                }
+
+                Grid {
+                    columns: 8
+                    z: 2
+
+                    Repeater {
+                        id: backRepeater
+                        model: backModel
+                        Rectangle {
+                            id: backCell
+                            color: model.backColor
+                            width: gameItem.width / 8
+                            height: gameItem.width / 8
+                        }
+
+                    }
+                }
+
+
+
                 ListModel {
                     id: my_model
+                    dynamicRoles: true
                     Component.onCompleted: {
                         for (var i = 0; i < 64; ++i) {
                             if (i < 16)
@@ -90,64 +123,96 @@ Item {
                         set_item(to_index, from_obj)
                         set_item(from_index, to_obj)
 
-                    }
 
+                    }
                 }
 
 
-                Grid {
-                    id: gridBoard
-                    columns: 8
+                ParallelAnimation {
+                    id: anim
+                    property Item toItem
+                    property Item fromItem
+                    property point fromPosition: Qt.point(0, 0)
+                    property point toPosition: Qt.point(0, 0)
+                    property int duration: 150
 
-                    add: Transition {
-                        NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 300 }
-                        NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 50 }
+
+                    function start_animation(from, to) {
+                        fromItem = from
+                        fromItem.z += 1
+                        toItem = to
+                        fromPosition = Qt.point(from.x, from.y)
+                        toPosition = Qt.point(to.x, to.y)
+                        start()
                     }
 
+                    NumberAnimation {
+                        target: anim.fromItem
+                        property: "x"
+                        easing.overshoot: 3
+                        easing.type: Easing.OutBack
+                        duration: 200
+                        from: anim.fromPosition.x
+                        to: anim.toPosition.x
 
+                    }
+
+                    NumberAnimation {
+                        target: anim.fromItem
+                        property: "y"
+                        duration: 200
+                        from: anim.fromPosition.y
+                        to: anim.toPosition.y
+                        easing.overshoot: 3
+                        easing.type: Easing.OutBack
+                    }
+                    onStopped: {
+                        fromItem.x = fromPosition.x
+                        fromItem.y = fromPosition.y
+                        fromItem.z -= 1
+                        my_model.replace(fromItem._index, toItem._index)
+                    }
+                }
+
+                property Item from: null
+
+                function item_clicked(item) {
+                    if (from == null) {
+                        from = item
+                        from.scale = 0.8
+                    } else {
+                        item.scale = 1
+                        anim.start_animation(from, item)
+                        from = null
+                    }
+                }
+
+                Grid {
+                    columns: 8
+                    z: 5
                     Repeater {
+                        id: repeater
                         model: my_model
-
                         Rectangle {
-                            id: itemWrapper
+                            id: root_item
+                            property int _index: index
                             width: gameItem.width / 8
                             height: gameItem.width / 8
-                            scale: index == from ? 0.9 : 1
-                            color: "transparent" // index == from ? "white" : "transparent"
-                            radius: 25
-                            //border.color: "white"
-                            //border.width: 3
+                            color: "transparent" // from === root_item ? "lightblue" : "lightgray"
 
                             Image {
                                 id: cellImg
-                                // anchors.centerIn: parent
-                                width: itemWrapper.width
-                                height: itemWrapper.height
+                                anchors.centerIn: parent
+                                width: root_item.width
+                                height: root_item.height
                                 source: model.item
                                 fillMode: Image.PreserveAspectFit
-
-                                states: State {
-                                    name: "changeParent"
-                                    PropertyChanges { target: cellImg; parent: gameItem }
-                                }
-
-                                State {
-                                    name: "returnParent"
-                                    PropertyChanges { target: cellImg; parent: itemWrapper }
-                                }
-
-
-
 
                             }
 
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: {
-                                   // cellImg.state = "changeParent"
-                                    item_clicked(index)
-
-                                }
+                                onClicked: gameItem.item_clicked(root_item)
                             }
                         }
                     }
