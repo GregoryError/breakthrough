@@ -18,6 +18,7 @@ SOURCES += \
         GmAbstrBitBoard.cpp \
         GmAbstrFigure.cpp \
         GmBreakthroughStrategy.cpp \
+        breakthrough_game.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -49,6 +50,7 @@ contains(ANDROID_TARGET_ARCH,arm64-v8a) {
 
 HEADERS += \
     GmAbstrBitBoard.h \
+    GmAbstrBoardGame.h \
     GmAbstrFigure.h \
-    GmBoardGame.h \
-    GmBreakthroughStrategy.h
+    GmBreakthroughStrategy.h \
+    breakthrough_game.h

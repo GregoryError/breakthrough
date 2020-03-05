@@ -6,21 +6,23 @@
 // This class works as a game core, accordingly
 // to the certain strategy.
 
-#ifndef GMBOARDGAME_H
-#define GMBOARDGAME_H
+#ifndef GMABSTRBOARDGAME_H
+#define GMABSTRBOARDGAME_H
 
 #include <cstdint>
 
 namespace Gm {
 
 template <class GameStrategy>
-class GmBoardGame : public GameStrategy
+class GmAbstrBoardGame : public GameStrategy
 {
 public:
-    GmBoardGame() = default;
+    GmAbstrBoardGame() = default;
+    virtual void start() = 0;
+    virtual ~GmAbstrBoardGame() {}
 
 };
 
 }
 
-#endif // GMBOARDGAME_H
+#endif // GMABSTRBOARDGAME_H

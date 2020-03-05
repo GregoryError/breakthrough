@@ -20,8 +20,9 @@ Window {
         x: 0
         y: 0
         width: mainWindow.width
-        height: mainWindow.height / 24
+        height: mainWindow.height / 20
         // clip: true
+
         Rectangle{
             id: toolRect
             anchors.verticalCenter: bar.verticalCenter
@@ -35,9 +36,10 @@ Window {
             Image {
                 id: toolPic
                 width: 20
-                height: 15
+                height: 20
                 source: "qrc:/visualsources/toolPic.png"
                 anchors.centerIn: toolRect
+                fillMode: Image.PreserveAspectFit
             }
 
             Rectangle {
@@ -99,14 +101,16 @@ Window {
             height: bar.height
             width: height
 
+
             x: bar.width - width - 20
 
             Image {
                 id: sharePic
-                width: 18
-                height: 18
+                width: 16
+                height: 16
                 source: "qrc:/visualsources/shareBtn.png"
                 anchors.centerIn: shareRect
+                fillMode: Image.PreserveAspectFit
 
             }
             Rectangle {

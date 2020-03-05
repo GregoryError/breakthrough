@@ -74,11 +74,13 @@ public:
 
     const std::size_t& getWidth() const { return WIDTH; }
     const std::size_t& getHeight() const { return HEIGHT; }
-    bool empty(); // if every cell is set to zero
+    virtual bool empty() = 0; // if every cell is set to zero
+    virtual ~GmAbstrBitBoard() {}
 
-    // TODO: delete leter
-//    void DIAG_showBoard();
-//    void DIAG_showMask();
+
+//  TODO: delete leter
+//  void DIAG_showBoard();
+//  void DIAG_showMask();
 };
 
 }

@@ -3,8 +3,10 @@
 
 #include <GmAbstrBitBoard.h>
 #include <GmAbstrFigure.h>
-#include <GmBoardGame.h>
+#include <GmAbstrBoardGame.h>
 #include <GmBreakthroughStrategy.h>
+
+#include <breakthrough_game.h>
 
 int main(int argc, char *argv[])
 {   
@@ -20,6 +22,11 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
         engine.load(url);
+
+        Breakthrough_Game GAME;
+
+        GAME.start();
+
 
 //    Gm::GmAbstrBitBoard obj(6, 8, 2);
 //    //  0  1  2  3  4  5  6  7
