@@ -9,8 +9,8 @@
 // There are methods like set(pos)/pos get() - that set/return
 // data in a cells.
 
-#ifndef GMABSTRBITBOARD_H
-#define GMABSTRBITBOARD_H
+#ifndef GMBITBOARD_H
+#define GMBITBOARD_H
 
 /////// DIAG
 #include <iostream>
@@ -26,7 +26,7 @@ enum BEG {direct, cross};
 enum DIRECTION {right, left, up, down, leftUp,
                 rightUp, rightDown, leftDown, undefined};
 
-class GmAbstrBitBoard
+class GmBitBoard
 {
 private:
     std::size_t WIDTH = 8, HEIGHT = 8;
@@ -34,13 +34,19 @@ private:
     std::size_t board_space;
     std::unique_ptr<std::uint8_t[]> p_side;
     std::unique_ptr<std::uint8_t[]> p_forces;
+protected:
+
 public:
-    GmAbstrBitBoard() = delete;
-    GmAbstrBitBoard(const std::size_t& height,
+    GmBitBoard() = delete;
+    GmBitBoard(const std::size_t& height,
                     const std::size_t& width,
                     const std::size_t& tps);
 
     // TODO: Make some methods protected or private leter
+
+    void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
+    void setCell(const std::size_t& pos,           // (position on brd, type of figure)
+                 const std::size_t& n_type);
 
     void arrange(const std::initializer_list<std::size_t>& lst,
                  const BEG& beg = cross);
@@ -48,10 +54,8 @@ public:
     void move(const std::size_t& pos_from,
               const std::size_t& pos_to);
 
-    bool getSide(const std::size_t& pos) const;    // whose figure
-    void setSide(const std::size_t& pos);          // 1 - one player, 0 - another
-    void setCell(const std::size_t& pos,           // (position on brd, type of figure)
-                 const std::size_t& n_type);
+    bool getSide(const std::size_t& pos) const;         // whose figure
+
     std::size_t getCell(const std::size_t& pos) const;  // returns KIND of figure on 'pos'
     void clearCell(const std::size_t& pos);
 
@@ -74,15 +78,15 @@ public:
 
     const std::size_t& getWidth() const { return WIDTH; }
     const std::size_t& getHeight() const { return HEIGHT; }
-    virtual bool empty() = 0; // if every cell is set to zero
-    virtual ~GmAbstrBitBoard() {}
+    bool empty(); // if every cell is set to zero
+    ~GmBitBoard() {}
 
 
 //  TODO: delete leter
-//  void DIAG_showBoard();
-//  void DIAG_showMask();
+  void DIAG_showBoard();
+  void DIAG_showMask();
 };
 
 }
 
-#endif // GMABSTRBITBOARD_H
+#endif // GMBITBOARD_H

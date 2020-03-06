@@ -18,6 +18,7 @@ class GmAbstrBoardGame : public GameStrategy
 {
 public:
     GmAbstrBoardGame() = default;
+
     virtual void start() = 0;
     virtual ~GmAbstrBoardGame() {}
 

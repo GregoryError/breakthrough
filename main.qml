@@ -8,12 +8,6 @@ Window {
     width: 540 * 0.7
     height: 960 * 0.7
 
-//    maximumHeight: height   // delete leter
-//    maximumWidth: width
-//    minimumHeight: height
-//    minimumWidth: width
-
-
     Item {
         id: bar
         z: 4

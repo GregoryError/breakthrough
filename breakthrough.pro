@@ -15,9 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        GmAbstrBitBoard.cpp \
-        GmAbstrFigure.cpp \
+        GmBitBoard.cpp \
         GmBreakthroughStrategy.cpp \
+        GmFigure.cpp \
         breakthrough_game.cpp \
         main.cpp
 
@@ -49,8 +49,8 @@ contains(ANDROID_TARGET_ARCH,arm64-v8a) {
 }
 
 HEADERS += \
-    GmAbstrBitBoard.h \
     GmAbstrBoardGame.h \
-    GmAbstrFigure.h \
+    GmBitBoard.h \
     GmBreakthroughStrategy.h \
+    GmFigure.h \
     breakthrough_game.h

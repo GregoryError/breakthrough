@@ -8,8 +8,8 @@
 #define GMBREAKTHROUGHSTRATEGY_H
 
 #include <cstdint>
-#include <GmAbstrBitBoard.h>
-#include <GmAbstrFigure.h>
+#include <GmBitBoard.h>
+#include <GmFigure.h>
 #include <memory>
 #include <initializer_list>
 
@@ -17,13 +17,13 @@ namespace Gm {
 
 class GmBreakthroughStrategy
 {
-private:
-    GmAbstrBitBoard* p_board;
-    std::unique_ptr<GmAbstrFigure> figure;
+protected:
+    GmBitBoard* p_board;
+    std::unique_ptr<GmFigure> figure;
 
 public:
     GmBreakthroughStrategy();
-    void addBoard(GmAbstrBitBoard* b);
+    void addBoard(GmBitBoard* b);
     void addFigure(const std::initializer_list<std::int8_t>& lst,
                           const int8_t& n_name);
 

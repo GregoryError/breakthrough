@@ -8,14 +8,14 @@ GmBreakthroughStrategy::GmBreakthroughStrategy()
 
 }
 
-void GmBreakthroughStrategy::addBoard(GmAbstrBitBoard* b)
+void GmBreakthroughStrategy::addBoard(GmBitBoard* b)
 {
     p_board = b;
 }
 void GmBreakthroughStrategy::addFigure(const std::initializer_list<std::int8_t>& lst,
                       const int8_t& n_name)
 {
-    figure = std::make_unique<GmAbstrFigure>(lst, n_name);
+    figure = std::make_unique<GmFigure>(lst, n_name);
 }
 
 bool GmBreakthroughStrategy::move(const std::size_t &side,

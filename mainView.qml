@@ -8,12 +8,26 @@ Item {
 
     function item_clicked(index) {
         if (from == -1) {
-
             from = index
         } else {
+
             my_model.replace(from, index)
             from = -1
+        }
+    }
 
+    function refresh_model()
+    {
+        for (var i = 0; i < 64; ++i) {
+
+            if (game_core.getCell_(i) === 1)
+            {
+                if (game_core.getSide_(i))
+                    my_model.append({"item": "qrc:/visualsources/blueFigure.png"})
+                if (!game_core.getSide_(i))
+                    my_model.append({"item": "qrc:/visualsources/redFigure.png"})
+            } else
+                my_model.append({"item": ""})
         }
     }
 
@@ -52,11 +66,10 @@ Item {
                 width: parent.width - 40
                 height: width
 
-
-
                 ListModel {
                     id: backModel
                     Component.onCompleted: {
+
                         var line_count = 1;
                         for (var i = 0; i < 64; ++i) {
                             if (i % 8 === 0)
@@ -93,20 +106,26 @@ Item {
                     }
                 }
 
-
-
                 ListModel {
                     id: my_model
                     dynamicRoles: true
                     Component.onCompleted: {
-                        for (var i = 0; i < 64; ++i) {
-                            if (i < 16)
-                                append({"item": "qrc:/visualsources/blueFigure.png"})
-                            if (i >= 16 && i < 48)
-                                append({"item": ""})
-                            if (i >= 48 && i < 64)
-                                append({"item": "qrc:/visualsources/redFigure.png"})
-                        }
+
+                        refresh_model()
+
+
+//                        for (var i = 0; i < 64; ++i) {
+
+//                            if (game_core.getCell_(i) === 1)
+//                            {
+//                                if (game_core.getSide_(i))
+//                                    append({"item": "qrc:/visualsources/blueFigure.png"})
+//                                if (!game_core.getSide_(i))
+//                                    append({"item": "qrc:/visualsources/redFigure.png"})
+//                            } else
+//                                append({"item": ""})
+//                        }
+
                     }
 
                     function get_item(index) {
@@ -179,10 +198,17 @@ Item {
                 function item_clicked(item) {
                     if (from == null) {
                         from = item
+
                         from.scale = 0.8
                     } else {
                         item.scale = 1
-                        anim.start_animation(from, item)
+                        if (game_core.move_(from._index, item._index))
+                        {
+                            anim.start_animation(from, item)
+
+                        }
+//                        console.log(from._index);
+//                        console.log(item._index);
                         from = null
                     }
                 }
@@ -212,7 +238,9 @@ Item {
 
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: gameItem.item_clicked(root_item)
+                                onClicked: {
+                                    gameItem.item_clicked(root_item)
+                                }
                             }
                         }
                     }

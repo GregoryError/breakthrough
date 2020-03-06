@@ -1,15 +1,19 @@
-#include "GmAbstrBitBoard.h"
+#include "GmBitBoard.h"
 
 using namespace Gm;
 
-GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
-                                 const std::size_t& width,
-                                 const std::size_t& tps)
+GmBitBoard::GmBitBoard(const std::size_t& height,
+                       const std::size_t& width,
+                       const std::size_t& tps)
 {
     if (HEIGHT >= 6)
         HEIGHT = height;
-    if (width > 8)
+    else
+        HEIGHT = 8;
+    if (width >= 8)
         WIDTH = width;
+    else
+        WIDTH = 8;
 
     TYPES = tps;
     board_space = (HEIGHT * WIDTH) / 8 + 1;
@@ -25,14 +29,14 @@ GmAbstrBitBoard::GmAbstrBitBoard(const std::size_t& height,
 ///    1, 1, 1, 1, 1, 1, 1, 1,                                             ///
 ///    0, 0, 0, 0, 0, 0, ... - Typical example of chess forces arrangement ///
 //////////////////////////////////////////////////////////////////////////////
-/// \brief GmAbstrBitBoard::arrange                                        ///
+/// \brief GmBitBoard::arrange                                        ///
 /// \param lst {2, 3, 4, 5, 5, 4, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1}            ///
 //////////////////////////////////////////////////////////////////////////////
 /// Arranges forces on board according how it was made for one side,       ///
 /// but for both sides. Mirror-like way or directly.                       ///
 //////////////////////////////////////////////////////////////////////////////
 
-void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, const BEG& beg)
+void GmBitBoard::arrange(const std::initializer_list<std::size_t> &lst, const BEG& beg)
 {
     std::size_t i = 0;
     for (const auto& v : lst)
@@ -59,7 +63,7 @@ void GmAbstrBitBoard::arrange(const std::initializer_list<std::size_t> &lst, con
     }
 }
 
-void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
+void GmBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
 {
     setCell(pos_to, getCell(pos_from));
     // setCell(pos_from, getCell(pos_to));
@@ -75,7 +79,7 @@ void GmAbstrBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_t
     }
 }
 
-bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
+bool GmBitBoard::getSide(const std::size_t &pos) const
 {
     if (pos < WIDTH * HEIGHT)
         return p_side[pos / 8] & (1 << (pos % 8));
@@ -83,13 +87,13 @@ bool GmAbstrBitBoard::getSide(const std::size_t &pos) const
         return false;
 }
 
-void GmAbstrBitBoard::setSide(const std::size_t &pos)
+void GmBitBoard::setSide(const std::size_t &pos)
 {
     if (pos < WIDTH * HEIGHT)
         p_side[pos / 8] ^= (1 << (pos % 8));
 }
 
-void GmAbstrBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
+void GmBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
 {
     if (pos < WIDTH * HEIGHT)
     {
@@ -97,7 +101,7 @@ void GmAbstrBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
     }
 }
 
-std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
+std::size_t GmBitBoard::getCell(const std::size_t& pos) const
 {
     std::size_t i;
     for (i = 0; i < TYPES; ++i)
@@ -106,7 +110,7 @@ std::size_t GmAbstrBitBoard::getCell(const std::size_t &pos) const
     return 0;
 }
 
-void GmAbstrBitBoard::clearCell(const std::size_t &pos)
+void GmBitBoard::clearCell(const std::size_t &pos)
 {
     std::size_t i;
     for (i = 0; i < TYPES; ++i)
@@ -114,55 +118,55 @@ void GmAbstrBitBoard::clearCell(const std::size_t &pos)
             setCell(pos, i);
 }
 
-std::size_t GmAbstrBitBoard::getCellsRIGHT(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsRIGHT(const std::size_t &pos) const
 {
     std::size_t i = 0;
     for (; i * WIDTH <= pos; ++i) ;
     return (i * WIDTH - pos) - 1;
 }
 
-std::size_t GmAbstrBitBoard::getCellsLEFT(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsLEFT(const std::size_t &pos) const
 {
     std::size_t i = 0;
     for (; i * WIDTH <= pos; ++i) ;
     return pos - (i * WIDTH - WIDTH);
 }
 
-std::size_t GmAbstrBitBoard::getCellsUP(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsUP(const std::size_t &pos) const
 {
     std::size_t i = 0;
     for (; i * WIDTH < pos; ++i) ;
     return (i == 0) ? i : (i - 1);
 }
 
-std::size_t GmAbstrBitBoard::getCellsDOWN(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsDOWN(const std::size_t &pos) const
 {
     std::size_t i = 0;
     for (; i * WIDTH < pos; ++i) ;
     return HEIGHT - i;
 }
 
-std::size_t GmAbstrBitBoard::getCellsLEFTUP(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsLEFTUP(const std::size_t &pos) const
 {
     return getCellsLEFT(pos) <= getCellsUP(pos) ? getCellsLEFT(pos) : getCellsUP(pos);
 }
 
-std::size_t GmAbstrBitBoard::getCellsRIGHTUP(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsRIGHTUP(const std::size_t &pos) const
 {
     return getCellsRIGHT(pos) <= getCellsUP(pos) ? getCellsRIGHT(pos) : getCellsUP(pos);
 }
 
-std::size_t GmAbstrBitBoard::getCellsRIGHTDOWN(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsRIGHTDOWN(const std::size_t &pos) const
 {
     return getCellsRIGHT(pos) <= getCellsDOWN(pos) ? getCellsRIGHT(pos) : getCellsDOWN(pos);
 }
 
-std::size_t GmAbstrBitBoard::getCellsLEFTDOWN(const std::size_t &pos) const
+std::size_t GmBitBoard::getCellsLEFTDOWN(const std::size_t &pos) const
 {
     return getCellsLEFT(pos) <= getCellsDOWN(pos) ? getCellsLEFT(pos) : getCellsDOWN(pos);
 }
 
-DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::size_t &pos_to) const  // TODO: Check here not shure this works properly
+DIRECTION GmBitBoard::getDirection(const std::size_t &pos_from, const std::size_t &pos_to) const  // TODO: Check here not shure this works properly
 {
     if (pos_to < pos_from)                            // -left, -leftUp, -up, -rightUp
     {
@@ -207,7 +211,7 @@ DIRECTION GmAbstrBitBoard::getDirection(const std::size_t &pos_from, const std::
     return undefined;
 }
 
-std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std::size_t &pos_to) const
+std::size_t GmBitBoard::getDistance(const std::size_t &pos_from, const std::size_t &pos_to) const
 {
     std::size_t row_first = 0;
     std::size_t row_second = 0;
@@ -235,7 +239,7 @@ std::size_t GmAbstrBitBoard::getDistance(const std::size_t &pos_from, const std:
     return 0;
 }
 
-bool GmAbstrBitBoard::empty()
+bool GmBitBoard::empty()
 {
     for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
         if (getCell(i))
@@ -246,39 +250,39 @@ bool GmAbstrBitBoard::empty()
 
 /////// DIAGNOSTIC // delete leter
 
-//void GmAbstrBitBoard::DIAG_showBoard()
-//{
-//    //        std::cout << "DIAG_showBoard()::Sides\n";
-//    //        for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-//    //        {
-//    //            std::cout << getSide(i) << " ";
-//    //            if ((i + 1) % WIDTH == 0)
-//    //                std::cout << '\n';
-//    //        }
-
-
-//    std::cout << "DIAG_showBoard()::Cells\n";
+void GmBitBoard::DIAG_showBoard()
+{
+//    std::cout << "DIAG_showBoard()::Sides\n";
 //    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
 //    {
-//        std::cout << getCell(i) << " ";
+//        std::cout << getSide(i) << " ";
 //        if ((i + 1) % WIDTH == 0)
 //            std::cout << '\n';
 //    }
-//     std::cout << std::endl;
 
-//}
 
-//void GmAbstrBitBoard::DIAG_showMask()
-//{
-//    for (int i = 0; i < WIDTH * HEIGHT; ++i)
-//    {
-//        std::cout << i << ' ';
-//        if ((i + 1) % WIDTH == 0)
-//            std::cout << '\n';
-//    }
-//     std::cout << std::endl;
+    std::cout << "DIAG_showBoard()::Cells\n";
+    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+    {
+        std::cout << getCell(i) << " ";
+        if ((i + 1) % WIDTH == 0)
+            std::cout << '\n';
+    }
+    std::cout << std::endl;
 
-//}
+}
+
+void GmBitBoard::DIAG_showMask()
+{
+    for (int i = 0; i < WIDTH * HEIGHT; ++i)
+    {
+        std::cout << i << ' ';
+        if ((i + 1) % WIDTH == 0)
+            std::cout << '\n';
+    }
+    std::cout << std::endl;
+
+}
 
 
 

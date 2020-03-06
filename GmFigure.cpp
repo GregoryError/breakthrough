@@ -1,9 +1,9 @@
-#include "GmAbstrFigure.h"
+#include "GmFigure.h"
 #include <iostream>
 
 using namespace Gm;
 
-GmAbstrFigure::GmAbstrFigure(const std::initializer_list<int8_t>& lst,
+GmFigure::GmFigure(const std::initializer_list<int8_t>& lst,
                              const std::int8_t& name) : n_name(name)
 {    
     if (lst.size() <= 26)
@@ -91,17 +91,17 @@ GmAbstrFigure::GmAbstrFigure(const std::initializer_list<int8_t>& lst,
 
 }
 
-void GmAbstrFigure::setBit(const size_t &pos)
+void GmFigure::setBit(const size_t &pos)
 {
     skills[pos / 8] ^= (1 << (pos % 8));
 }
 
-bool GmAbstrFigure::getBit(const size_t &pos)
+bool GmFigure::getBit(const size_t &pos)
 {
     return skills[pos / 8] & (1 << (pos % 8));
 }
 
-//void GmAbstrFigure::DIAG_showFigure()
+//void GmFigure::DIAG_showFigure()
 //{
 //    std::cout << "c_RIGHT: " << c_RIGHT << " c_LEFT: " << c_LEFT << " c_UP: " << c_UP << " c_DOWN: " << c_DOWN
 //              << "\nc_DOWN: " << c_DOWN << " c_LEFTUP: " << c_LEFTUP << " c_RIGHTUP: " << c_RIGHTUP
@@ -117,7 +117,7 @@ bool GmAbstrFigure::getBit(const size_t &pos)
 //    }
 //}
 
-//bool GmAbstrFigure::operator[](const size_t &pos)
+//bool GmFigure::operator[](const size_t &pos)
 //{
 //    return getBit(pos);
 //}
