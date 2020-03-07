@@ -18,6 +18,7 @@ Item {
 
     function refresh_model()
     {
+        my_model.clear()
         for (var i = 0; i < 64; ++i) {
 
             if (game_core.getCell_(i) === 1)
@@ -156,6 +157,7 @@ Item {
                     property int duration: 150
 
 
+
                     function start_animation(from, to) {
                         fromItem = from
                         fromItem.z += 1
@@ -190,6 +192,7 @@ Item {
                         fromItem.y = fromPosition.y
                         fromItem.z -= 1
                         my_model.replace(fromItem._index, toItem._index)
+                        refresh_model();
                     }
                 }
 
