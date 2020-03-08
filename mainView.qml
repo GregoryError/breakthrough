@@ -18,6 +18,7 @@ Item {
 
     function refresh_model()
     {
+        console.log("refresh_model called")
         my_model.clear()
         for (var i = 0; i < 64; ++i) {
 
@@ -85,7 +86,6 @@ Item {
                                     append({"backColor": "#2C3846"})
                                 else
                                     append({"backColor": "black"})
-
                         }
                     }
                 }
@@ -111,22 +111,7 @@ Item {
                     id: my_model
                     dynamicRoles: true
                     Component.onCompleted: {
-
                         refresh_model()
-
-
-//                        for (var i = 0; i < 64; ++i) {
-
-//                            if (game_core.getCell_(i) === 1)
-//                            {
-//                                if (game_core.getSide_(i))
-//                                    append({"item": "qrc:/visualsources/blueFigure.png"})
-//                                if (!game_core.getSide_(i))
-//                                    append({"item": "qrc:/visualsources/redFigure.png"})
-//                            } else
-//                                append({"item": ""})
-//                        }
-
                     }
 
                     function get_item(index) {
@@ -142,11 +127,8 @@ Item {
                         var to_obj = get_item(to_index)
                         set_item(to_index, from_obj)
                         set_item(from_index, to_obj)
-
-
                     }
                 }
-
 
                 ParallelAnimation {
                     id: anim
@@ -155,8 +137,6 @@ Item {
                     property point fromPosition: Qt.point(0, 0)
                     property point toPosition: Qt.point(0, 0)
                     property int duration: 150
-
-
 
                     function start_animation(from, to) {
                         fromItem = from
@@ -175,7 +155,6 @@ Item {
                         duration: 200
                         from: anim.fromPosition.x
                         to: anim.toPosition.x
-
                     }
 
                     NumberAnimation {
@@ -192,7 +171,8 @@ Item {
                         fromItem.y = fromPosition.y
                         fromItem.z -= 1
                         my_model.replace(fromItem._index, toItem._index)
-                        refresh_model();
+                        if (game_core.eaten())
+                            refresh_model();
                     }
                 }
 
@@ -208,11 +188,11 @@ Item {
                         if (game_core.move_(from._index, item._index))
                         {
                             anim.start_animation(from, item)
-
+                            from = null
                         }
+
 //                        console.log(from._index);
 //                        console.log(item._index);
-                        from = null
                     }
                 }
 

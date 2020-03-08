@@ -1,5 +1,7 @@
 #include "GmBreakthroughStrategy.h"
 
+#include <QDebug>
+
 
 using namespace Gm;
 
@@ -13,7 +15,7 @@ void GmBreakthroughStrategy::addBoard(GmBitBoard* b)
     p_board = b;
 }
 void GmBreakthroughStrategy::addFigure(const std::initializer_list<std::int8_t>& lst,
-                      const int8_t& n_name)
+                                       const int8_t& n_name)
 {
     figure = std::make_unique<GmFigure>(lst, n_name);
 }
@@ -29,8 +31,12 @@ bool GmBreakthroughStrategy::move(const std::size_t &side,
                     (p_board->getSide(pos_to) && side == 0) ||     // you are allowed to make a move.
                     (!p_board->getSide(pos_to) && side == 1))
             {
-               if (checkSkill(pos_from, pos_to))
+                if (checkSkill(pos_from, pos_to))
                 {
+                    if ((p_board->getCell(pos_to) != 0) &&         // TODO Check if it is not just muve but eating
+                            ((p_board->getSide(pos_to) && side == 0) ||
+                             (!p_board->getSide(pos_to) && side == 1)))
+                        collide = true;
                     p_board->move(pos_from, pos_to);
                     return true;
                 }
@@ -53,6 +59,13 @@ bool GmBreakthroughStrategy::checkSkill(const std::size_t& from, const std::size
     case undefined: return false;
     }
     return false;
+}
+
+bool GmBreakthroughStrategy::isEaten()
+{
+    bool t = collide;
+    collide = false;
+    return t;
 }
 
 int GmBreakthroughStrategy::win()

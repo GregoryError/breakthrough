@@ -20,6 +20,7 @@ class GmBreakthroughStrategy
 protected:
     GmBitBoard* p_board;
     std::unique_ptr<GmFigure> figure;
+    bool collide = false;
 
 public:
     GmBreakthroughStrategy();
@@ -33,8 +34,10 @@ public:
 
     bool checkSkill(const std::size_t& from,
                     const std::size_t& to);
-    int win();
 
+    bool isEaten();
+
+    int win();
 };
 
 }

@@ -6,7 +6,7 @@
 #include <GmBreakthroughStrategy.h> // - Certain strategy of game. Sets of rules; main logic etc
 
 
-class Breakthrough_Game : public QObject,  Gm::GmAbstrBoardGame<Gm::GmBreakthroughStrategy>
+class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroughStrategy>
 {
     Q_OBJECT
 private:
@@ -32,9 +32,12 @@ public slots:
 
     void clearCell_(const std::size_t& pos);
 
+    bool eaten() { return isEaten(); }
+
     virtual void start() override;
 
 signals:
+   // void eaten();
 
 };
 
