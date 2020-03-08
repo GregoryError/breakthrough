@@ -54,3 +54,8 @@ void Breakthrough_Game::clearCell_(const std::size_t &pos)
 {
     p_board->clearCell(pos);
 }
+
+bool Breakthrough_Game::hasUnit(const unsigned int &pos)
+{
+    return p_board->getCell(pos) && p_board->getSide(pos) == 1;
+}

@@ -34,6 +34,8 @@ public slots:
 
     bool eaten() { return isEaten(); }
 
+    bool hasUnit(const unsigned int& pos);
+
     virtual void start() override;
 
 signals:

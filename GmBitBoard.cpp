@@ -252,13 +252,13 @@ bool GmBitBoard::empty()
 
 void GmBitBoard::DIAG_showBoard()
 {
-//    std::cout << "DIAG_showBoard()::Sides\n";
-//    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-//    {
-//        std::cout << getSide(i) << " ";
-//        if ((i + 1) % WIDTH == 0)
-//            std::cout << '\n';
-//    }
+    std::cout << "DIAG_showBoard()::Sides\n";
+    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+    {
+        std::cout << getSide(i) << " ";
+        if ((i + 1) % WIDTH == 0)
+            std::cout << '\n';
+    }
 
 
     std::cout << "DIAG_showBoard()::Cells\n";

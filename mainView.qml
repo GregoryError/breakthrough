@@ -179,20 +179,24 @@ Item {
                 property Item from: null
 
                 function item_clicked(item) {
-                    if (from == null) {
-                        from = item
+                    //console.log("Item: " + item._index)
 
-                        from.scale = 0.8
+                    if (from == null)
+                    {
+                        if (game_core.hasUnit(item._index))
+                        {
+                            from = item
+                            from.scale = 0.8
+                        }
                     } else {
-                        item.scale = 1
                         if (game_core.move_(from._index, item._index))
                         {
+                            item.scale = 1
                             anim.start_animation(from, item)
                             from = null
                         }
-
-//                        console.log(from._index);
-//                        console.log(item._index);
+                        else
+                            refresh_model()
                     }
                 }
 

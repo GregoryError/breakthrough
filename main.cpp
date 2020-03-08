@@ -11,13 +11,11 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-
     Breakthrough_Game GAME;
 
     GAME.setBoard(8, 8);
 
     GAME.start();
-
 
     QQmlApplicationEngine engine;
     QQmlContext* cont;
