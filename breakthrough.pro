@@ -19,7 +19,8 @@ SOURCES += \
         GmBreakthroughStrategy.cpp \
         GmFigure.cpp \
         breakthrough_game.cpp \
-        main.cpp
+        main.cpp \
+        player.cpp
 
 RESOURCES += qml.qrc
 
@@ -53,4 +54,5 @@ HEADERS += \
     GmBitBoard.h \
     GmBreakthroughStrategy.h \
     GmFigure.h \
-    breakthrough_game.h
+    breakthrough_game.h \
+    player.h

@@ -12,7 +12,8 @@ Breakthrough_Game::Breakthrough_Game()
 
 void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 {
-    Gm::GmBitBoard* board = new Gm::GmBitBoard(w, h, 2);   // Creating board
+    //Gm::GmBitBoard* board = new Gm::GmBitBoard(w, h, 2);   // Creating board
+    std::shared_ptr<Gm::GmBitBoard> board(new Gm::GmBitBoard(w, h, 2));
     board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
                     0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
     addBoard(board);
@@ -26,7 +27,7 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 
 Breakthrough_Game::~Breakthrough_Game()
 {
-    delete p_board;
+   // delete p_board;
 }
 
 void Breakthrough_Game::start()

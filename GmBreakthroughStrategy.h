@@ -18,13 +18,14 @@ namespace Gm {
 class GmBreakthroughStrategy
 {
 protected:
-    GmBitBoard* p_board;
+    std::shared_ptr<GmBitBoard> p_board;
     std::unique_ptr<GmFigure> figure;
     bool collide = false;
 
 public:
     GmBreakthroughStrategy();
-    void addBoard(GmBitBoard* b);
+//    void addBoard(GmBitBoard* b);
+    void addBoard(std::shared_ptr<GmBitBoard>& b);
     void addFigure(const std::initializer_list<std::int8_t>& lst,
                           const int8_t& n_name);
 
