@@ -12,13 +12,10 @@ class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroug
 private:
     std::size_t width_, height_;
 
-
 public:
     Breakthrough_Game();
     void setBoard(const std::size_t& w = 8, const std::size_t& h = 8);
     ~Breakthrough_Game() override;
-
-
 
 public slots:
     bool move_(const unsigned int& pos_from,

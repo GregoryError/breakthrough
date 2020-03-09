@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include <breakthrough_game.h>
+#include "breakthrough_game.h"
 
 
 int main(int argc, char *argv[])

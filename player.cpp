@@ -1,6 +1,8 @@
 #include "player.h"
+#include <random>
 
-Player::Player()
+void player::play()
 {
+    GmAbstrPlayer::play();
 
 }

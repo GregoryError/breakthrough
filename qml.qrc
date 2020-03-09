@@ -7,5 +7,13 @@
         <file>visualsources/blueFigure.png</file>
         <file>visualsources/redFigure.png</file>
         <file>visualsources/lightCell.png</file>
+        <file>visualsources/players/bohr .png</file>
+        <file>visualsources/players/dalai_lama_14.png</file>
+        <file>visualsources/players/einstein .png</file>
+        <file>visualsources/players/hemingway .png</file>
+        <file>visualsources/players/hokinq .png</file>
+        <file>visualsources/players/holms.png</file>
+        <file>visualsources/players/popov.png</file>
+        <file>visualsources/players/tesla.png</file>
     </qresource>
 </RCC>
