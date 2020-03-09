@@ -15,8 +15,6 @@ int main(int argc, char *argv[])
 
     GAME.setBoard(8, 8);
 
-    GAME.start();
-
     QQmlApplicationEngine engine;
     QQmlContext* cont;
     cont = engine.rootContext();
@@ -29,6 +27,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
+    GAME.start();
 
     return app.exec();
 }

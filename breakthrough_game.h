@@ -4,6 +4,8 @@
 
 #include <GmAbstrBoardGame.h>
 #include <GmBreakthroughStrategy.h> // - Certain strategy of game. Sets of rules; main logic etc
+#include "player.h"
+#include <QString>
 
 
 class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroughStrategy>
@@ -11,6 +13,16 @@ class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroug
     Q_OBJECT
 private:
     std::size_t width_, height_;
+
+    player Player_Bohr;
+    player Player_Lama;
+    player Player_Einstein;
+    player Player_Hemingway;
+    player Player_Hoking;
+    player Player_Holmes;
+    player Player_Popov;
+    player Player_Tesla;
+    player* current_player;
 
 public:
     Breakthrough_Game();
@@ -33,10 +45,15 @@ public slots:
 
     bool hasUnit(const unsigned int& pos);
 
+    QString opponent_Name() const;
+
+    QString opponent_img() const;
+
     virtual void start() override;
 
 signals:
-   // void eaten();
+
+    void opponentReady();
 
 };
 

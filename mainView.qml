@@ -6,6 +6,7 @@ Item {
     anchors.fill: parent
     property int from: -1
 
+
     function item_clicked(index) {
         if (from == -1) {
             from = index
@@ -43,6 +44,46 @@ Item {
             anchors.left: mainRect.left
             anchors.right: mainRect.right
             height: (mainRect.height / 16) * 6
+
+            Connections{
+                target: game_core
+                onOpponentReady: {
+                    opponentFace.source = game_core.opponent_img();
+                    opponentName.text = game_core.opponent_Name();
+                }
+            }
+
+            Image {
+                id: opponentFace
+                anchors.top: parent.top
+                opacity: 0
+                anchors.topMargin: 15
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width / 4 + 5
+                height: width
+                fillMode: Image.PreserveAspectFit
+                onSourceChanged: faceAnim.start()
+
+                }
+                OpacityAnimator {
+                    id: faceAnim
+                    target: opponentFace
+                    from: 0
+                    to: 1
+                    running: false
+                    duration: 500
+                }
+
+            Text {
+                id: opponentName
+                anchors.top: opponentFace.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: 10
+                font.family: "Segoe UI Light"
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 15
+                color: "white"
+            }
         }
         Rectangle {
             id: middleRect                  // In wich we can place some extra info

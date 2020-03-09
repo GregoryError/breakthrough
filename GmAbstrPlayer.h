@@ -12,6 +12,7 @@ namespace Gm {
 class GmAbstrPlayer
 {
 protected:
+public:
     unsigned short n_side;
     std::string img_path;
     std::string name;
@@ -20,7 +21,7 @@ protected:
     unsigned int cell_from, cell_to;
 
 public:
-    GmAbstrPlayer() = delete;
+    GmAbstrPlayer() = default;
     GmAbstrPlayer(const unsigned short& side, const std::string& img, const std::string& nm,
                   std::shared_ptr<GmBitBoard>& b);
     void addQuote(const std::string& txt);
