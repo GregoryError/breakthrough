@@ -10,7 +10,7 @@ GmBreakthroughStrategy::GmBreakthroughStrategy()
 
 }
 
-void GmBreakthroughStrategy::addBoard(std::shared_ptr<GmBitBoard>& b)
+void GmBreakthroughStrategy::addBoard(std::shared_ptr<GmBitBoard> b)
 {
     p_board = b;
 }

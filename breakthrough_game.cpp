@@ -8,28 +8,29 @@
 
 Breakthrough_Game::Breakthrough_Game()
 {    
-    Player_Bohr = player(0, "qrc:/visualsources/players/bohr .png", "Niels Bohr", p_board);
+
+    Player_Bohr = player(0, "qrc:/visualsources/players/bohr .png", "Niels Bohr");
     Player_Bohr.addQuote("");
 
-    Player_Lama = player(0, "qrc:/visualsources/players/dalai_lama_14.png", "Dalai Lama XIV", p_board);
+    Player_Lama = player(0, "qrc:/visualsources/players/dalai_lama_14.png", "Dalai Lama XIV");
     Player_Lama.addQuote("");
 
-    Player_Einstein = player(0, "qrc:/visualsources/players/einstein .png", "Albert Einstein", p_board);
+    Player_Einstein = player(0, "qrc:/visualsources/players/einstein .png", "Albert Einstein");
     Player_Einstein.addQuote("");
 
-    Player_Hemingway = player(0, "qrc:/visualsources/players/hemingway .png", "Ernest Hemingway", p_board);
+    Player_Hemingway = player(0, "qrc:/visualsources/players/hemingway .png", "Ernest Hemingway");
     Player_Hemingway.addQuote("");
 
-    Player_Hoking = player(0, "qrc:/visualsources/players/hokinq .png", "Stiven Hoking", p_board);
+    Player_Hoking = player(0, "qrc:/visualsources/players/hokinq .png", "Stiven Hoking");
     Player_Hoking.addQuote("");
 
-    Player_Holmes = player(0, "qrc:/visualsources/players/holms.png", "Sherlok Holmes", p_board);
+    Player_Holmes = player(0, "qrc:/visualsources/players/holms.png", "Sherlok Holmes");
     Player_Holmes.addQuote("");
 
-    Player_Popov = player(0, "qrc:/visualsources/players/popov.png", "Александр Попов", p_board);
+    Player_Popov = player(0, "qrc:/visualsources/players/popov.png", "Александр Попов");
     Player_Popov.addQuote("");
 
-    Player_Tesla = player(0, "qrc:/visualsources/players/tesla.png", "Nikola Tesla", p_board);
+    Player_Tesla = player(0, "qrc:/visualsources/players/tesla.png", "Nikola Tesla");
     Player_Tesla.addQuote("");
 
     std::srand(std::time(0));
@@ -37,7 +38,10 @@ Breakthrough_Game::Breakthrough_Game()
 
 void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 {
-    std::shared_ptr<Gm::GmBitBoard> board(new Gm::GmBitBoard(w, h, 2));
+
+    auto board(std::make_shared<Gm::GmBitBoard>(w, h, 2));
+
+
     board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
                     0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
     addBoard(board);
@@ -46,6 +50,9 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
                0, 1, 1, 1, 0,
                0, 1, 1, 1, 0,
                0, 0, 0, 0, 0}, 1);  // Creating a pawn with some skills
+
+    width_ = p_board->getWidth();
+    height_ = p_board->getHeight();
 }
 
 Breakthrough_Game::~Breakthrough_Game()
@@ -73,6 +80,10 @@ void Breakthrough_Game::start()
         }
 
         emit opponentReady();
+
+        current_player->addBoard(p_board);
+
+        current_player->play();
 
         // entery point
 

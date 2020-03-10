@@ -22,14 +22,18 @@ public:
 
 public:
     GmAbstrPlayer() = default;
-    GmAbstrPlayer(const unsigned short& side, const std::string& img, const std::string& nm,
-                  std::shared_ptr<GmBitBoard>& b);
+    GmAbstrPlayer(const unsigned short& side, const std::string& img, const std::string& nm);
     void addQuote(const std::string& txt);
+    void addBoard(std::shared_ptr<GmBitBoard>& b) { board = b; }
+
     virtual void play() = 0;
-    const unsigned int& from() const
+
+    virtual unsigned int from() const
     { return cell_from; }
-    const unsigned int& to() const
+
+    virtual unsigned int to() const
     { return cell_to; }
+
     virtual ~GmAbstrPlayer();
 };
 

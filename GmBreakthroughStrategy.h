@@ -25,7 +25,7 @@ protected:
 public:
     GmBreakthroughStrategy();
 //    void addBoard(GmBitBoard* b);
-    void addBoard(std::shared_ptr<GmBitBoard>& b);
+    void addBoard(std::shared_ptr<GmBitBoard> b);
     void addFigure(const std::initializer_list<std::int8_t>& lst,
                           const int8_t& n_name);
 

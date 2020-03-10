@@ -5,10 +5,12 @@
 
 class player : public Gm::GmAbstrPlayer
 {
+private:
+
 public:
     player() = default;
-    player(const unsigned short& side, const std::string& img, const std::string& nm,
-           std::shared_ptr<Gm::GmBitBoard>& b) : Gm::GmAbstrPlayer(side, img, nm, b) {}
+    player(const unsigned short& side, const std::string& img, const std::string& nm) : Gm::GmAbstrPlayer(side, img, nm) {}
+
     void play() override;
 
 };

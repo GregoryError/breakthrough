@@ -12,7 +12,7 @@ class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroug
 {
     Q_OBJECT
 private:
-    std::size_t width_, height_;
+    unsigned width_, height_;
 
     player Player_Bohr;
     player Player_Lama;
@@ -49,6 +49,10 @@ public slots:
 
     QString opponent_img() const;
 
+    unsigned int opponent_from() { return current_player->from(); }  // Artificial player is moving
+
+    unsigned int opponent_to() { return current_player->to(); }
+
     virtual void start() override;
 
 signals:
@@ -58,3 +62,10 @@ signals:
 };
 
 #endif // BREAKTHROUGH_GAME_H
+
+
+
+
+
+
+

@@ -7,15 +7,15 @@ Item {
     property int from: -1
 
 
-    function item_clicked(index) {
-        if (from == -1) {
-            from = index
-        } else {
+    //    function item_clicked(index) {
+    //        if (from == -1) {
+    //            from = index
+    //        } else {
 
-            my_model.replace(from, index)
-            from = -1
-        }
-    }
+    //            my_model.replace(from, index)
+    //            from = -1
+    //        }
+    //    }
 
     function refresh_model()
     {
@@ -64,15 +64,15 @@ Item {
                 fillMode: Image.PreserveAspectFit
                 onSourceChanged: faceAnim.start()
 
-                }
-                OpacityAnimator {
-                    id: faceAnim
-                    target: opponentFace
-                    from: 0
-                    to: 1
-                    running: false
-                    duration: 500
-                }
+            }
+            OpacityAnimator {
+                id: faceAnim
+                target: opponentFace
+                from: 0
+                to: 1
+                running: false
+                duration: 500
+            }
 
             Text {
                 id: opponentName
@@ -217,11 +217,55 @@ Item {
                     }
                 }
 
+                ParallelAnimation {
+                    id: anim_1
+                    property Item toItem
+                    property Item fromItem
+                    property point fromPosition: Qt.point(0, 0)
+                    property point toPosition: Qt.point(0, 0)
+                    property int duration: 150
+
+                    function start_animation_1(from, to) {
+                        fromItem = from
+                        fromItem.z += 1
+                        toItem = to
+                        fromPosition = Qt.point(from.x, from.y)
+                        toPosition = Qt.point(to.x, to.y)
+                        start()
+                    }
+
+                    NumberAnimation {
+                        target: anim_1.fromItem
+                        property: "x"
+                        easing.overshoot: 3
+                        easing.type: Easing.OutBack
+                        duration: 200
+                        from: anim_1.fromPosition.x
+                        to: anim_1.toPosition.x
+                    }
+
+                    NumberAnimation {
+                        target: anim_1.fromItem
+                        property: "y"
+                        duration: 200
+                        from: anim_1.fromPosition.y
+                        to: anim_1.toPosition.y
+                        easing.overshoot: 3
+                        easing.type: Easing.OutBack
+                    }
+                    onStopped: {
+                        fromItem.x = fromPosition.x
+                        fromItem.y = fromPosition.y
+                        fromItem.z -= 1
+                        my_model.replace(fromItem._index, toItem._index)
+                        if (game_core.eaten())
+                            refresh_model();
+                    }
+                }
+
                 property Item from: null
 
                 function item_clicked(item) {
-                    //console.log("Item: " + item._index)
-
                     if (from == null)
                     {
                         if (game_core.hasUnit(item._index))
@@ -234,6 +278,8 @@ Item {
                         {
                             item.scale = 1
                             anim.start_animation(from, item)
+                            anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
+                                                     repeater.itemAt(game_core.opponent_to()));
                             from = null
                         }
                         else
@@ -252,7 +298,7 @@ Item {
                             property int _index: index
                             width: gameItem.width / 8
                             height: gameItem.width / 8
-                            color: "transparent" // from === root_item ? "lightblue" : "lightgray"
+                            color: "transparent"
 
                             Image {
                                 id: cellImg
