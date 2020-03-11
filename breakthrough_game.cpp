@@ -53,6 +53,8 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 
     width_ = p_board->getWidth();
     height_ = p_board->getHeight();
+
+
 }
 
 Breakthrough_Game::~Breakthrough_Game()
@@ -63,6 +65,8 @@ Breakthrough_Game::~Breakthrough_Game()
 void Breakthrough_Game::start()
 {
     p_board->DIAG_showBoard();
+
+
     // chose opponent
 //    while (true)
 //    {
@@ -84,6 +88,14 @@ void Breakthrough_Game::start()
         current_player->addBoard(p_board);
 
         current_player->play();
+
+
+//        if (isAvailable(0, 10, 17))
+//            qDebug() << "YES\n";
+//        else
+//            qDebug() << "NO\n";
+
+
 
         // entery point
 

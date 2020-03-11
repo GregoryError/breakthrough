@@ -19,6 +19,7 @@ class GmAbstrBoardGame : public GameStrategy
 public:
     GmAbstrBoardGame() = default;
     virtual void start() = 0;
+    int* get_Surroundings(const unsigned& pos);
     virtual ~GmAbstrBoardGame() {}
 
 };

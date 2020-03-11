@@ -10,8 +10,12 @@ void player::play()
     std::mt19937 gen(std::time(0));
     std::uniform_int_distribution<> uid(0, board->getWidth() * board->getHeight());
 
+    // pointer to board allows us to know current state of forces on the field
+    //
 
-    for (int i = 0; i < 15; ++i)
-        qDebug() << uid(gen) << " - ";
+
+//    for (int i = 0; i < 15; ++i)
+//        qDebug() << uid(gen) << " - ";
+
 
 }

@@ -36,6 +36,10 @@ public:
     bool checkSkill(const std::size_t& from,
                     const std::size_t& to);
 
+    bool isAvailable(const unsigned& side,
+                     const unsigned& pos_from,
+                     const unsigned& pos_to);
+
     bool isEaten();
 
     int win();

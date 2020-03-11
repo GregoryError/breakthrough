@@ -1,6 +1,6 @@
 // Gregory Kolesnikoff 2020
 //
-// This abstract class keeps data about current game board state.
+// This class keeps data about current game board state.
 // The data is keeped as an array of bytes.
 // Bit 1 - means there is a filled cell, 0 - means it is empty.
 // BitBoard objects also have data about whose figure on a cells.
@@ -35,12 +35,13 @@ private:
     std::unique_ptr<std::uint8_t[]> p_side;
     std::unique_ptr<std::uint8_t[]> p_forces;
 protected:
+    int arround[9] = {};
 
 public:
     GmBitBoard() = delete;
     GmBitBoard(const std::size_t& height,
-                    const std::size_t& width,
-                    const std::size_t& tps);
+               const std::size_t& width,
+               const std::size_t& tps);
 
     // TODO: Make some methods protected or private leter
 
@@ -75,18 +76,42 @@ public:
     // this shows distance in cells between positions
     std::size_t getDistance(const std::size_t& pos_from, const std::size_t& pos_to) const;
 
-
     const std::size_t& getWidth() const { return WIDTH; }
     const std::size_t& getHeight() const { return HEIGHT; }
+
+
     bool empty(); // if every cell is set to zero
     ~GmBitBoard() {}
 
 
-//  TODO: delete leter
-  void DIAG_showBoard();
-  void DIAG_showMask();
+    //  TODO: delete leter
+    void DIAG_showBoard();
+    void DIAG_showMask();
 };
 
 }
 
 #endif // GMBITBOARD_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
