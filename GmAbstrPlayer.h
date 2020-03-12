@@ -26,6 +26,8 @@ public:
     void addQuote(const std::string& txt);
     void addBoard(std::shared_ptr<GmBitBoard>& b) { board = b; }
 
+    virtual bool checkCell(const unsigned& from, const unsigned& to);
+
     virtual void play() = 0;
 
     virtual unsigned int from() const

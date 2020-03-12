@@ -53,6 +53,8 @@ public slots:
 
     unsigned int opponent_to() { return current_player->to(); }
 
+    void opponentPlay() { current_player->play(); }
+
     virtual void start() override;
 
 signals:

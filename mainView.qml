@@ -168,6 +168,7 @@ Item {
                         var to_obj = get_item(to_index)
                         set_item(to_index, from_obj)
                         set_item(from_index, to_obj)
+
                     }
                 }
 
@@ -214,6 +215,7 @@ Item {
                         my_model.replace(fromItem._index, toItem._index)
                         if (game_core.eaten())
                             refresh_model();
+
                     }
                 }
 
@@ -280,6 +282,7 @@ Item {
                             anim.start_animation(from, item)
                             anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
                                                      repeater.itemAt(game_core.opponent_to()));
+
                             from = null
                         }
                         else

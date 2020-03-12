@@ -14,6 +14,11 @@ public:
 
     void play() override;
 
+    bool checkCell(const unsigned int &from, const unsigned int &to) override
+    {
+        return GmAbstrPlayer::checkCell(from, to);     // Check for 1 cell is enough
+    }
+
 };
 
 #endif // PLAYER_H

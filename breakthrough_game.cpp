@@ -102,6 +102,7 @@ void Breakthrough_Game::start()
 
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
 {
+    current_player->play();
     return move(getSide_(pos_from), pos_from, pos_to);
 }
 

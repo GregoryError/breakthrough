@@ -23,3 +23,25 @@ GmAbstrPlayer::~GmAbstrPlayer()
 {
 
 }
+
+bool GmAbstrPlayer::checkCell(const unsigned &from, const unsigned &to)
+{
+    if (board->getCell(from) != 0 && (to != from))
+        if ((board->getCell(to) == 0) ||
+                (board->getSide(to)))
+        {
+            switch (board->getDirection(from, to))
+            {
+            case right: if (1 >= (board->getDistance(from, to))) return true; break;
+            case left: if (1 >= (board->getDistance(from, to))) return true; break;
+            case up: if (1 >= (board->getDistance(from, to))) return true; break;
+            case down: if (1 >= (board->getDistance(from, to))) return true; break;
+            case leftUp: if (1 >= (board->getDistance(from, to))) return true; break;
+            case rightUp: if (1 >= (board->getDistance(from, to))) return true; break;
+            case rightDown: if (1 >= (board->getDistance(from, to))) return true; break;
+            case leftDown: if (1 >= (board->getDistance(from, to))) return true; break;
+            case undefined: return false;
+            }
+        }
+    return false;
+}
