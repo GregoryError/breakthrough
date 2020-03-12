@@ -11,6 +11,7 @@ public:
     player() = default;
     player(const unsigned short& side, const std::string& img, const std::string& nm) : Gm::GmAbstrPlayer(side, img, nm) {}
 
+
     void play() override;
 
 };

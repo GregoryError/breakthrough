@@ -2,8 +2,8 @@
 #define BREAKTHROUGH_GAME_H
 #include <QObject>
 
-#include <GmAbstrBoardGame.h>
-#include <GmBreakthroughStrategy.h> // - Certain strategy of game. Sets of rules; main logic etc
+#include "GmAbstrBoardGame.h"
+#include "GmBreakthroughStrategy.h" // - Certain strategy of game. Sets of rules; main logic etc
 #include "player.h"
 #include <QString>
 

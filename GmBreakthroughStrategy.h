@@ -8,8 +8,8 @@
 #define GMBREAKTHROUGHSTRATEGY_H
 
 #include <cstdint>
-#include <GmBitBoard.h>
-#include <GmFigure.h>
+#include "GmBitBoard.h"
+#include "GmFigure.h"
 #include <memory>
 #include <initializer_list>
 
@@ -36,8 +36,7 @@ public:
     bool checkSkill(const std::size_t& from,
                     const std::size_t& to);
 
-    bool isAvailable(const unsigned& side,
-                     const unsigned& pos_from,
+    bool isAvailable(const unsigned& pos_from,
                      const unsigned& pos_to);
 
     bool isEaten();

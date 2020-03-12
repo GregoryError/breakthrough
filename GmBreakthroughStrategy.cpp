@@ -44,18 +44,14 @@ bool GmBreakthroughStrategy::move(const std::size_t &side,
     return false;
 }
 
-bool GmBreakthroughStrategy::isAvailable(const unsigned &side, const unsigned &pos_from, const unsigned &pos_to)
+bool GmBreakthroughStrategy::isAvailable(const unsigned &pos_from, const unsigned &pos_to)
 {
-    if (p_board->getCell(pos_from) != 0 && (pos_to != pos_from))   // - If on 'pos_from' is not empty cell AND
-        if ((!p_board->getSide(pos_from) && side == 0) ||          // - If the figure on pos 'pos_from' yours, AND
-                (p_board->getSide(pos_from) && side == 1))         // - If the cell where you want to move is
-            if ((p_board->getCell(pos_to) == 0) ||                 // free, OR if it is filled with opponent
-                    (p_board->getSide(pos_to) && side == 0) ||     // you are allowed to make a move.
-                    (!p_board->getSide(pos_to) && side == 1))
-            {
-                if (checkSkill(pos_from, pos_to))
-                    return true;
-            }
+    if (p_board->getCell(pos_from) != 0 && (pos_to != pos_from))                 // - If on 'pos_from' is not empty cell AND
+        if ((p_board->getCell(pos_to) == 0) ||                                   // free, OR if it is filled with opponent
+                (p_board->getSide(pos_to) && !p_board->getSide(pos_from)) ||     // you are allowed to make a move.
+                (!p_board->getSide(pos_to) && p_board->getSide(pos_from)))
+            if (checkSkill(pos_from, pos_to))
+                return true;
     return false;
 }
 
@@ -75,7 +71,6 @@ bool GmBreakthroughStrategy::checkSkill(const std::size_t& from, const std::size
     }
     return false;
 }
-
 
 bool GmBreakthroughStrategy::isEaten()
 {

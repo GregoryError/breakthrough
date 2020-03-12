@@ -4,11 +4,8 @@
 #include "player.h"
 #include <QDebug>
 
-
-
 Breakthrough_Game::Breakthrough_Game()
 {    
-
     Player_Bohr = player(0, "qrc:/visualsources/players/bohr .png", "Niels Bohr");
     Player_Bohr.addQuote("");
 
@@ -38,9 +35,7 @@ Breakthrough_Game::Breakthrough_Game()
 
 void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 {
-
     auto board(std::make_shared<Gm::GmBitBoard>(w, h, 2));
-
 
     board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
                     0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
@@ -53,8 +48,6 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 
     width_ = p_board->getWidth();
     height_ = p_board->getHeight();
-
-
 }
 
 Breakthrough_Game::~Breakthrough_Game()
@@ -90,7 +83,7 @@ void Breakthrough_Game::start()
         current_player->play();
 
 
-//        if (isAvailable(0, 10, 17))
+//        if (isAvailable(10, 19))
 //            qDebug() << "YES\n";
 //        else
 //            qDebug() << "NO\n";
