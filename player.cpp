@@ -17,6 +17,7 @@ void player::play()
 
     std::map<unsigned, std::vector<unsigned>> free_cells_map;
 
+
     std::vector<unsigned> t_vct, from_vct;
 
     for (unsigned i = 0; i < (board_SZ); ++i)
@@ -66,9 +67,18 @@ void player::play()
 
     cell_from = from_vct[0];
 
-    std::uniform_int_distribution<> uid_to(0, free_cells_map[cell_from].size());
+//    std::uniform_int_distribution<> uid_to(0, free_cells_map[cell_from].size());
 
-    cell_to = free_cells_map[cell_from][uid_to(gen)];
+//    auto choise = uid_to(gen);
+
+    std::random_shuffle(free_cells_map[cell_from].begin(), free_cells_map[cell_from].end());
+
+    cell_to = free_cells_map[cell_from][0];
+
+//    qDebug() << "Choise = " << choise;
+
+
+    qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
 }
 
 void player::DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M)

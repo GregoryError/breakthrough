@@ -77,6 +77,8 @@ void GmBitBoard::move(const std::size_t &pos_from, const std::size_t &pos_to)
         setSide(pos_to);
         setSide(pos_from);
     }
+
+    DIAG_showBoard();
 }
 
 bool GmBitBoard::getSide(const std::size_t &pos) const

@@ -27,10 +27,6 @@ GmAbstrPlayer::~GmAbstrPlayer()
 
 bool GmAbstrPlayer::checkCell(const unsigned &from, const unsigned &to)
 {
-    if (from == board->getWidth() - 1 && to == (board->getWidth() - 1) + 1)
-        return false;
-    if (to == board->getWidth() - 1 && from == (board->getWidth() - 1) + 1)
-        return false;
     if (board->getCell(from) != 0 && (to != from) && (!board->getSide(from)))
         if ((board->getCell(to) == 0) ||
                 (board->getSide(to)))
@@ -51,3 +47,14 @@ bool GmAbstrPlayer::checkCell(const unsigned &from, const unsigned &to)
         }
     return false;
 }
+
+
+
+
+
+
+
+
+
+
+

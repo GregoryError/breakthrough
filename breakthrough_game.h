@@ -57,6 +57,8 @@ public slots:
 
     virtual void start() override;
 
+    bool move_0(const unsigned& from, const unsigned& to);
+
 signals:
 
     void opponentReady();

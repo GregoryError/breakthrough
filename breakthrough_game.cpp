@@ -97,7 +97,12 @@ void Breakthrough_Game::start()
 
 //        }
 
-//    }
+        //    }
+}
+
+bool Breakthrough_Game::move_0(const unsigned &from, const unsigned &to)
+{
+   return move(0, from, to);
 }
 
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
