@@ -21,7 +21,7 @@ SOURCES += \
         GmFigure.cpp \
         breakthrough_game.cpp \
         main.cpp \
-        player.cpp
+        player.cpp \
 
 RESOURCES += qml.qrc
 

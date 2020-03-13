@@ -11,7 +11,7 @@ void player::play()
 {
     unsigned board_SZ = board->getWidth() * board->getHeight();
 
-    cell_from = cell_to = 0;
+    GmAbstrPlayer::play();
     std::mt19937 gen(std::time(0));
 
 
@@ -21,7 +21,7 @@ void player::play()
 
     for (unsigned i = 0; i < (board_SZ); ++i)
     {
-        if (board->getSide(i) == 0 && board->getCell(i))
+        if (!board->getSide(i) && board->getCell(i))
         {
             if (i > 1)
                 if (checkCell(i, i - 1))
@@ -35,6 +35,7 @@ void player::play()
             if (i > 9)
                 if (checkCell(i, i - 9))
                     t_vct.push_back(i - 9);
+
 
             if ((i + 1) < board_SZ)
                 if (checkCell(i, i + 1))
@@ -59,6 +60,8 @@ void player::play()
     }
 
 
+    DIAG_showPlayer(free_cells_map);
+
     std::random_shuffle(from_vct.begin(), from_vct.end());
 
     cell_from = from_vct[0];
@@ -67,3 +70,45 @@ void player::play()
 
     cell_to = free_cells_map[cell_from][uid_to(gen)];
 }
+
+void player::DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M)
+{
+    qDebug() << "Player base:\n";
+    for (const auto& K : M)
+    {
+        qDebug() << "Key: " << K.first << ":\n";
+        for (unsigned i = 0 ; i < K.second.size(); ++i)
+        {
+            qDebug() << K.second[i] << " ";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

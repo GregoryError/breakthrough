@@ -280,8 +280,11 @@ Item {
                         {
                             item.scale = 1
                             anim.start_animation(from, item)
-                            anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
-                                                     repeater.itemAt(game_core.opponent_to()));
+
+
+                            if (game_core.move_(game_core.opponent_from(), game_core.opponent_to())) //
+                                anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
+                                                         repeater.itemAt(game_core.opponent_to()));
 
                             from = null
                         }

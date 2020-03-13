@@ -57,7 +57,7 @@ public:
 
     bool getSide(const std::size_t& pos) const;         // whose figure
 
-    std::size_t getCell(const std::size_t& pos) const;  // returns KIND of figure on 'pos'
+    unsigned getCell(const std::size_t& pos) const;  // returns KIND of figure on 'pos'
     void clearCell(const std::size_t& pos);
 
 

@@ -101,7 +101,7 @@ void GmBitBoard::setCell(const std::size_t &pos, const std::size_t& n_type)
     }
 }
 
-std::size_t GmBitBoard::getCell(const std::size_t& pos) const
+unsigned GmBitBoard::getCell(const std::size_t& pos) const
 {
     std::size_t i;
     for (i = 0; i < TYPES; ++i)

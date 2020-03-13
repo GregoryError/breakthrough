@@ -1,4 +1,5 @@
 #include "GmAbstrPlayer.h"
+#include <QDebug>
 
 using namespace Gm;
 
@@ -26,7 +27,11 @@ GmAbstrPlayer::~GmAbstrPlayer()
 
 bool GmAbstrPlayer::checkCell(const unsigned &from, const unsigned &to)
 {
-    if (board->getCell(from) != 0 && (to != from))
+    if (from == board->getWidth() - 1 && to == (board->getWidth() - 1) + 1)
+        return false;
+    if (to == board->getWidth() - 1 && from == (board->getWidth() - 1) + 1)
+        return false;
+    if (board->getCell(from) != 0 && (to != from) && (!board->getSide(from)))
         if ((board->getCell(to) == 0) ||
                 (board->getSide(to)))
         {
@@ -42,6 +47,7 @@ bool GmAbstrPlayer::checkCell(const unsigned &from, const unsigned &to)
             case leftDown: if (1 >= (board->getDistance(from, to))) return true; break;
             case undefined: return false;
             }
+
         }
     return false;
 }
