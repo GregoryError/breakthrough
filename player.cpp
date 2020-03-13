@@ -24,32 +24,46 @@ void player::play()
     {
         if (!board->getSide(i) && board->getCell(i))
         {
-            if (i > 1)
-                if (checkCell(i, i - 1))
-                    t_vct.push_back(i - 1);
-            if (i > 7)
-                if (checkCell(i, i - 7))
-                    t_vct.push_back(i - 7);
-            if (i > 8)
-                if (checkCell(i, i - 8))
-                    t_vct.push_back(i - 8);
-            if (i > 9)
-                if (checkCell(i, i - 9))
-                    t_vct.push_back(i - 9);
+            if (i % 8 != 0 && (i - 7) % 8 != 0)
+            {
+                if (i > 1)
+                    if (checkCell(i, i - 1))
+                        t_vct.push_back(i - 1);
+                if (i > 7)
+                    if (checkCell(i, i - 7))
+                        t_vct.push_back(i - 7);
+                if (i > 8)
+                    if (checkCell(i, i - 8))
+                        t_vct.push_back(i - 8);
+                if (i > 9)
+                    if (checkCell(i, i - 9))
+                        t_vct.push_back(i - 9);
 
+                if ((i + 1) < board_SZ)
+                    if (checkCell(i, i + 1))
+                        t_vct.push_back(i + 1);
+                if ((i + 7) < board_SZ)
+                    if (checkCell(i, i + 7))
+                        t_vct.push_back(i + 7);
+                if ((i + 8) < board_SZ)
+                    if (checkCell(i, i + 8))
+                        t_vct.push_back(i + 8);
+                if ((i + 9) < board_SZ)
+                    if (checkCell(i, i + 9))
+                        t_vct.push_back(i + 9);
+            }
+            else
+            {
+                if (i % 8 == 0)
+                {
 
-            if ((i + 1) < board_SZ)
-                if (checkCell(i, i + 1))
-                    t_vct.push_back(i + 1);
-            if ((i + 7) < board_SZ)
-                if (checkCell(i, i + 7))
-                    t_vct.push_back(i + 7);
-            if ((i + 8) < board_SZ)
-                if (checkCell(i, i + 8))
-                    t_vct.push_back(i + 8);
-            if ((i + 9) < board_SZ)
-                if (checkCell(i, i + 9))
-                    t_vct.push_back(i + 9);
+                }
+                if ((i - 7) % 8 == 0)
+                {
+
+                }
+
+            }
 
             if (!t_vct.empty())
             {
@@ -67,15 +81,15 @@ void player::play()
 
     cell_from = from_vct[0];
 
-//    std::uniform_int_distribution<> uid_to(0, free_cells_map[cell_from].size());
+    //    std::uniform_int_distribution<> uid_to(0, free_cells_map[cell_from].size());
 
-//    auto choise = uid_to(gen);
+    //    auto choise = uid_to(gen);
 
     std::random_shuffle(free_cells_map[cell_from].begin(), free_cells_map[cell_from].end());
 
     cell_to = free_cells_map[cell_from][0];
 
-//    qDebug() << "Choise = " << choise;
+    //    qDebug() << "Choise = " << choise;
 
 
     qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
