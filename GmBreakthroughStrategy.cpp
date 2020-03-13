@@ -70,7 +70,7 @@ bool GmBreakthroughStrategy::isEaten()
 
 int GmBreakthroughStrategy::win()
 {
-    if (p_board->empty())    // absolute empty board, return 2 - means nobody win (tied)
+    if (p_board->empty())    // absolutely empty board, return 2 - means nobody win (tied)
         return 2;
 
     int result = 3;         // 3 - neams the game is continue

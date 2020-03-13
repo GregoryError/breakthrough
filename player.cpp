@@ -85,7 +85,6 @@ void player::play()
                         if (checkCell(i, i + 7))
                             t_vct.push_back(i + 7);
 
-
                 }
 
             }
@@ -99,24 +98,43 @@ void player::play()
         }
     }
 
-
-    DIAG_showPlayer(free_cells_map);
-
-    std::random_shuffle(from_vct.begin(), from_vct.end());
+    // std::random_shuffle(from_vct.begin(), from_vct.end());
 
     cell_from = from_vct[0];
 
-    for (unsigned i = 0; i < from_vct.size() / 2; ++i)
+    for (unsigned i = 0; i < from_vct.size(); ++i)
         if (cell_from < from_vct[i])
             cell_from = from_vct[i];
 
-    std::random_shuffle(free_cells_map[cell_from].begin(), free_cells_map[cell_from].end());
-
     cell_to = free_cells_map[cell_from][0];
 
-    for (unsigned i = 0; i < free_cells_map[cell_from].size() / 2; ++i)
+    for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
+    {
         if (cell_to < free_cells_map[cell_from][i])
             cell_to = free_cells_map[cell_from][i];
+
+        if (free_cells_map[cell_from][i] > 55 &&
+                free_cells_map[cell_from][i] < 64)
+        {
+            if(!board->getSide(free_cells_map[cell_from][i]))
+            {
+                cell_to = free_cells_map[cell_from][i];
+                break;
+            }
+        }
+
+        if (free_cells_map[cell_from][i] > 55 &&
+                free_cells_map[cell_from][i] < 64)
+        {
+            cell_to = free_cells_map[cell_from][i];
+            break;
+        }
+
+        if (board->getSide(free_cells_map[cell_from][i]))
+            cell_to = free_cells_map[cell_from][i];
+
+    }
+
 
 
     qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
@@ -134,7 +152,6 @@ void player::DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M)
         }
     }
 }
-
 
 
 
