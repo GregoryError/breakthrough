@@ -84,9 +84,7 @@ void player::play()
                     if ((i + 7) < board_SZ)
                         if (checkCell(i, i + 7))
                             t_vct.push_back(i + 7);
-
                 }
-
             }
 
             if (!t_vct.empty())
@@ -98,11 +96,11 @@ void player::play()
         }
     }
 
-    // std::random_shuffle(from_vct.begin(), from_vct.end());
+    std::random_shuffle(from_vct.begin(), from_vct.end());
 
     cell_from = from_vct[0];
 
-    for (unsigned i = 0; i < from_vct.size(); ++i)
+    for (unsigned i = 0; i < from_vct.size() / 2; ++i)
         if (cell_from < from_vct[i])
             cell_from = from_vct[i];
 
@@ -135,6 +133,18 @@ void player::play()
 
     }
 
+
+
+    for (const auto& pos : from_vct)
+        for (unsigned i = 0; i < free_cells_map[pos].size(); ++i)
+        {
+            if (board->getCell(free_cells_map[pos][i]) && board->getSide(free_cells_map[pos][i]))
+            {
+                cell_from = pos;
+                cell_to = free_cells_map[pos][i];
+                break;
+            }
+        }
 
 
     qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
