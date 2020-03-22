@@ -25,6 +25,7 @@ public:
     GmAbstrPlayer(const unsigned short& side, const std::string& img, const std::string& nm);
     void addQuote(const std::string& txt);
     void addBoard(std::shared_ptr<GmBitBoard>& b) { board = b; }
+    std::string getQuote();
 
     virtual bool checkCell(const unsigned& from, const unsigned& to);
 

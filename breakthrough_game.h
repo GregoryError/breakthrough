@@ -59,6 +59,8 @@ public slots:
 
     bool move_0(const unsigned& from, const unsigned& to);
 
+    QString getQuote();
+
 signals:
 
     void opponentReady();

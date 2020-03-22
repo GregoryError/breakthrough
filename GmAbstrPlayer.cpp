@@ -1,4 +1,6 @@
 #include "GmAbstrPlayer.h"
+#include <ctime>
+
 #include <QDebug>
 
 using namespace Gm;
@@ -8,11 +10,19 @@ GmAbstrPlayer::GmAbstrPlayer(const unsigned short &side, const std::string &img,
     n_side = side;
     img_path = img;
     name = nm;
+    std::srand(std::time(0));
 }
 
 void GmAbstrPlayer::addQuote(const std::string &txt)
 {
     quotes.push_back(txt);
+}
+
+std::string GmAbstrPlayer::getQuote()
+{
+    if (!quotes.empty())
+        return quotes[std::rand() % quotes.size()];
+    return "";
 }
 
 void GmAbstrPlayer::play()

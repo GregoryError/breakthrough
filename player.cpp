@@ -131,20 +131,27 @@ void player::play()
         if (board->getSide(free_cells_map[cell_from][i]))
             cell_to = free_cells_map[cell_from][i];
 
+        if (board->getCell(free_cells_map[cell_from][i]) && board->getSide(free_cells_map[cell_from][i]))
+        {
+            cell_from = cell_from;
+            cell_to = free_cells_map[cell_from][i];
+            break;
+        }
+
     }
 
 
 
-    for (const auto& pos : from_vct)
-        for (unsigned i = 0; i < free_cells_map[pos].size(); ++i)
-        {
-            if (board->getCell(free_cells_map[pos][i]) && board->getSide(free_cells_map[pos][i]))
-            {
-                cell_from = pos;
-                cell_to = free_cells_map[pos][i];
-                break;
-            }
-        }
+//    for (const auto& pos : from_vct)
+//        for (unsigned i = 0; i < free_cells_map[pos].size(); ++i)
+//        {
+//            if (board->getCell(free_cells_map[pos][i]) && board->getSide(free_cells_map[pos][i]))
+//            {
+//                cell_from = pos;
+//                cell_to = free_cells_map[pos][i];
+//                break;
+//            }
+//        }
 
 
     qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;

@@ -50,6 +50,7 @@ Item {
                 onOpponentReady: {
                     opponentFace.source = game_core.opponent_img();
                     opponentName.text = game_core.opponent_Name();
+                    quote.text = game_core.getQuote();
                 }
             }
 
@@ -83,6 +84,18 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 15
                 color: "white"
+            }
+            Text {
+                id: quote
+                anchors.top: opponentName.bottom
+                anchors.horizontalCenter: opponentName.horizontalCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 12
+                anchors.topMargin: 8
+                font.family: "Segoe UI Light"
+                color: "white"
+                width: parent.width * 0.8
+                wrapMode: Text.WordWrap
             }
         }
         Rectangle {

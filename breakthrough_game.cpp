@@ -7,28 +7,44 @@
 Breakthrough_Game::Breakthrough_Game()
 {    
     Player_Bohr = player(0, "qrc:/visualsources/players/bohr .png", "Niels Bohr");
-    Player_Bohr.addQuote("");
+    Player_Bohr.addQuote("На свете есть столь серьезные вещи, что говорить о них можно только шутя.");
+    Player_Bohr.addQuote("Эксперт — это человек, который совершил все возможные ошибки в очень узкой специальности.");
+    Player_Bohr.addQuote("Противоположности - не противоречия, они - дополнения.");
 
     Player_Lama = player(0, "qrc:/visualsources/players/dalai_lama_14.png", "Dalai Lama XIV");
-    Player_Lama.addQuote("");
+    Player_Lama.addQuote("Процветание приходит благодаря действиям, а не благодаря молитвам.");
+    Player_Lama.addQuote("Мы никогда не установим гармонию с окружающим миром, пока не примиримся с собой.");
+    Player_Lama.addQuote("Когда человеку кажется, что всё идёт наперекосяк, в его жизнь пытается войти нечто чудесное.");
 
     Player_Einstein = player(0, "qrc:/visualsources/players/einstein .png", "Albert Einstein");
-    Player_Einstein.addQuote("");
+    Player_Einstein.addQuote("Только дурак нуждается в порядке — гений господствует над хаосом.");
+    Player_Einstein.addQuote("Есть только две бесконечные вещи: Вселенная и глупость. Хотя насчет Вселенной я не уверен.");
+    Player_Einstein.addQuote("При помощи совпадений Бог сохраняет анонимность.");
 
     Player_Hemingway = player(0, "qrc:/visualsources/players/hemingway .png", "Ernest Hemingway");
-    Player_Hemingway.addQuote("");
+    Player_Hemingway.addQuote("Никогда не отправляйтесь в путешествие с теми, кого не любите.");
+    Player_Hemingway.addQuote("Тот, кто щеголяет эрудицией или ученостью, не имеет ни того, ни другого.");
+    Player_Hemingway.addQuote("Если вы перестали делать какие-то вещи просто для удовольствия, считайте, что вы больше не живете.");
 
     Player_Hoking = player(0, "qrc:/visualsources/players/hokinq .png", "Stiven Hoking");
-    Player_Hoking.addQuote("");
+    Player_Hoking.addQuote("Я понятия не имею, какой у меня IQ. Те, кого интересует их IQ, просто неудачники.");
+    Player_Hoking.addQuote("Перспектива рано умереть заставила меня понять, что жизнь стоит того, чтобы ее прожить.");
+    Player_Hoking.addQuote("Среди всех систем, которые у нас есть, самые сложные - это наши собственные тела.");
 
     Player_Holmes = player(0, "qrc:/visualsources/players/holms.png", "Sherlok Holmes");
-    Player_Holmes.addQuote("");
+    Player_Holmes.addQuote("Пожалуйста, не говори вслух, ты понижаешь IQ всей улицы!");
+    Player_Holmes.addQuote("Хочешь спрятать дерево — спрячь его в лесу.");
+    Player_Holmes.addQuote("Вы смотрите, но вы не наблюдаете, а это большая разница.");
 
     Player_Popov = player(0, "qrc:/visualsources/players/popov.png", "Александр Попов");
-    Player_Popov.addQuote("");
+    Player_Popov.addQuote("Счастлив я, что не за рубежом, а в России открыто новое средство связи.");
+    Player_Popov.addQuote("Разум есть способность обобщать и обмениваться обобщением.");
+    Player_Popov.addQuote("Здесь собран прибор для телеграфирования. Связной телеграммы мы не сумели послать, все детали приборов нужно ещё разработать.");
 
     Player_Tesla = player(0, "qrc:/visualsources/players/tesla.png", "Nikola Tesla");
-    Player_Tesla.addQuote("");
+    Player_Tesla.addQuote("Если вы хотите познать секреты вселенной - мыслите единицами измерения энергии, частоты и вибрации.");
+    Player_Tesla.addQuote("Великие тайны нашего бытия еще только предстоит разгадать, даже смерть может оказаться не концом.");
+    Player_Tesla.addQuote("Волны, создаваемые моим передатчиком, будут величайшим спонтанным проявлением энергии на планете.");
 
     std::srand(std::time(0));
 }
@@ -61,48 +77,53 @@ void Breakthrough_Game::start()
 
 
     // chose opponent
-//    while (true)
-//    {
-        switch (std::rand() % 8)
-        {
-        case 0: current_player = &Player_Bohr; break;
-        case 1: current_player = &Player_Lama; break;
-        case 2: current_player = &Player_Einstein; break;
-        case 3: current_player = &Player_Hemingway; break;
-        case 4: current_player = &Player_Hoking; break;
-        case 5: current_player = &Player_Holmes; break;
-        case 6: current_player = &Player_Popov; break;
-        case 7: current_player = &Player_Tesla; break;
-        default: break;
-        }
+    //    while (true)
+    //    {
+    switch (std::rand() % 8)
+    {
+    case 0: current_player = &Player_Bohr; break;
+    case 1: current_player = &Player_Lama; break;
+    case 2: current_player = &Player_Einstein; break;
+    case 3: current_player = &Player_Hemingway; break;
+    case 4: current_player = &Player_Hoking; break;
+    case 5: current_player = &Player_Holmes; break;
+    case 6: current_player = &Player_Popov; break;
+    case 7: current_player = &Player_Tesla; break;
+    default: break;
+    }
 
-        emit opponentReady();
+    emit opponentReady();
 
-        current_player->addBoard(p_board);
+    current_player->addBoard(p_board);
 
-        current_player->play();
-
-
-//        if (isAvailable(10, 19))
-//            qDebug() << "YES\n";
-//        else
-//            qDebug() << "NO\n";
+    current_player->play();
 
 
+    //        if (isAvailable(10, 19))
+    //            qDebug() << "YES\n";
+    //        else
+    //            qDebug() << "NO\n";
 
-        // entery point
 
-//        while (win() == 3)
-//        {
 
-//        }
+    // entery point
 
-        //    }
+    //        while (win() == 3)
+    //        {
+
+    //        }
+
+    //    }
 }
 
 bool Breakthrough_Game::move_0(const unsigned &from, const unsigned &to)
 {
-   return move(0, from, to);
+    return move(0, from, to);
+}
+
+QString Breakthrough_Game::getQuote()
+{
+    return QString::fromStdString(current_player->getQuote());
 }
 
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
