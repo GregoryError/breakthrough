@@ -1,20 +1,32 @@
 #include "player.h"
 #include <random>
 #include <ctime>
-#include <vector>
-#include <map>
 #include <algorithm>
 
 #include <QDebug>
 
-void player::defense(const unsigned& gap)
+void player::defense(const unsigned& gap, const std::vector<unsigned>& forces_vct,
+                     const std::map<unsigned, std::vector<unsigned>>& possible_cells_map)
 {
 
 }
 
-void player::atack(const unsigned& gap)
+void player::attack(const unsigned& gap, const std::vector<unsigned>& forces_vct,
+                    std::map<unsigned, std::vector<unsigned>>& possible_cells_map)
 {
-
+    unsigned minDistance = 64;
+    for (unsigned i = 0; i < forces_vct.size(); ++i)
+    {
+        for (unsigned j = 0; j < possible_cells_map[forces_vct[i]].size(); ++j)
+        {
+            if (gap - possible_cells_map[forces_vct[i]][j] < minDistance)
+            {
+                minDistance = gap - possible_cells_map[forces_vct[i]][j];
+                cell_from = forces_vct[i];
+                cell_to = possible_cells_map[forces_vct[i]][j];
+            }
+        }
+    }
 
 }
 
@@ -26,8 +38,8 @@ void player::play()
     std::mt19937 gen(std::time(0));
 
     std::map<unsigned, std::vector<unsigned>> free_cells_map; // cells with forces
-
     std::vector<unsigned> t_vct, from_vct;
+
 
     for (unsigned i = 0; i < (board_SZ); ++i)
     {
@@ -127,15 +139,34 @@ void player::play()
         if (cell_to < free_cells_map[cell_from][i])
             cell_to = free_cells_map[cell_from][i];             // choose a max
 
-
     }
-
 
     // TODO: here must be something that detect if there is a gap on a board and atack,
     // and if there is a dangerous context near own base and defense
+    // How to know if need to defense?
+    // - If opponent forces on cell less (or equal to) than 31
+    // - Opponent forces concentrated on certain part of board (prepare for attack)
+    // How to know if need to attack?
+    // there is a gap on a opponent horizontal
+
+    // Attack
+
+    for (unsigned i = 56; i < 64; ++i)
+    {
+        if (!board->getCell(i))
+        {
+            attack(i, from_vct, free_cells_map);
+        }
+    }
 
 
-    qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
+
+
+
+
+
+
+    //    qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
 }
 
 

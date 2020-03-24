@@ -17,9 +17,11 @@ public:
 
     void play() override;
 
-    void defense(const unsigned& gap);
+    void defense(const unsigned& gap, const std::vector<unsigned>& forces_vct,
+                 const std::map<unsigned, std::vector<unsigned>>& possible_cells_map);
 
-    void atack(const unsigned& gap);
+    void attack(const unsigned& gap, const std::vector<unsigned>& forces_vct,
+               std::map<unsigned, std::vector<unsigned>>& possible_cells_map);
 
     bool checkCell(const unsigned int &from, const unsigned int &to) override
     {
