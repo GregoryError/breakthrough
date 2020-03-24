@@ -87,6 +87,7 @@ public:
     //  TODO: delete leter
     void DIAG_showBoard();
     void DIAG_showMask();
+    void DIAG_showDirection(const unsigned& from, const unsigned& to);
 };
 
 }

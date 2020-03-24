@@ -286,12 +286,23 @@ void GmBitBoard::DIAG_showMask()
 
 }
 
-
-
-
-
-
-
+void GmBitBoard::DIAG_showDirection(const unsigned &from, const unsigned &to)
+{
+    std::cout << "DIAG_showDirection():\n";
+    switch (getDirection(from, to))
+    {
+    case DIRECTION::right: std::cout << "RIGHT"; break;
+    case DIRECTION::left: std::cout << "LEFT"; break;
+    case DIRECTION::up: std::cout << "UP"; break;
+    case DIRECTION::down: std::cout << "DOWN"; break;
+    case DIRECTION::leftUp: std::cout << "LEFT_UP"; break;
+    case DIRECTION::rightUp: std::cout << "RIGHT_UP"; break;
+    case DIRECTION::rightDown: std::cout << "RIGHT_DOWN"; break;
+    case DIRECTION::leftDown: std::cout << "LEFT_DOWN"; break;
+    default: std::cout << "undefined\n"; break;
+    }
+    std::cout << std::endl;
+}
 
 
 
