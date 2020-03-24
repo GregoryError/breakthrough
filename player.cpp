@@ -22,12 +22,14 @@ void player::attack(const unsigned& gap, const std::vector<unsigned>& forces_vct
             if (gap - possible_cells_map[forces_vct[i]][j] < minDistance)
             {
                 minDistance = gap - possible_cells_map[forces_vct[i]][j];
+
+                if (possible_cells_map[forces_vct[i]][j] - forces_vct[i] < 7)
+                    continue;
                 cell_from = forces_vct[i];
                 cell_to = possible_cells_map[forces_vct[i]][j];
             }
         }
     }
-
 }
 
 void player::play()
@@ -141,7 +143,7 @@ void player::play()
 
     }
 
-    // TODO: here must be something that detect if there is a gap on a board and atack,
+    // TODO: here must be something that detect if there is a gap on a board and attack,
     // and if there is a dangerous context near own base and defense
     // How to know if need to defense?
     // - If opponent forces on cell less (or equal to) than 31
