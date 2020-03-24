@@ -7,6 +7,17 @@
 
 #include <QDebug>
 
+void player::defense(const unsigned& gap)
+{
+
+}
+
+void player::atack(const unsigned& gap)
+{
+
+
+}
+
 void player::play()
 {
     unsigned board_SZ = board->getWidth() * board->getHeight();
@@ -14,9 +25,7 @@ void player::play()
     GmAbstrPlayer::play();
     std::mt19937 gen(std::time(0));
 
-
-    std::map<unsigned, std::vector<unsigned>> free_cells_map;
-
+    std::map<unsigned, std::vector<unsigned>> free_cells_map; // cells with forces
 
     std::vector<unsigned> t_vct, from_vct;
 
@@ -102,60 +111,35 @@ void player::play()
 
     for (unsigned i = 0; i < from_vct.size() / 2; ++i)
         if (cell_from < from_vct[i])
-            cell_from = from_vct[i];
+            cell_from = from_vct[i];                     // random maximum from half (choose pos_from)
 
     cell_to = free_cells_map[cell_from][0];
 
     for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
     {
-        if (cell_to < free_cells_map[cell_from][i])
-            cell_to = free_cells_map[cell_from][i];
-
-        if (free_cells_map[cell_from][i] > 55 &&
-                free_cells_map[cell_from][i] < 64)
-        {
-            if(!board->getSide(free_cells_map[cell_from][i]))
-            {
-                cell_to = free_cells_map[cell_from][i];
-                break;
-            }
-        }
-
-        if (free_cells_map[cell_from][i] > 55 &&
-                free_cells_map[cell_from][i] < 64)
-        {
-            cell_to = free_cells_map[cell_from][i];
-            break;
-        }
-
-        if (board->getSide(free_cells_map[cell_from][i]))
-            cell_to = free_cells_map[cell_from][i];
 
         if (board->getCell(free_cells_map[cell_from][i]) && board->getSide(free_cells_map[cell_from][i]))
         {
-            cell_from = cell_from;
-            cell_to = free_cells_map[cell_from][i];
+            cell_to = free_cells_map[cell_from][i];             // try eat if item is near
             break;
         }
+
+        if (cell_to < free_cells_map[cell_from][i])
+            cell_to = free_cells_map[cell_from][i];             // choose a max
+
 
     }
 
 
-
-//    for (const auto& pos : from_vct)
-//        for (unsigned i = 0; i < free_cells_map[pos].size(); ++i)
-//        {
-//            if (board->getCell(free_cells_map[pos][i]) && board->getSide(free_cells_map[pos][i]))
-//            {
-//                cell_from = pos;
-//                cell_to = free_cells_map[pos][i];
-//                break;
-//            }
-//        }
+    // TODO: here must be something that detect if there is a gap on a board and atack,
+    // and if there is a dangerous context near own base and defense
 
 
     qDebug() << "player::from = " << cell_from << " player::to = " << cell_to;
 }
+
+
+
 
 void player::DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M)
 {

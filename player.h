@@ -15,8 +15,11 @@ public:
     player() = default;
     player(const unsigned short& side, const std::string& img, const std::string& nm) : Gm::GmAbstrPlayer(side, img, nm) {}
 
-
     void play() override;
+
+    void defense(const unsigned& gap);
+
+    void atack(const unsigned& gap);
 
     bool checkCell(const unsigned int &from, const unsigned int &to) override
     {
@@ -28,6 +31,7 @@ public:
 };
 
 #endif // PLAYER_H
+
 
 
 
