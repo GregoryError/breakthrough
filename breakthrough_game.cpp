@@ -116,22 +116,47 @@ void Breakthrough_Game::start()
     //    }
 }
 
-bool Breakthrough_Game::move_0(const unsigned &from, const unsigned &to)
-{
-    return move(0, from, to);
-}
-
 QString Breakthrough_Game::getQuote()
 {
     return QString::fromStdString(current_player->getQuote());
 }
 
+void Breakthrough_Game::swapCell(const unsigned &A, const unsigned &B)
+{
+    struct TEMP_Cell
+    {
+        short side;
+        unsigned pos;
+        TEMP_Cell(const short& s, const unsigned& p)
+        {
+            side = s;
+            pos = p;
+        }
+    };
+
+    TEMP_Cell t(p_board->getSide(A), A);
+
+    p_board->clearCell(A);
+    p_board->setCell(A, 1);
+    if (p_board->getSide(B))
+        p_board->setSide(B);
+
+    p_board->clearCell(B);
+    p_board->setCell(B, 1);
+    if (t.side == 0)
+        p_board->setSide(t.pos);
+
+}
+
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
 {
-    current_player->play();
     return move(getSide_(pos_from), pos_from, pos_to);
 }
 
+bool Breakthrough_Game::move_0(const unsigned &from, const unsigned &to)
+{
+    return move(0, from, to);
+}
 
 bool Breakthrough_Game::getSide_(const unsigned int& pos) const
 {

@@ -5,6 +5,7 @@ Item {
     id: mainItem
     anchors.fill: parent
     property int from: -1
+    property int needRefresh: 0
 
 
     //    function item_clicked(index) {
@@ -229,6 +230,12 @@ Item {
                         if (game_core.eaten())
                             refresh_model();
 
+                        if (needRefresh == 1)
+                        {
+                            refresh_model();
+                            needRefresh = 0;
+                        }
+
                     }
                 }
 
@@ -288,21 +295,62 @@ Item {
                             from = item
                             from.scale = 0.8
                         }
-                    } else {
-                        if (game_core.move_(from._index, item._index))
+                    }
+                    else
+                    {
+                        item.scale = 1
+                        game_core.opponentPlay();
+                        if (item._index !== game_core.opponent_from())
                         {
-                            item.scale = 1
-                            anim.start_animation(from, item)
+                            if (game_core.move_(from._index, item._index))
+                            {
+                                item.scale = 1
+                                anim.start_animation(from, item)
+                                // lock cell
 
+                                if (game_core.move_0(game_core.opponent_from(), game_core.opponent_to()))
+                                    anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
+                                                             repeater.itemAt(game_core.opponent_to()));
 
-                            if (game_core.move_0(game_core.opponent_from(), game_core.opponent_to())) //
+                                from = null
+                            }
+                            else
+                                refresh_model()
+                        }
+                        else    // moving to same cell as opponent
+                        {
+                            if (from._index !== game_core.opponent_to())
+                            {
+                                if (game_core.move_0(game_core.opponent_from(), game_core.opponent_to()))
+                                {
+                                    anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
+                                                             repeater.itemAt(game_core.opponent_to()));
+
+                                    if (game_core.move_(from._index, item._index))
+                                    {
+                                        item.scale = 1
+                                        anim.start_animation(from, item)
+                                    }
+
+                                    from = null
+                                }
+                                else
+                                    refresh_model()
+                            }
+                            else
+                            {
+                                // moving it the same time
                                 anim_1.start_animation_1(repeater.itemAt(game_core.opponent_from()),
                                                          repeater.itemAt(game_core.opponent_to()));
+                                item.scale = 1
+                                anim.start_animation(from, item)
 
-                            from = null
+                                game_core.swapCell(game_core.opponent_from(), game_core.opponent_to())
+                                needRefresh = 1;
+//                                refresh_model()
+
+                            }
                         }
-                        else
-                            refresh_model()
                     }
                 }
 

@@ -61,6 +61,8 @@ public slots:
 
     QString getQuote();
 
+    void swapCell(const unsigned& A, const unsigned& B);
+
 signals:
 
     void opponentReady();
