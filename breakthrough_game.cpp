@@ -73,12 +73,6 @@ Breakthrough_Game::~Breakthrough_Game()
 
 void Breakthrough_Game::start()
 {
-    p_board->DIAG_showBoard();
-
-
-    // chose opponent
-    //    while (true)
-    //    {
     switch (std::rand() % 8)
     {
     case 0: current_player = &Player_Bohr; break;
@@ -98,15 +92,6 @@ void Breakthrough_Game::start()
 
     current_player->play();
 
-
-    // entery point
-
-    //        while (win() == 3)
-    //        {
-
-    //        }
-
-    //    }
 }
 
 QString Breakthrough_Game::getQuote()

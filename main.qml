@@ -123,6 +123,7 @@ Window {
                 onPressed: {
                     shareButtoncircleAnimation.start()
                     shareButtonOpacityAnimation.start()
+                    game_core.newGame();
                 }
             }
         }

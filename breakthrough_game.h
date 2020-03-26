@@ -65,9 +65,18 @@ public slots:
 
     bool isAvailable(const unsigned& from, const unsigned& to);
 
+    void newGame()
+    {
+        setBoard(8, 8);
+        start();
+        emit resetBoard();
+    }
+
 signals:
 
     void opponentReady();
+
+    void resetBoard();
 
 };
 

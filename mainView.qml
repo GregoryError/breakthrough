@@ -53,6 +53,10 @@ Item {
                     opponentName.text = game_core.opponent_Name();
                     quote.text = game_core.getQuote();
                 }
+
+                onResetBoard: {
+                    refresh_model();
+                }
             }
 
             Image {
@@ -66,6 +70,12 @@ Item {
                 fillMode: Image.PreserveAspectFit
                 onSourceChanged: faceAnim.start()
 
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
+                }
             }
             OpacityAnimator {
                 id: faceAnim
