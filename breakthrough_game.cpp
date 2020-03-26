@@ -131,6 +131,13 @@ bool Breakthrough_Game::isAvailable(const unsigned &from, const unsigned &to)
     return checkSkill(from, to);
 }
 
+void Breakthrough_Game::newGame()
+{
+    setBoard(8, 8);
+    start();
+    emit resetBoard();
+}
+
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
 {
     return move(getSide_(pos_from), pos_from, pos_to);

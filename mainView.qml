@@ -56,19 +56,23 @@ Item {
 
                 onResetBoard: {
                     refresh_model();
+                    quote.font.pointSize = 12;
+                    quote.font.bold = false;
+                    quote.opacity = 1;
                 }
             }
 
             Image {
                 id: opponentFace
-                anchors.top: parent.top
+                anchors.top: infoRect.top
                 opacity: 0
                 anchors.topMargin: 15
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width / 4 + 5
+                anchors.horizontalCenter: infoRect.horizontalCenter
+                width: infoRect.width / 4 + 5
                 height: width
                 fillMode: Image.PreserveAspectFit
                 onSourceChanged: faceAnim.start()
+
 
                 MouseArea{
                     anchors.fill: parent
@@ -77,6 +81,60 @@ Item {
                     }
                 }
             }
+
+            Rectangle {
+                id: faceFrame
+                visible: false
+                anchors.top: parent.top
+                anchors.topMargin: 15
+               // anchors.horizontalCenter: parent.horizontalCenter
+                anchors.centerIn: opponentFace
+                color: "transparent"
+                border.width: 1
+                border.color: "white"
+                width: opponentFace.width
+                height: width
+                radius: 50
+
+
+            }
+
+            PropertyAnimation {
+                id: faceFrameAnim
+                target: faceFrame
+                running: false
+                properties: "width,height,radius"
+                from: opponentFace.width
+                to: faceFrame.width * 1.3
+                duration: 1400
+                loops: 2
+
+                onStarted: {
+                    faceFrame.visible = true
+                    faceFrameOpacityAnim.start()
+                }
+
+                onStopped: {
+                    faceFrame.width = opponentFace.width
+                    faceFrame.visible = false
+                }
+            }
+
+            PropertyAnimation {
+                id: faceFrameOpacityAnim
+                running: false
+                target: faceFrame
+                properties: "opacity"
+                from: 1
+                to: 0
+                duration: 1400
+                onStopped: {
+                    faceFrame.opacity = 1
+                }
+            }
+
+
+
             OpacityAnimator {
                 id: faceAnim
                 target: opponentFace
@@ -246,6 +304,34 @@ Item {
                             needRefresh = 0;
                         }
 
+                        if (game_core.win_() !== 3)
+                        {
+                            quote.font.pointSize = 16
+                            quote.font.bold = true
+                            if (game_core.win_() === 2)
+                                quote.text = "Ну что ж, ничья так ничья!"
+                            if (game_core.win_() === 1)
+                                quote.text = "Мои поздравления, на этот раз удача на Вашей стороне!"
+                            if (game_core.win_() === 0)
+                                quote.text = "Вы проиграли в этой схватке!"
+                            quoteAnim.start();
+                            faceFrameAnim.start();
+                        }
+
+
+                    }
+                }
+
+                OpacityAnimator {
+                    id: quoteAnim
+                    running: false
+                    target: quote
+                    from: 1
+                    to: 0
+                    duration: 700
+                    loops: 4
+                    onStopped: {
+                        game_core.newGame();
                     }
                 }
 
