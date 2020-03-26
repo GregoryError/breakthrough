@@ -72,9 +72,11 @@ public:
     std::size_t getCellsLEFTDOWN(const std::size_t& pos) const;
 
     // this shows direction by positions
-    DIRECTION getDirection(const std::size_t& pos_from, const std::size_t& pos_to) const;
+    DIRECTION getDirection(const std::size_t& pos_from,
+                           const std::size_t& pos_to) const;
     // this shows distance in cells between positions
-    std::size_t getDistance(const std::size_t& pos_from, const std::size_t& pos_to) const;
+    std::size_t getDistance(const std::size_t& pos_from,
+                            const std::size_t& pos_to) const;
 
     const std::size_t& getWidth() const { return WIDTH; }
     const std::size_t& getHeight() const { return HEIGHT; }

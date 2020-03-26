@@ -5,13 +5,8 @@
 
 #include <QDebug>
 
-void player::defense(const unsigned& gap, const std::vector<unsigned>& forces_vct,
-                     const std::map<unsigned, std::vector<unsigned>>& possible_cells_map)
-{
 
-}
-
-void player::attack(const unsigned& gap, const std::vector<unsigned>& forces_vct,
+void player::goToCell(const unsigned& gap, const std::vector<unsigned>& forces_vct,
                     std::map<unsigned, std::vector<unsigned>>& possible_cells_map)
 {
     unsigned minDistance = 64;
@@ -132,14 +127,16 @@ void player::play()
     for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
     {
 
+        if (cell_to < free_cells_map[cell_from][i])
+            cell_to = free_cells_map[cell_from][i];
+
         if (board->getCell(free_cells_map[cell_from][i]) && board->getSide(free_cells_map[cell_from][i]))
         {
             cell_to = free_cells_map[cell_from][i];             // try eat if item is near
             break;
         }
 
-        if (cell_to < free_cells_map[cell_from][i])
-            cell_to = free_cells_map[cell_from][i];             // choose a max
+                    // choose a max
 
     }
 
@@ -151,15 +148,68 @@ void player::play()
     // How to know if need to attack?
     // there is a gap on a opponent horizontal
 
+
+    // check if need to defense
+
+    unsigned distance = 64;
+    unsigned protected_cell = 0;
+
+    for (unsigned i = 0; i < 33; ++i)
+    {
+        if (board->getCell(i) && board->getSide(i))
+        {
+            for (unsigned j = 0; j < 8; ++j)
+            {
+                if (!board->getCell(j))
+                {
+                    if (board->getDistance(j, i) < distance)
+                    {
+                        distance = board->getDistance(j, i);
+                        protected_cell = j;
+                    }
+                }
+            }
+        }
+    }
+
+    if (distance < 64)
+    {
+        goToCell(protected_cell, from_vct, free_cells_map);
+    }
+
+
+
     // Attack
 
     for (unsigned i = 56; i < 64; ++i)
     {
         if (!board->getCell(i))
         {
-            attack(i, from_vct, free_cells_map);
+            goToCell(i, from_vct, free_cells_map);
         }
     }
+
+
+//    static int move_call = 1;
+//    if (move_call % 2 == 0)
+//    {
+//        ++move_call;
+//        for (unsigned i = 56; i < 64; ++i)
+//        {
+//            if (!board->getCell(i))
+//            {
+//                attack(i, from_vct, free_cells_map);
+//            }
+//        }
+
+//        for (unsigned i = 0; i < 8; ++i)
+//        {
+//            if (!board->getCell(i))
+//            {
+//                attack(i, from_vct, free_cells_map);
+//            }
+//        }
+//    }
 
 
 

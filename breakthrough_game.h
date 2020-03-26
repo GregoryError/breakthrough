@@ -63,6 +63,8 @@ public slots:
 
     void swapCell(const unsigned& A, const unsigned& B);
 
+    bool isAvailable(const unsigned& from, const unsigned& to);
+
 signals:
 
     void opponentReady();

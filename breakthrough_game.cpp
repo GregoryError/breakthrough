@@ -99,13 +99,6 @@ void Breakthrough_Game::start()
     current_player->play();
 
 
-    //        if (isAvailable(10, 19))
-    //            qDebug() << "YES\n";
-    //        else
-    //            qDebug() << "NO\n";
-
-
-
     // entery point
 
     //        while (win() == 3)
@@ -146,6 +139,11 @@ void Breakthrough_Game::swapCell(const unsigned &A, const unsigned &B)
     if (t.side == 0)
         p_board->setSide(t.pos);
 
+}
+
+bool Breakthrough_Game::isAvailable(const unsigned &from, const unsigned &to)
+{
+    return checkSkill(from, to);
 }
 
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
