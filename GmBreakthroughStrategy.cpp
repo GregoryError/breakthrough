@@ -75,7 +75,7 @@ int GmBreakthroughStrategy::win()
 
     int result = 3;         // 3 - neams the game is continue
 
-    for (std::size_t i = 0; i <= p_board->getWidth(); ++i)     // is player 1 wins?
+    for (std::size_t i = 0; i < p_board->getWidth(); ++i)     // is player 1 wins?
         if (p_board->getSide(i) && p_board->getCell(i))
             result = 1;
     for (std::size_t i = (p_board->getWidth() * p_board->getHeight() - 1);          // is player 0 win?

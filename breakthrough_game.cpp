@@ -46,6 +46,11 @@ Breakthrough_Game::Breakthrough_Game()
     Player_Tesla.addQuote("Великие тайны нашего бытия еще только предстоит разгадать, даже смерть может оказаться не концом.");
     Player_Tesla.addQuote("Волны, создаваемые моим передатчиком, будут величайшим спонтанным проявлением энергии на планете.");
 
+    backSound_0.setVolume(0.55f);
+
+    moveSound.setSource(QUrl("qrc:/sounds/move.wav"));
+    winSound.setSource(QUrl("qrc:/sounds/winsound.wav"));
+
     std::srand(std::time(0));
 }
 
@@ -73,6 +78,15 @@ Breakthrough_Game::~Breakthrough_Game()
 
 void Breakthrough_Game::start()
 {
+    static int playTimes = 1;
+    if (playTimes % 2 == 0)
+    {
+        backSound_0.setSource(QUrl("qrc:/sounds/background_0.wav"));
+    }
+    else
+        backSound_0.setSource(QUrl("qrc:/sounds/background_1.wav"));
+    ++playTimes;
+
     switch (std::rand() % 8)
     {
     case 0: current_player = &Player_Bohr; break;
@@ -91,6 +105,8 @@ void Breakthrough_Game::start()
     current_player->addBoard(p_board);
 
     current_player->play();
+
+    backSound_0.play();
 
 }
 
@@ -138,9 +154,17 @@ void Breakthrough_Game::newGame()
     emit resetBoard();
 }
 
+void Breakthrough_Game::congrat()
+{
+    backSound_0.stop();
+    winSound.play();
+}
+
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)
 {
-    return move(getSide_(pos_from), pos_from, pos_to);
+    auto res = move(getSide_(pos_from), pos_from, pos_to);
+    moveSound.play();
+    return res;
 }
 
 bool Breakthrough_Game::move_0(const unsigned &from, const unsigned &to)

@@ -6,6 +6,7 @@
 #include "GmBreakthroughStrategy.h" // - Certain strategy of game. Sets of rules; main logic etc
 #include "player.h"
 #include <QString>
+#include <QSoundEffect>
 
 
 class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroughStrategy>
@@ -23,6 +24,10 @@ private:
     player Player_Popov;
     player Player_Tesla;
     player* current_player;
+
+    QSoundEffect backSound_0;
+    QSoundEffect moveSound;
+    QSoundEffect winSound;
 
 public:
     Breakthrough_Game();
@@ -66,6 +71,8 @@ public slots:
     bool isAvailable(const unsigned& from, const unsigned& to);
 
     void newGame();
+
+    void congrat();
 
 
 signals:

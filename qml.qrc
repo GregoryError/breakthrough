@@ -15,5 +15,9 @@
         <file>visualsources/players/holms.png</file>
         <file>visualsources/players/popov.png</file>
         <file>visualsources/players/tesla.png</file>
+        <file>sounds/background_0.wav</file>
+        <file>sounds/background_1.wav</file>
+        <file>sounds/move.wav</file>
+        <file>sounds/winsound.wav</file>
     </qresource>
 </RCC>

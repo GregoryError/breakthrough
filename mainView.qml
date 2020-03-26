@@ -311,7 +311,10 @@ Item {
                             if (game_core.win_() === 2)
                                 quote.text = "Ну что ж, ничья так ничья!"
                             if (game_core.win_() === 1)
+                            {
+                                game_core.congrat();
                                 quote.text = "Мои поздравления, на этот раз удача на Вашей стороне!"
+                            }
                             if (game_core.win_() === 0)
                                 quote.text = "Вы проиграли в этой схватке!"
                             quoteAnim.start();
