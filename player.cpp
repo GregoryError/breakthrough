@@ -22,8 +22,8 @@ void player::goToCell(const unsigned& gap, const std::vector<unsigned>& forces_v
             {
                 minDistance = gap - possible_cells_map[forces_vct[i]][j];
 
-                if (possible_cells_map[forces_vct[i]][j] - forces_vct[i] < 7)
-                    continue;
+//                if (possible_cells_map[forces_vct[i]][j] - forces_vct[i] < 7)
+//                    continue;
                 cell_from = forces_vct[i];
                 cell_to = possible_cells_map[forces_vct[i]][j];
             }
@@ -31,11 +31,9 @@ void player::goToCell(const unsigned& gap, const std::vector<unsigned>& forces_v
     }
 
     if (board->getDirection(cell_from, gap) == Gm::down)
-    {
         for (unsigned i = 0; i < possible_cells_map[cell_from].size(); ++i)
             if (possible_cells_map[cell_from][i] == cell_from + 8)
                 cell_to = possible_cells_map[cell_from][i];
-    }
     if (board->getDirection(cell_from, gap) == Gm::leftDown)
         for (unsigned i = 0; i < possible_cells_map[cell_from].size(); ++i)
             if (possible_cells_map[cell_from][i] == cell_from + 7)
@@ -147,11 +145,6 @@ void player::play()
 
     std::vector<unsigned> vertical_vct;
 
-    for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
-        if (free_cells_map[cell_from][i] == cell_from + 8)
-            vertical_vct.push_back(free_cells_map[cell_from][i]);
-
-
     static int move_call = 1;
 
     if (move_call % 3 != 0)
@@ -175,6 +168,10 @@ void player::play()
 
     if (move_call % 3 == 0)
     {
+        for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
+            if (free_cells_map[cell_from][i] == cell_from + 8)
+                vertical_vct.push_back(free_cells_map[cell_from][i]);
+
         if (!vertical_vct.empty())
         {
             if (cell_from < vertical_vct[0])
@@ -226,10 +223,10 @@ void player::play()
 
 
 
-    unsigned distance = 24;
+    unsigned distance = 4;
     unsigned protected_cell = 0;
 
-    for (unsigned i = 0; i < 24; ++i)
+    for (unsigned i = 0; i < 15; ++i)
     {
         if (board->getCell(i) && board->getSide(i))
         {
@@ -253,9 +250,21 @@ void player::play()
         if (v < 24)
             from_closer_vct.push_back(v);
 
-    if (distance < 24)
+    if (distance < 4)
     {
         goToCell(protected_cell, from_closer_vct, free_cells_map);
+    }
+
+    if (cell_to > 55 && cell_to < 64)
+    {
+        for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
+        {
+            if ((free_cells_map[cell_from][i] > 55 && free_cells_map[cell_from][i] < 64) && !board->getCell(free_cells_map[cell_from][i]))
+            {
+                cell_to = free_cells_map[cell_from][i];
+                break;
+            }
+        }
     }
 
 }
