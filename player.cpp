@@ -170,21 +170,25 @@ void player::play()
             }
 
             // choose a max
-
         }
-
     }
 
     if (move_call % 3 == 0)
     {
         if (!vertical_vct.empty())
         {
-            cell_to = vertical_vct[0];
+            if (cell_from < vertical_vct[0])
+                cell_to = vertical_vct[0];
             for (unsigned i = 0; i < vertical_vct.size(); ++i)
                 if (cell_to < vertical_vct[i])
-                    cell_to = vertical_vct[i];
+                {
+                    if (cell_from < vertical_vct[i])
+                    {
+                        cell_to = vertical_vct[i];
+                        qDebug() << "vertical_vct works: from: " << cell_from << " cell_to: " << cell_to;
+                    }
+                }
         }
-        qDebug() << "vertical_vct works: from: " << cell_from << " cell_to: " << cell_to;
 
     }
 
@@ -213,16 +217,16 @@ void player::play()
 
     if (cell_to >= 48 && cell_to <= 55)
     {
-            for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
-                if (free_cells_map[cell_from][i] > 55 && free_cells_map[cell_from][i] < 64)
-                    cell_to = free_cells_map[cell_from][i];
+        for (unsigned i = 0; i < free_cells_map[cell_from].size(); ++i)
+            if (free_cells_map[cell_from][i] > 55 && free_cells_map[cell_from][i] < 64)
+                cell_to = free_cells_map[cell_from][i];
     }
 
 
 
 
 
-    unsigned distance = 64;
+    unsigned distance = 24;
     unsigned protected_cell = 0;
 
     for (unsigned i = 0; i < 24; ++i)
@@ -243,9 +247,15 @@ void player::play()
         }
     }
 
-    if (distance < 64)
+
+    std::vector<unsigned> from_closer_vct;
+    for (const auto& v : from_vct)
+        if (v < 24)
+            from_closer_vct.push_back(v);
+
+    if (distance < 24)
     {
-        goToCell(protected_cell, from_vct, free_cells_map);
+        goToCell(protected_cell, from_closer_vct, free_cells_map);
     }
 
 }
