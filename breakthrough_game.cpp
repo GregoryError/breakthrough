@@ -51,6 +51,7 @@ Breakthrough_Game::Breakthrough_Game()
 
     moveSound.setSource(QUrl("qrc:/sounds/move.wav"));
     winSound.setSource(QUrl("qrc:/sounds/winsound.wav"));
+    loseSound.setSource(QUrl("qrc:/sounds/lose.wav"));
 
     std::srand(std::time(0));
 }
@@ -85,13 +86,9 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 
     if (arrangeType == 4)
         board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 0, 1, 1, 0, 1, 1,
                         1, 1, 1, 1, 1, 1, 1, 1,
-                        1, 1, 1, 1, 1, 1, 1, 1,
-                        1, 1, 1, 1, 1, 1, 1, 1}, Gm::cross);
-
-
-
-
+                        1, 0, 1, 0, 0, 1, 0, 1}, Gm::cross);
 
 
     addBoard(board);
@@ -112,14 +109,14 @@ Breakthrough_Game::~Breakthrough_Game()
 
 void Breakthrough_Game::start()
 {
-    static int playTimes = 1;
-    if (playTimes % 2 == 0)
-    {
+    int playTimes = std::rand() % 3;
+
+    if (playTimes == 0)
         backSound_0.setSource(QUrl("qrc:/sounds/background_0.wav"));
-    }
-    else
+    if (playTimes == 1)
         backSound_0.setSource(QUrl("qrc:/sounds/background_1.wav"));
-    ++playTimes;
+    if (playTimes == 2)
+        backSound_0.setSource(QUrl("qrc:/sounds/background_2.wav"));
 
     switch (std::rand() % 8)
     {
@@ -192,6 +189,12 @@ void Breakthrough_Game::congrat()
 {
     backSound_0.stop();
     winSound.play();
+}
+
+void Breakthrough_Game::lose()
+{
+    backSound_0.stop();
+    loseSound.play();
 }
 
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)

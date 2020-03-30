@@ -19,5 +19,7 @@
         <file>sounds/background_1.wav</file>
         <file>sounds/move.wav</file>
         <file>sounds/winsound.wav</file>
+        <file>sounds/lose.wav</file>
+        <file>sounds/background_2.wav</file>
     </qresource>
 </RCC>

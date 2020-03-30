@@ -28,6 +28,7 @@ private:
     QSoundEffect backSound_0;
     QSoundEffect moveSound;
     QSoundEffect winSound;
+    QSoundEffect loseSound;
 
 public:
     Breakthrough_Game();
@@ -73,6 +74,8 @@ public slots:
     void newGame();
 
     void congrat();
+
+    void lose();
 
 
 signals:

@@ -316,7 +316,10 @@ Item {
                                 quote.text = "Мои поздравления, на этот раз удача на Вашей стороне!"
                             }
                             if (game_core.win_() === 0)
+                            {
                                 quote.text = "Вы проиграли в этой схватке!"
+                                game_core.lose();
+                            }
                             quoteAnim.start();
                             faceFrameAnim.start();
                         }
