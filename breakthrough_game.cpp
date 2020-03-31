@@ -61,7 +61,7 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
     auto board(std::make_shared<Gm::GmBitBoard>(w, h, 2));
 
 
-    short arrangeType = std::rand() % 5;
+    short arrangeType = std::rand() % 6;
 
 
     if (arrangeType == 0)
@@ -86,9 +86,12 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
 
     if (arrangeType == 4)
         board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
-                        1, 1, 0, 1, 1, 0, 1, 1,
-                        1, 1, 1, 1, 1, 1, 1, 1,
-                        1, 0, 1, 0, 0, 1, 0, 1}, Gm::cross);
+                        0, 1, 0, 1, 0, 1, 0, 1,
+                        1, 0, 1, 0, 1, 0, 1, 0 }, Gm::cross);
+
+    if (arrangeType == 5)
+        board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
+                        0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
 
 
     addBoard(board);
