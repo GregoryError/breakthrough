@@ -46,8 +46,10 @@ Breakthrough_Game::Breakthrough_Game()
     Player_Tesla.addQuote("Великие тайны нашего бытия еще только предстоит разгадать, даже смерть может оказаться не концом.");
     Player_Tesla.addQuote("Волны, создаваемые моим передатчиком, будут величайшим спонтанным проявлением энергии на планете.");
 
-    backSound_0.setVolume(0.42);
-    winSound.setVolume(0.70);
+    backSound_0.setVolume(0.25);
+    winSound.setVolume(0.55);
+    loseSound.setVolume(0.60);
+    moveSound.setVolume(1);
 
     moveSound.setSource(QUrl("qrc:/sounds/move.wav"));
     winSound.setSource(QUrl("qrc:/sounds/winsound.wav"));
@@ -61,7 +63,7 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
     auto board(std::make_shared<Gm::GmBitBoard>(w, h, 2));
 
 
-    short arrangeType = std::rand() % 6;
+    short arrangeType = std::rand() % 7;
 
 
     if (arrangeType == 0)
@@ -82,7 +84,7 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
         board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
                         1, 0, 0, 0, 0, 0, 0, 1,
                         1, 0, 0, 0, 0, 0, 0, 1,
-                        1, 0, 0, 0, 0, 0, 0, 1}, Gm::cross);
+                        1, 0, 0, 0, 1, 0, 0, 1}, Gm::cross);
 
     if (arrangeType == 4)
         board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
@@ -90,6 +92,10 @@ void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
                         1, 0, 1, 0, 1, 0, 1, 0 }, Gm::cross);
 
     if (arrangeType == 5)
+        board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
+                        0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
+
+    if (arrangeType == 6)
         board->arrange({1, 1, 1, 1, 1, 1, 1, 1,
                         0, 0, 1, 1, 1, 1, 0, 0}, Gm::cross);
 
