@@ -24,5 +24,8 @@
         <file>sounds/background_3.wav</file>
         <file>visualsources/horizontal_alph.png</file>
         <file>visualsources/vertical_nums.png</file>
+        <file>visualsources/rght_arrow.png</file>
+        <file>visualsources/draw_back.png</file>
+        <file>visualsources/label.png</file>
     </qresource>
 </RCC>

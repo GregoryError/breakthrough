@@ -16,7 +16,7 @@ Window {
         x: 0
         y: 0
         width: mainWindow.width
-        height: mainWindow.height / 20
+        height: mainWindow.height / 16
         // clip: true
 
         Rectangle{
@@ -173,12 +173,242 @@ Window {
 
                 onAboutToShow: {
                     drawerAnimOpacity.start()
+                    name_txt_anim.start()
                 }
 
                 Rectangle{
                     id: drawBack
                     anchors.fill: parent
                     color: "#1d242b"
+
+                    Image {
+                        id: name
+                        source: "qrc:/visualsources/draw_back.png"
+                        anchors.fill: parent
+                        opacity: 0.7
+
+
+
+                        //                        Text {
+                        //                            id: app_name
+                        //                            anchors.top: parent.top
+                        //                            anchors.horizontalCenter: parent.horizontalCenter
+                        //                            text: "прорывные<br>шашки"
+                        //                            font.family: "Segoe UI Light"
+                        //                            wrapMode: Text.WordWrap
+                        //                            horizontalAlignment: Text.AlignHCenter
+                        //                            width: parent.width * 0.8
+                        //                            color: "white"
+                        //                            font.pointSize: 20
+                        //                            anchors.topMargin: 20
+
+                        //                            PropertyAnimation {
+                        //                                id: name_txt_anim
+                        //                                target: app_name
+                        //                                easing.type: Easing.InCubic
+                        //                                properties: "opacity"
+                        //                                from: 0
+                        //                                to: 1
+                        //                                duration: 1200
+                        //                                running: false
+                        //                            }
+
+                        //                        }
+
+
+                        Image {
+                            id: app_name
+                            source: "qrc:/visualsources/label.png"
+                            anchors.top: parent.top
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width * 0.7
+                            fillMode: Image.PreserveAspectFit
+                            anchors.topMargin: 20
+
+                            PropertyAnimation {
+                                id: name_txt_anim
+                                target: app_name
+                                easing.type: Easing.InCubic
+                                properties: "opacity"
+                                from: 0
+                                to: 1
+                                duration: 1200
+                                running: false
+                            }
+
+                        }
+
+                        Item {
+                            id: music_sw
+                            anchors.top: app_name.bottom
+                            anchors.topMargin: 15
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: (mainWindow.height / 16)
+                            Text {
+                                id: music_txt
+                                anchors.centerIn: parent
+                                font.family: "Segoe UI Light"
+                                font.pointSize: 16
+                                color: "white"
+                                text: "Музыка on/off"
+                                width: parent.width * 0.6
+                            }
+
+                            Image {
+                                source: "qrc:/visualsources/rght_arrow.png"
+                                anchors.verticalCenter: music_sw.verticalCenter
+                                anchors.left: music_txt.right
+                                anchors.leftMargin: 5
+                                height: music_sw.height * 0.7
+                                fillMode: Image.PreserveAspectFit
+                            }
+                            MouseArea {
+                                id: music_ms_area
+                                anchors.fill: parent
+                                onClicked: {
+
+                                }
+                            }
+                        }
+
+                        Item {
+                            id: sound_sw
+                            anchors.top: music_sw.bottom
+                            anchors.topMargin: 10
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: (mainWindow.height / 16)
+                            Text {
+                                id: sound_txt
+                                anchors.centerIn: parent
+                                font.family: "Segoe UI Light"
+                                font.pointSize: 16
+                                color: "white"
+                                text: "Звук on/off"
+                                width: parent.width * 0.6
+                            }
+
+                            Image {
+                                source: "qrc:/visualsources/rght_arrow.png"
+                                anchors.verticalCenter: sound_sw.verticalCenter
+                                anchors.left: sound_txt.right
+                                anchors.leftMargin: 5
+                                height: sound_sw.height * 0.7
+                                fillMode: Image.PreserveAspectFit
+                            }
+                            MouseArea {
+                                id: sound_ms_area
+                                anchors.fill: parent
+                                onClicked: {
+
+                                }
+                            }
+                        }
+
+                        Item {
+                            id: rules_sw
+                            anchors.top: sound_sw.bottom
+                            anchors.topMargin: 10
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: (mainWindow.height / 16)
+                            Text {
+                                id: rules_txt
+                                anchors.centerIn: parent
+                                font.family: "Segoe UI Light"
+                                font.pointSize: 16
+                                color: "white"
+                                text: "Правила игры"
+                                width: parent.width * 0.6
+                            }
+
+                            Image {
+                                source: "qrc:/visualsources/rght_arrow.png"
+                                anchors.verticalCenter: rules_sw.verticalCenter
+                                anchors.left: rules_txt.right
+                                anchors.leftMargin: 5
+                                height: rules_sw.height * 0.7
+                                fillMode: Image.PreserveAspectFit
+                            }
+                            MouseArea {
+                                id: rules_ms_area
+                                anchors.fill: parent
+                                onClicked: {
+
+                                }
+                            }
+                        }
+
+                        Item {
+                            id: about_sw
+                            anchors.top: rules_sw.bottom
+                            anchors.topMargin: 10
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: (mainWindow.height / 16)
+                            Text {
+                                id: about_txt
+                                anchors.centerIn: parent
+                                font.family: "Segoe UI Light"
+                                font.pointSize: 16
+                                color: "white"
+                                text: "О приложении"
+                                width: parent.width * 0.6
+                            }
+
+                            Image {
+                                source: "qrc:/visualsources/rght_arrow.png"
+                                anchors.verticalCenter: about_sw.verticalCenter
+                                anchors.left: about_txt.right
+                                anchors.leftMargin: 5
+                                height: about_sw.height * 0.7
+                                fillMode: Image.PreserveAspectFit
+                            }
+                            MouseArea {
+                                id: about_ms_area
+                                anchors.fill: parent
+                                onClicked: {
+
+                                }
+                            }
+                        }
+
+                        Item {
+                            id: feedback_sw
+                            anchors.top: about_sw.bottom
+                            anchors.topMargin: 10
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: (mainWindow.height / 16)
+                            Text {
+                                id: feedback_txt
+                                anchors.centerIn: parent
+                                font.family: "Segoe UI Light"
+                                font.pointSize: 16
+                                color: "white"
+                                text: "Оценить"
+                                width: parent.width * 0.6
+                            }
+
+                            Image {
+                                source: "qrc:/visualsources/rght_arrow.png"
+                                anchors.verticalCenter: feedback_sw.verticalCenter
+                                anchors.left: feedback_txt.right
+                                anchors.leftMargin: 5
+                                height: feedback_sw.height * 0.7
+                                fillMode: Image.PreserveAspectFit
+                            }
+                            MouseArea {
+                                id: feedback_ms_area
+                                anchors.fill: parent
+                                onClicked: {
+
+                                }
+                            }
+                        }
+
+                    }
                 }
             }
             PropertyAnimation {
@@ -193,5 +423,33 @@ Window {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
