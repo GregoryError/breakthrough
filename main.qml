@@ -8,6 +8,8 @@ Window {
     width: 540 * 0.7
     height: 960 * 0.7
 
+
+
     Item {
         id: bar
         z: 4

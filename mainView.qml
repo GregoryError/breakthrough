@@ -184,11 +184,40 @@ Item {
             anchors.bottom: mainRect.bottom
             color: "#000106"
 
+            Image {
+                id: left_nums
+                source: "qrc:/visualsources/vertical_nums.png"
+                anchors.left: gameRect.left
+                anchors.verticalCenter: gameRect.verticalCenter
+                height: gameRect.width - 60
+                fillMode: Image.PreserveAspectFit
+            }
+
+            Image {
+                id: right_nums
+                source: "qrc:/visualsources/vertical_nums.png"
+                anchors.right: gameRect.right
+                anchors.verticalCenter: gameRect.verticalCenter
+                height: gameRect.width - 60
+                fillMode: Image.PreserveAspectFit
+            }
+
+
+            Image {
+                id: alph
+                source: "qrc:/visualsources/horizontal_alph.png"
+                anchors.top: gameRect.top
+                anchors.horizontalCenter: gameRect.horizontalCenter
+                width: gameRect.width - 70
+                fillMode: Image.PreserveAspectFit
+            }
+
             Item {
                 id: gameItem
+                anchors.top: alph.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width - 40
+                width: parent.width - 52
                 height: width
 
                 ListModel {
@@ -495,6 +524,16 @@ Item {
                     }
                 }
             }
+
+//            Image {
+//                id: alph_down
+//                source: "qrc:/visualsources/horizontal_alph.png"
+//                anchors.top: gameItem.bottom
+//                anchors.topMargin: 2
+//                anchors.horizontalCenter: gameRect.horizontalCenter
+//                width: gameRect.width - 70
+//                fillMode: Image.PreserveAspectFit
+//            }
         }
     }
 }

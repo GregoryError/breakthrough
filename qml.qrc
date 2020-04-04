@@ -21,5 +21,8 @@
         <file>sounds/winsound.wav</file>
         <file>sounds/lose.wav</file>
         <file>sounds/background_2.wav</file>
+        <file>sounds/background_3.wav</file>
+        <file>visualsources/horizontal_alph.png</file>
+        <file>visualsources/vertical_nums.png</file>
     </qresource>
 </RCC>

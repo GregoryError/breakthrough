@@ -118,7 +118,7 @@ Breakthrough_Game::~Breakthrough_Game()
 
 void Breakthrough_Game::start()
 {
-    int playTimes = std::rand() % 3;
+    int playTimes = std::rand() % 4;
 
     if (playTimes == 0)
         backSound_0.setSource(QUrl("qrc:/sounds/background_0.wav"));
@@ -126,6 +126,8 @@ void Breakthrough_Game::start()
         backSound_0.setSource(QUrl("qrc:/sounds/background_1.wav"));
     if (playTimes == 2)
         backSound_0.setSource(QUrl("qrc:/sounds/background_2.wav"));
+    if (playTimes == 3)
+        backSound_0.setSource(QUrl("qrc:/sounds/background_3.wav"));
 
     switch (std::rand() % 8)
     {
