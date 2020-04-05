@@ -7,6 +7,7 @@
 #include "player.h"
 #include <QString>
 #include <QSoundEffect>
+#include <QSettings>
 
 
 class Breakthrough_Game : public QObject, Gm::GmAbstrBoardGame<Gm::GmBreakthroughStrategy>
@@ -29,6 +30,8 @@ private:
     QSoundEffect moveSound;
     QSoundEffect winSound;
     QSoundEffect loseSound;
+
+    QSettings dataSet;  // set: .setValue("isEntered", true); get: .value("isEntered").toBool()
 
 public:
     Breakthrough_Game();
@@ -77,12 +80,32 @@ public slots:
 
     void lose();
 
+    void soundsOnOff();
+
+    void musicOnOff();
+
+    void openUrl(const QString& url);
+
+    void clickSound();
 
 signals:
 
     void opponentReady();
 
     void resetBoard();
+
+    void showRules();
+
+
+
+
+
+
+
+
+
+
+
 
 
 

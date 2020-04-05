@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
 
+
 Window {
     id: mainWindow
     visible: true
@@ -10,6 +11,40 @@ Window {
 
 
 
+    Connections {
+        target: game_core
+        onShowRules: {
+            drawer_timer.start()
+            rulesTimer.start()
+        }
+    }
+
+
+    Timer {
+        id: drawer_timer
+        interval: 1100;
+        running: false;
+        repeat: false;
+        onTriggered: {
+            drawer.open()
+        }
+    }
+
+    Timer {
+        id: rulesTimer
+        interval: 2300
+        running: false
+        repeat: false
+        onTriggered: {
+            circleAnimation.stop()
+            opacityAnimation.stop()
+            game_core.clickSound();
+            circleAnimation.target = opacityAnimation.target = rules_sw_colorRect
+            circleAnimation.start()
+            opacityAnimation.start()
+        }
+    }
+
     Item {
         id: bar
         z: 4
@@ -17,7 +52,6 @@ Window {
         y: 0
         width: mainWindow.width
         height: mainWindow.height / 16
-        // clip: true
 
         Rectangle{
             id: toolRect
@@ -64,7 +98,7 @@ Window {
             properties: "width,height,radius"
             from: 0
             to: toolRect.width * 2
-            duration: 400
+            duration: 500
             onRunningChanged: {
                 if (stackView.depth > 1) {
                     stackView.pop()
@@ -154,6 +188,7 @@ Window {
         }
     }
 
+
     Item {
         id: mainField
         anchors.fill: parent
@@ -187,35 +222,6 @@ Window {
                         anchors.fill: parent
                         opacity: 0.7
 
-
-
-                        //                        Text {
-                        //                            id: app_name
-                        //                            anchors.top: parent.top
-                        //                            anchors.horizontalCenter: parent.horizontalCenter
-                        //                            text: "прорывные<br>шашки"
-                        //                            font.family: "Segoe UI Light"
-                        //                            wrapMode: Text.WordWrap
-                        //                            horizontalAlignment: Text.AlignHCenter
-                        //                            width: parent.width * 0.8
-                        //                            color: "white"
-                        //                            font.pointSize: 20
-                        //                            anchors.topMargin: 20
-
-                        //                            PropertyAnimation {
-                        //                                id: name_txt_anim
-                        //                                target: app_name
-                        //                                easing.type: Easing.InCubic
-                        //                                properties: "opacity"
-                        //                                from: 0
-                        //                                to: 1
-                        //                                duration: 1200
-                        //                                running: false
-                        //                            }
-
-                        //                        }
-
-
                         Image {
                             id: app_name
                             source: "qrc:/visualsources/label.png"
@@ -238,6 +244,52 @@ Window {
 
                         }
 
+                        // buttons begin
+
+
+                        PropertyAnimation {
+                            id: circleAnimation
+                            properties: "width,height,radius"
+                            from: 0
+                            to: drawBack.width * 2
+                            duration: 300
+                            onRunningChanged: {
+
+                            }
+
+                            onStopped: {
+
+                                //                                music_sw
+                                //                                sound_sw
+                                //                                rules_sw
+                                //                                about_sw
+                                //                                feedback_sw
+
+                                music_sw_colorRect.width = 0
+                                music_sw_colorRect.height = 0
+
+                                sound_sw_colorRect.width = 0
+                                sound_sw_colorRect.height = 0
+
+                                rules_sw_colorRect.width = 0
+                                rules_sw_colorRect.height = 0
+
+                                about_sw_colorRect.width = 0
+                                about_sw_colorRect.height = 0
+
+                                feedback_sw_colorRect.width = 0
+                                feedback_sw_colorRect.height = 0
+                            }
+                        }
+
+                        PropertyAnimation {
+                            id: opacityAnimation
+                            properties: "opacity"
+                            from: 1
+                            to: 0
+                            duration: 500
+                        }
+
                         Item {
                             id: music_sw
                             anchors.top: app_name.bottom
@@ -245,6 +297,7 @@ Window {
                             anchors.horizontalCenter: parent.horizontalCenter
                             width: parent.width
                             height: (mainWindow.height / 16)
+                            clip: true
                             Text {
                                 id: music_txt
                                 anchors.centerIn: parent
@@ -267,9 +320,29 @@ Window {
                                 id: music_ms_area
                                 anchors.fill: parent
                                 onClicked: {
+                                    circleAnimation.stop()
+                                    opacityAnimation.stop()
+                                    game_core.clickSound();
+                                    music_sw_colorRect.x = mouseX
+                                    music_sw_colorRect.y = mouseY
+                                    circleAnimation.target = opacityAnimation.target = music_sw_colorRect
+                                    circleAnimation.start()
+                                    opacityAnimation.start()
 
                                 }
                             }
+
+                            Rectangle {
+                                id: music_sw_colorRect
+                                height: 0
+                                width: 0
+                                color: "white"
+                                transform: Translate {
+                                    x: -music_sw_colorRect.width / 2
+                                    y: -music_sw_colorRect.height / 2
+                                }
+                            }
+
                         }
 
                         Item {
@@ -279,6 +352,7 @@ Window {
                             anchors.horizontalCenter: parent.horizontalCenter
                             width: parent.width
                             height: (mainWindow.height / 16)
+                            clip: true
                             Text {
                                 id: sound_txt
                                 anchors.centerIn: parent
@@ -301,7 +375,26 @@ Window {
                                 id: sound_ms_area
                                 anchors.fill: parent
                                 onClicked: {
+                                    circleAnimation.stop()
+                                    opacityAnimation.stop()
+                                    game_core.clickSound();
+                                    sound_sw_colorRect.x = mouseX
+                                    sound_sw_colorRect.y = mouseY
+                                    circleAnimation.target = opacityAnimation.target = sound_sw_colorRect
+                                    circleAnimation.start()
+                                    opacityAnimation.start()
 
+                                }
+                            }
+
+                            Rectangle {
+                                id: sound_sw_colorRect
+                                height: 0
+                                width: 0
+                                color: "white"
+                                transform: Translate {
+                                    x: -sound_sw_colorRect.width / 2
+                                    y: -sound_sw_colorRect.height / 2
                                 }
                             }
                         }
@@ -313,6 +406,7 @@ Window {
                             anchors.horizontalCenter: parent.horizontalCenter
                             width: parent.width
                             height: (mainWindow.height / 16)
+                            clip: true
                             Text {
                                 id: rules_txt
                                 anchors.centerIn: parent
@@ -335,7 +429,27 @@ Window {
                                 id: rules_ms_area
                                 anchors.fill: parent
                                 onClicked: {
+                                    circleAnimation.stop()
+                                    opacityAnimation.stop()
+                                    game_core.clickSound();
+                                    rules_sw_colorRect.x = mouseX
+                                    rules_sw_colorRect.y = mouseY
+                                    circleAnimation.target = opacityAnimation.target = rules_sw_colorRect
+                                    circleAnimation.start()
+                                    opacityAnimation.start()
+                                    stackView.push("qrc:/rules.qml")
 
+                                }
+                            }
+
+                            Rectangle {
+                                id: rules_sw_colorRect
+                                height: 0
+                                width: 0
+                                color: "white"
+                                transform: Translate {
+                                    x: -rules_sw_colorRect.width / 2
+                                    y: -rules_sw_colorRect.height / 2
                                 }
                             }
                         }
@@ -347,6 +461,7 @@ Window {
                             anchors.horizontalCenter: parent.horizontalCenter
                             width: parent.width
                             height: (mainWindow.height / 16)
+                            clip: true
                             Text {
                                 id: about_txt
                                 anchors.centerIn: parent
@@ -369,7 +484,26 @@ Window {
                                 id: about_ms_area
                                 anchors.fill: parent
                                 onClicked: {
+                                    circleAnimation.stop()
+                                    opacityAnimation.stop()
+                                    game_core.clickSound();
+                                    about_sw_colorRect.x = mouseX
+                                    about_sw_colorRect.y = mouseY
+                                    circleAnimation.target = opacityAnimation.target = about_sw_colorRect
+                                    circleAnimation.start()
+                                    opacityAnimation.start()
 
+                                }
+                            }
+
+                            Rectangle {
+                                id: about_sw_colorRect
+                                height: 0
+                                width: 0
+                                color: "white"
+                                transform: Translate {
+                                    x: -about_sw_colorRect.width / 2
+                                    y: -about_sw_colorRect.height / 2
                                 }
                             }
                         }
@@ -381,6 +515,7 @@ Window {
                             anchors.horizontalCenter: parent.horizontalCenter
                             width: parent.width
                             height: (mainWindow.height / 16)
+                            clip: true
                             Text {
                                 id: feedback_txt
                                 anchors.centerIn: parent
@@ -403,7 +538,25 @@ Window {
                                 id: feedback_ms_area
                                 anchors.fill: parent
                                 onClicked: {
+                                    circleAnimation.stop()
+                                    opacityAnimation.stop()
+                                    game_core.clickSound();
+                                    feedback_sw_colorRect.x = mouseX
+                                    feedback_sw_colorRect.y = mouseY
+                                    circleAnimation.target = opacityAnimation.target = feedback_sw_colorRect
+                                    circleAnimation.start()
+                                    opacityAnimation.start()
+                                }
+                            }
 
+                            Rectangle {
+                                id: feedback_sw_colorRect
+                                height: 0
+                                width: 0
+                                color: "white"
+                                transform: Translate {
+                                    x: -feedback_sw_colorRect.width / 2
+                                    y: -feedback_sw_colorRect.height / 2
                                 }
                             }
                         }
@@ -411,6 +564,8 @@ Window {
                     }
                 }
             }
+
+
             PropertyAnimation {
                 id: drawerAnimOpacity
                 target: drawer

@@ -56,6 +56,7 @@ Breakthrough_Game::Breakthrough_Game()
     loseSound.setSource(QUrl("qrc:/sounds/lose.wav"));
 
     std::srand(std::time(0));
+
 }
 
 void Breakthrough_Game::setBoard(const std::size_t& w, const std::size_t& h)
@@ -150,6 +151,14 @@ void Breakthrough_Game::start()
 
     backSound_0.play();
 
+
+    if (true/*dataSet.value("firstIn").toBool()*/)
+    {
+        dataSet.setValue("firstIn", false);
+        emit showRules();
+    }
+
+
 }
 
 QString Breakthrough_Game::getQuote()
@@ -206,6 +215,26 @@ void Breakthrough_Game::lose()
 {
     backSound_0.stop();
     loseSound.play();
+}
+
+void Breakthrough_Game::soundsOnOff()
+{
+
+}
+
+void Breakthrough_Game::musicOnOff()
+{
+
+}
+
+void Breakthrough_Game::openUrl(const QString &url)
+{
+
+}
+
+void Breakthrough_Game::clickSound()
+{
+    moveSound.play();
 }
 
 bool Breakthrough_Game::move_(const unsigned int &pos_from, const unsigned int &pos_to)

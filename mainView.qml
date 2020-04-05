@@ -268,6 +268,7 @@ Item {
 
                     function get_item(index) {
                         return get(index).item
+
                     }
 
                     function set_item(index, item) {

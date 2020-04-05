@@ -27,5 +27,8 @@
         <file>visualsources/rght_arrow.png</file>
         <file>visualsources/draw_back.png</file>
         <file>visualsources/label.png</file>
+        <file>rules.qml</file>
+        <file>visualsources/gifs/move.gif</file>
+        <file>visualsources/gifs/win.gif</file>
     </qresource>
 </RCC>
