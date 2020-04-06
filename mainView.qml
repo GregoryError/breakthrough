@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 
 Item {
     id: mainItem
-    anchors.fill: parent
     property int from: -1
     property int needRefresh: 0
 
@@ -52,6 +51,11 @@ Item {
                     opponentFace.source = game_core.opponent_img();
                     opponentName.text = game_core.opponent_Name();
                     quote.text = game_core.getQuote();
+
+                    countTable.text = "Побед: " + game_core.showVictories() + " Поражений: " +
+                            game_core.showDefeats() + " | Вы: " +
+                            game_core.showPlayerVictories() + "/" +
+                            game_core.showPlayerDefeats();
                 }
 
                 onResetBoard: {
@@ -174,6 +178,20 @@ Item {
             anchors.left: mainRect.left
             anchors.right: mainRect.right
             height: infoRect.height / 6
+
+            Text {
+                id: countTable
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.family: "Segoe UI Light"
+                color: "white"
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 14
+                minimumPointSize: 12
+
+            }
         }
 
         Rectangle {

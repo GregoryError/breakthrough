@@ -5,12 +5,14 @@
 
 using namespace Gm;
 
-GmAbstrPlayer::GmAbstrPlayer(const unsigned short &side, const std::string &img, const std::string &nm)
+GmAbstrPlayer::GmAbstrPlayer(const unsigned short &side, const std::string &img,
+                             const std::string &nm, const unsigned& pl_num)
 {
     n_side = side;
     img_path = img;
     name = nm;
     std::srand(std::time(0));
+    player_num = pl_num;
 }
 
 void GmAbstrPlayer::addQuote(const std::string &txt)

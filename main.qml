@@ -16,6 +16,7 @@ Window {
         onShowRules: {
             drawer_timer.start()
             rulesTimer.start()
+            open_rules_timer.start()
         }
     }
 
@@ -42,6 +43,17 @@ Window {
             circleAnimation.target = opacityAnimation.target = rules_sw_colorRect
             circleAnimation.start()
             opacityAnimation.start()
+        }
+    }
+
+    Timer {
+        id: open_rules_timer
+        interval: 2600;
+        running: false;
+        repeat: false;
+        onTriggered: {
+            drawer.close();
+            stackView.push("qrc:/rules.qml")
         }
     }
 
@@ -97,17 +109,17 @@ Window {
             target: toolButtoncolorRect
             properties: "width,height,radius"
             from: 0
-            to: toolRect.width * 2
-            duration: 500
-            onRunningChanged: {
+            to: toolRect.width * 1.5
+            duration: 300
+            onStopped: {
                 if (stackView.depth > 1) {
                     stackView.pop()
-                } else {
+
+                }
+                else
+                {
                     drawer.open()
                 }
-            }
-
-            onStopped: {
                 toolButtoncolorRect.width = 0
                 toolButtoncolorRect.height = 0
             }
@@ -119,7 +131,7 @@ Window {
             properties: "opacity"
             from: 1
             to: 0
-            duration: 700
+            duration: 400
         }
 
         Rectangle{
@@ -198,9 +210,17 @@ Window {
             z: 1
             anchors.fill: parent
             initialItem: "mainView.qml"
+            onChildrenChanged: {
+                if (depth == 1)
+                {
+                    toolPic.source = "qrc:/visualsources/toolPic.png"
+                    toolPic.rotation = 180
+                }
+            }
+
             Drawer {
                 id: drawer
-                width: mainWindow.width * 0.8 + 5
+                width: mainWindow.width * 0.8
                 height: mainWindow.height
                 dragMargin: 25
                 clip: true
@@ -238,7 +258,7 @@ Window {
                                 properties: "opacity"
                                 from: 0
                                 to: 1
-                                duration: 1200
+                                duration: 1100
                                 running: false
                             }
 
@@ -252,7 +272,7 @@ Window {
                             properties: "width,height,radius"
                             from: 0
                             to: drawBack.width * 2
-                            duration: 300
+                            duration: 250
                             onRunningChanged: {
 
                             }
@@ -264,6 +284,8 @@ Window {
                                 //                                rules_sw
                                 //                                about_sw
                                 //                                feedback_sw
+
+                                drawer.close()
 
                                 music_sw_colorRect.width = 0
                                 music_sw_colorRect.height = 0
@@ -279,6 +301,9 @@ Window {
 
                                 feedback_sw_colorRect.width = 0
                                 feedback_sw_colorRect.height = 0
+
+                                another_sw_colorRect.width = 0
+                                another_sw_colorRect.height = 0
                             }
                         }
 
@@ -287,7 +312,7 @@ Window {
                             properties: "opacity"
                             from: 1
                             to: 0
-                            duration: 500
+                            duration: 350
                         }
 
                         Item {
@@ -322,12 +347,13 @@ Window {
                                 onClicked: {
                                     circleAnimation.stop()
                                     opacityAnimation.stop()
-                                    game_core.clickSound();
+                                    game_core.clickSound()
                                     music_sw_colorRect.x = mouseX
                                     music_sw_colorRect.y = mouseY
                                     circleAnimation.target = opacityAnimation.target = music_sw_colorRect
                                     circleAnimation.start()
                                     opacityAnimation.start()
+                                    game_core.musicOnOff()
 
                                 }
                             }
@@ -377,12 +403,13 @@ Window {
                                 onClicked: {
                                     circleAnimation.stop()
                                     opacityAnimation.stop()
-                                    game_core.clickSound();
+                                    game_core.clickSound()
                                     sound_sw_colorRect.x = mouseX
                                     sound_sw_colorRect.y = mouseY
                                     circleAnimation.target = opacityAnimation.target = sound_sw_colorRect
                                     circleAnimation.start()
                                     opacityAnimation.start()
+                                    game_core.soundsOnOff()
 
                                 }
                             }
@@ -438,6 +465,8 @@ Window {
                                     circleAnimation.start()
                                     opacityAnimation.start()
                                     stackView.push("qrc:/rules.qml")
+                                    toolPic.source = "qrc:/visualsources/rght_arrow.png"
+                                    toolPic.rotation = 180
 
                                 }
                             }
@@ -492,6 +521,9 @@ Window {
                                     circleAnimation.target = opacityAnimation.target = about_sw_colorRect
                                     circleAnimation.start()
                                     opacityAnimation.start()
+                                    stackView.push("qrc:/about.qml")
+                                    toolPic.source = "qrc:/visualsources/rght_arrow.png"
+                                    toolPic.rotation = 180
 
                                 }
                             }
@@ -516,6 +548,7 @@ Window {
                             width: parent.width
                             height: (mainWindow.height / 16)
                             clip: true
+
                             Text {
                                 id: feedback_txt
                                 anchors.centerIn: parent
@@ -546,6 +579,8 @@ Window {
                                     circleAnimation.target = opacityAnimation.target = feedback_sw_colorRect
                                     circleAnimation.start()
                                     opacityAnimation.start()
+                                    game_core.openUrl("https://play.google.com/store/apps/dev?id=5304440424969692355")
+
                                 }
                             }
 
@@ -557,6 +592,63 @@ Window {
                                 transform: Translate {
                                     x: -feedback_sw_colorRect.width / 2
                                     y: -feedback_sw_colorRect.height / 2
+                                }
+                            }
+                        }
+
+                        Item {
+                            id: another_sw
+                            anchors.top: feedback_sw.bottom
+                            anchors.topMargin: 10
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: (mainWindow.height / 16)
+                            clip: true
+
+                            Text {
+                                id: another_txt
+                                anchors.centerIn: parent
+                                font.family: "Segoe UI Light"
+                                font.pointSize: 16
+                                color: "white"
+                                text: "Приложения"
+                                width: parent.width * 0.6
+                            }
+
+                            Image {
+                                source: "qrc:/visualsources/rght_arrow.png"
+                                anchors.verticalCenter: another_sw.verticalCenter
+                                anchors.left: another_txt.right
+                                anchors.leftMargin: 5
+                                height: another_sw.height * 0.7
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            MouseArea {
+                                id: another_ms_area
+                                anchors.fill: parent
+                                onClicked: {
+                                    circleAnimation.stop()
+                                    opacityAnimation.stop()
+                                    game_core.clickSound();
+                                    another_sw_colorRect.x = mouseX
+                                    another_sw_colorRect.y = mouseY
+                                    circleAnimation.target = opacityAnimation.target = another_sw_colorRect
+                                    circleAnimation.start()
+                                    opacityAnimation.start()
+                                    game_core.openUrl("https://play.google.com/store/apps/dev?id=5304440424969692355")
+
+                                }
+                            }
+
+                            Rectangle {
+                                id: another_sw_colorRect
+                                height: 0
+                                width: 0
+                                color: "white"
+                                transform: Translate {
+                                    x: -another_sw_colorRect.width / 2
+                                    y: -another_sw_colorRect.height / 2
                                 }
                             }
                         }
@@ -578,17 +670,6 @@ Window {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

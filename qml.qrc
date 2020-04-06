@@ -30,5 +30,6 @@
         <file>rules.qml</file>
         <file>visualsources/gifs/move.gif</file>
         <file>visualsources/gifs/win.gif</file>
+        <file>about.qml</file>
     </qresource>
 </RCC>

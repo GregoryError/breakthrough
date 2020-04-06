@@ -13,7 +13,7 @@ private:
 
 public:
     player() = default;
-    player(const unsigned short& side, const std::string& img, const std::string& nm) : Gm::GmAbstrPlayer(side, img, nm) {}
+    player(const unsigned short& side, const std::string& img, const std::string& nm, const unsigned& pl_nm) : Gm::GmAbstrPlayer(side, img, nm, pl_nm) {}
 
     void play() override;
 

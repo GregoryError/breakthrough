@@ -9,7 +9,13 @@ int main(int argc, char *argv[])
 {   
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+
     QGuiApplication app(argc, argv);
+
+    app.setApplicationDisplayName("Прорыв");
+    app.setOrganizationName("Kolesnikoff");
+    app.setOrganizationDomain("https://play.google.com/store/apps/dev?id=5304440424969692355");
+    app.setApplicationName("breakthrough");
 
     Breakthrough_Game GAME;
 

@@ -3,13 +3,12 @@ import QtQuick.Controls 2.2
 
 Item {
     id: mainTtem
-    anchors.fill: parent
 
     Image {
         id: backImg
         source: "qrc:/visualsources/draw_back.png"
         anchors.fill: parent
-
+        opacity: 0.9
         Component.onCompleted: focus = true;
 
         Flickable{
@@ -18,7 +17,7 @@ Item {
             height: backImg.height
             anchors.horizontalCenter: backImg.horizontalCenter
             contentHeight: (rulesTXT.height + introTXT.height + moveGif.height +
-                           botomTXT.height + winGif.height) * 1.5
+                            botomTXT.height + winGif.height + confirmButton.height) * 1.2
             contentWidth: parent.width
             smooth: true
             boundsBehavior: Flickable.StopAtBounds
@@ -118,8 +117,81 @@ Cыграть можно любой <br>
                 anchors.top: botomTXT.bottom
                 anchors.topMargin: 20
                 playing: true
-                speed: 0.7
+                speed: 1.5
             }
+
+            Rectangle {
+                id: confirmButton
+                width: parent.width * 0.6
+                height: width * 0.5
+                color: "#1C9BD7"
+                radius: 18
+                anchors.top: winGif.bottom
+                anchors.topMargin: 20
+                anchors.horizontalCenter: parent.horizontalCenter
+                clip:  true
+
+                Image {
+                    anchors.centerIn: parent
+                    source: "qrc:/visualsources/rght_arrow.png"
+                    rotation: 180
+                    width: confirmButton.height * 0.7
+                    fillMode: Image.PreserveAspectFit
+
+                }
+
+                Rectangle {
+                    id: confirmButtonColorRect
+                    height: 0
+                    width: 0
+                    color: "white"
+                    transform: Translate {
+                        x: -confirmButtonColorRect.width / 2
+                        y: -confirmButtonColorRect.height / 2
+                    }
+
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        circleAnimation.stop()
+                        opacityAnimation.stop()
+                        confirmButtonColorRect.x = mouseX
+                        confirmButtonColorRect.y = mouseY
+                        circleAnimation.start()
+                        opacityAnimation.start()
+                    }
+                }
+            }
+
+            PropertyAnimation {
+                id: circleAnimation
+                properties: "width,height,radius"
+                target: confirmButtonColorRect
+                from: 0
+                to: parent.width * 2
+                duration: 500
+                onRunningChanged: {
+
+                }
+
+                onStopped: {
+                    confirmButtonColorRect.width = 0
+                    confirmButtonColorRect.height = 0
+                    stackView.pop()
+                }
+            }
+
+            PropertyAnimation {
+                id: opacityAnimation
+                properties: "opacity"
+                target: confirmButtonColorRect
+                from: 1
+                to: 0
+                duration: 500
+            }
+
         }
     }
 }

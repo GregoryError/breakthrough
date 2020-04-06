@@ -33,6 +33,9 @@ private:
 
     QSettings dataSet;  // set: .setValue("isEntered", true); get: .value("isEntered").toBool()
 
+    bool need_sound = true;
+    bool need_music = true;
+
 public:
     Breakthrough_Game();
     void setBoard(const std::size_t& w = 8, const std::size_t& h = 8);
@@ -42,7 +45,7 @@ public slots:
     bool move_(const unsigned int& pos_from,
                const unsigned int& pos_to);
 
-    int win_() { return win(); }
+    int win_();
 
     bool getSide_(const unsigned int& pos) const;         // whose figure
 
@@ -88,6 +91,18 @@ public slots:
 
     void clickSound();
 
+    void addVictory();
+
+    void addDefeat();
+
+    unsigned showVictories();
+
+    unsigned showDefeats();
+
+    unsigned showPlayerVictories();
+
+    unsigned showPlayerDefeats();
+
 signals:
 
     void opponentReady();
@@ -95,18 +110,6 @@ signals:
     void resetBoard();
 
     void showRules();
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 };

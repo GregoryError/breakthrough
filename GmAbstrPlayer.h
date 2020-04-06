@@ -11,18 +11,18 @@ namespace Gm {
 
 class GmAbstrPlayer
 {
-protected:
 public:
-    unsigned short n_side;
-    std::string img_path;
     std::string name;
+    std::string img_path;
+    unsigned short n_side;
     std::shared_ptr<GmBitBoard> board;
     std::vector<std::string> quotes;
     unsigned int cell_from, cell_to;
+    unsigned player_num = 0;
 
 public:
     GmAbstrPlayer() = default;
-    GmAbstrPlayer(const unsigned short& side, const std::string& img, const std::string& nm);
+    GmAbstrPlayer(const unsigned short& side, const std::string& img, const std::string& nm, const unsigned& pl_num);
     void addQuote(const std::string& txt);
     void addBoard(std::shared_ptr<GmBitBoard>& b) { board = b; }
     std::string getQuote();
