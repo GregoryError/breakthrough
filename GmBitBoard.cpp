@@ -250,59 +250,59 @@ bool GmBitBoard::empty()
 }
 
 
-/////// DIAGNOSTIC // delete leter
+///////// DIAGNOSTIC // delete leter
 
-void GmBitBoard::DIAG_showBoard()
-{
-    std::cout << "DIAG_showBoard()::Sides\n";
-    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-    {
-        std::cout << getSide(i) << " ";
-        if ((i + 1) % WIDTH == 0)
-            std::cout << '\n';
-    }
+//void GmBitBoard::DIAG_showBoard()
+//{
+//    std::cout << "DIAG_showBoard()::Sides\n";
+//    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+//    {
+//        std::cout << getSide(i) << " ";
+//        if ((i + 1) % WIDTH == 0)
+//            std::cout << '\n';
+//    }
 
 
-    std::cout << "DIAG_showBoard()::Cells\n";
-    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
-    {
-        std::cout << getCell(i) << " ";
-        if ((i + 1) % WIDTH == 0)
-            std::cout << '\n';
-    }
-    std::cout << std::endl;
+//    std::cout << "DIAG_showBoard()::Cells\n";
+//    for (std::size_t i = 0; i < WIDTH * HEIGHT; ++i)
+//    {
+//        std::cout << getCell(i) << " ";
+//        if ((i + 1) % WIDTH == 0)
+//            std::cout << '\n';
+//    }
+//    std::cout << std::endl;
 
-}
+//}
 
-void GmBitBoard::DIAG_showMask()
-{
-    for (int i = 0; i < WIDTH * HEIGHT; ++i)
-    {
-        std::cout << i << ' ';
-        if ((i + 1) % WIDTH == 0)
-            std::cout << '\n';
-    }
-    std::cout << std::endl;
+//void GmBitBoard::DIAG_showMask()
+//{
+//    for (int i = 0; i < WIDTH * HEIGHT; ++i)
+//    {
+//        std::cout << i << ' ';
+//        if ((i + 1) % WIDTH == 0)
+//            std::cout << '\n';
+//    }
+//    std::cout << std::endl;
 
-}
+//}
 
-void GmBitBoard::DIAG_showDirection(const unsigned &from, const unsigned &to)
-{
-    std::cout << "DIAG_showDirection():\n";
-    switch (getDirection(from, to))
-    {
-    case DIRECTION::right: std::cout << "RIGHT"; break;
-    case DIRECTION::left: std::cout << "LEFT"; break;
-    case DIRECTION::up: std::cout << "UP"; break;
-    case DIRECTION::down: std::cout << "DOWN"; break;
-    case DIRECTION::leftUp: std::cout << "LEFT_UP"; break;
-    case DIRECTION::rightUp: std::cout << "RIGHT_UP"; break;
-    case DIRECTION::rightDown: std::cout << "RIGHT_DOWN"; break;
-    case DIRECTION::leftDown: std::cout << "LEFT_DOWN"; break;
-    default: std::cout << "undefined\n"; break;
-    }
-    std::cout << std::endl;
-}
+//void GmBitBoard::DIAG_showDirection(const unsigned &from, const unsigned &to)
+//{
+//    std::cout << "DIAG_showDirection():\n";
+//    switch (getDirection(from, to))
+//    {
+//    case DIRECTION::right: std::cout << "RIGHT"; break;
+//    case DIRECTION::left: std::cout << "LEFT"; break;
+//    case DIRECTION::up: std::cout << "UP"; break;
+//    case DIRECTION::down: std::cout << "DOWN"; break;
+//    case DIRECTION::leftUp: std::cout << "LEFT_UP"; break;
+//    case DIRECTION::rightUp: std::cout << "RIGHT_UP"; break;
+//    case DIRECTION::rightDown: std::cout << "RIGHT_DOWN"; break;
+//    case DIRECTION::leftDown: std::cout << "LEFT_DOWN"; break;
+//    default: std::cout << "undefined\n"; break;
+//    }
+//    std::cout << std::endl;
+//}
 
 
 

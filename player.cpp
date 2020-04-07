@@ -182,7 +182,7 @@ void player::play()
                     if (cell_from < vertical_vct[i])
                     {
                         cell_to = vertical_vct[i];
-                        qDebug() << "vertical_vct works: from: " << cell_from << " cell_to: " << cell_to;
+                      //  qDebug() << "vertical_vct works: from: " << cell_from << " cell_to: " << cell_to;
                     }
                 }
         }
@@ -270,18 +270,18 @@ void player::play()
 }
 
 
-void player::DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M)
-{
-    qDebug() << "Player base:\n";
-    for (const auto& K : M)
-    {
-        qDebug() << "Key: " << K.first << ":\n";
-        for (unsigned i = 0 ; i < K.second.size(); ++i)
-        {
-            qDebug() << K.second[i] << " ";
-        }
-    }
-}
+//void player::DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M)
+//{
+//    qDebug() << "Player base:\n";
+//    for (const auto& K : M)
+//    {
+//        qDebug() << "Key: " << K.first << ":\n";
+//        for (unsigned i = 0 ; i < K.second.size(); ++i)
+//        {
+//            qDebug() << K.second[i] << " ";
+//        }
+//    }
+//}
 
 
 

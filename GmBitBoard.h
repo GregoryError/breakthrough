@@ -12,9 +12,9 @@
 #ifndef GMBITBOARD_H
 #define GMBITBOARD_H
 
-/////// DIAG
-#include <iostream>
-/////// DIAG
+///////// DIAG
+//#include <iostream>
+///////// DIAG
 
 #include <cstdint>
 #include <memory>
@@ -87,9 +87,9 @@ public:
 
 
     //  TODO: delete leter
-    void DIAG_showBoard();
-    void DIAG_showMask();
-    void DIAG_showDirection(const unsigned& from, const unsigned& to);
+//    void DIAG_showBoard();
+//    void DIAG_showMask();
+//    void DIAG_showDirection(const unsigned& from, const unsigned& to);
 };
 
 }

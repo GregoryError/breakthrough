@@ -53,7 +53,7 @@ Item {
                     quote.text = game_core.getQuote();
 
                     countTable.text = "Побед: " + game_core.showVictories() + " Поражений: " +
-                            game_core.showDefeats() + " | Вы: " +
+                            game_core.showDefeats() + "  |  Вы: " +
                             game_core.showPlayerVictories() + "/" +
                             game_core.showPlayerDefeats();
                 }
@@ -137,8 +137,6 @@ Item {
                 }
             }
 
-
-
             OpacityAnimator {
                 id: faceAnim
                 target: opponentFace
@@ -184,12 +182,15 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 5
                 anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
                 font.family: "Segoe UI Light"
                 color: "white"
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 14
-                minimumPointSize: 12
+                font.pointSize: 12
+                minimumPointSize: 8
+                width: parent.width
+                height: parent.height
 
             }
         }

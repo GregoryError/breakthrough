@@ -1,14 +1,22 @@
 import QtQuick 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
-
+import QtQuick.Window 2.10
 
 Window {
     id: mainWindow
     visible: true
-    width: 540 * 0.7
-    height: 960 * 0.7
+//    width: 540 * 0.7
+//    height: 960 * 0.7
 
+    onClosing: {
+            if(stackView.depth > 1){
+                close.accepted = false
+                stackView.pop();
+            }else{
+                return;
+            }
+        }
 
 
     Connections {
@@ -148,8 +156,8 @@ Window {
 
             Image {
                 id: sharePic
-                width: 16
-                height: 16
+                width: 26
+                height: 26
                 source: "qrc:/visualsources/shareBtn.png"
                 anchors.centerIn: shareRect
                 fillMode: Image.PreserveAspectFit
@@ -207,6 +215,15 @@ Window {
 
         StackView {
             id: stackView
+//            Component.onCompleted: event.accepted = false;
+            focus: true
+//            Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
+//                                 stackView.pop();
+//                                 event.accepted = true;
+//                             }
+
+
+
             z: 1
             anchors.fill: parent
             initialItem: "mainView.qml"

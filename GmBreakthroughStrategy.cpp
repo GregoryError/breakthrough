@@ -1,6 +1,6 @@
 #include "GmBreakthroughStrategy.h"
 
-#include <QDebug>
+//#include <QDebug>
 
 
 using namespace Gm;

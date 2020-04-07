@@ -25,7 +25,7 @@ public:
         return GmAbstrPlayer::checkCell(from, to);     // Check for 1 cell is enough
     }
 
-    void DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M);
+ //   void DIAG_showPlayer(const std::map<unsigned, std::vector<unsigned>>& M);
 
 };
 

@@ -5,7 +5,7 @@
 #include "GmBitBoard.h"
 
 
-#include <QDebug>
+//#include <QDebug>
 
 Breakthrough_Game::Breakthrough_Game()
 {    
