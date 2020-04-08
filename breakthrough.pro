@@ -51,6 +51,9 @@ contains(ANDROID_TARGET_ARCH,arm64-v8a) {
         $$PWD/android
 }
 
+
+ANDROID_ABIS=armeabi-v7a arm64-v8a
+
 HEADERS += \
     GmAbstrBoardGame.h \
     GmAbstrPlayer.h \
@@ -59,3 +62,5 @@ HEADERS += \
     GmFigure.h \
     breakthrough_game.h \
     player.h
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
