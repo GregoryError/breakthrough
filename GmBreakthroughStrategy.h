@@ -15,7 +15,7 @@
 
 namespace Gm {
 
-class GmBreakthroughStrategy
+class GmBreakthroughStrategy // here actualy should be an abstract class with common interface, and different certain algorithms might be accessable...
 {
 protected:
     std::shared_ptr<GmBitBoard> p_board;
