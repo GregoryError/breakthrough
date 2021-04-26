@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
     Breakthrough_Game GAME;
 
-    GAME.setBoard(8, 8);
+    GAME.setBoard(8, 8); // to change boars size you not only have to change board here
 
     QQmlApplicationEngine engine;
     QQmlContext* cont;
